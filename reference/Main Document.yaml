@@ -1112,6 +1112,20 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/schedule-new'
+            examples:
+              Example 1:
+                value:
+                  healthcareCenterId: string
+                  doctorId: string
+                  timeslot: string
+                  monday: true
+                  tuesday: true
+                  wednesday: true
+                  thursday: true
+                  friday: true
+                  saturday: true
+                  sunday: true
+                  price: 0
       parameters: []
   /schedules/scheduleId:
     patch:
