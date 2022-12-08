@@ -2817,28 +2817,28 @@ components:
       in: query
       required: false
       schema:
-        type: string
+        type: boolean
       description: Flag to retrieve pending appointments. Default value is true
     booked:
       name: booked
       in: query
       required: false
       schema:
-        type: string
+        type: boolean
       description: Flag to retrieve booked appointments. Default value is true
     completed:
       name: completed
       in: query
       required: false
       schema:
-        type: string
+        type: boolean
       description: Flag to retrieve completed appointments. Default value is true
     cancelled:
       name: cancelled
       in: query
       required: false
       schema:
-        type: string
+        type: boolean
       description: Flag to retrieve cancelled appointments. Default value is true
     fromDate:
       name: fromDate
@@ -2870,7 +2870,7 @@ components:
       in: query
       required: false
       schema:
-        type: string
+        type: boolean
       description: Flag to retrieve rejected appointments. Default value is true
     specialty:
       name: specialty
