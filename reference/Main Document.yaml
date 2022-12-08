@@ -702,6 +702,24 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/manualClaims-new'
+  '/beneficiaries/{benefciaryId}/benefitPolicy':
+    parameters:
+      - schema:
+          type: string
+        name: benefciaryId
+        in: path
+        required: true
+    get:
+      summary: Get benefit policy information
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/beneficiary'
+      operationId: get-beneficiaries-benefciaryId-benefitPolicy
   /appointments:
     get:
       summary: List all appointments
@@ -2527,6 +2545,16 @@ components:
       properties:
         insurancePolicyId:
           type: string
+        insuranceType:
+          type: string
+        insuranceIssuer:
+          type: string
+        balanceResetDate:
+          type: string
+          format: date
+        policyExpirationDate:
+          type: string
+          format: date
         inPatientAggregateLimit:
           type: number
           format: float
@@ -2540,6 +2568,9 @@ components:
               limit:
                 type: number
                 format: float
+            required:
+              - service
+              - limit
         outPatientAggregateLimit:
           type: number
           format: float
@@ -2552,8 +2583,15 @@ components:
                 type: string
               limit:
                 type: string
+            required:
+              - service
+              - limit
       required:
         - insurancePolicyId
+        - insuranceType
+        - insuranceIssuer
+        - balanceResetDate
+        - policyExpirationDate
         - inPatientAggregateLimit
         - inPatientServices
         - outPatientAggregateLimit
