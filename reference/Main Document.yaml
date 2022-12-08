@@ -473,7 +473,7 @@ paths:
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/starting_after_object'
       description: ''
-  '/beneficiaries/{benefciaryId}/expenseReport':
+  '/beneficiaries/{benefciaryId}/expenseReports':
     parameters:
       - schema:
           type: string
@@ -517,7 +517,7 @@ paths:
                         patientName: string
                     ObjectCount: 0
                     hasMore: true
-      operationId: get-beneficiaries-benefciaryId-expenseReport
+      operationId: get-beneficiaries-benefciaryId-expenseReports
       parameters:
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/starting_after_object'
@@ -702,7 +702,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/manualClaims-new'
-  '/beneficiaries/{benefciaryId}/benefitPolicy':
+  '/beneficiaries/{benefciaryId}/benefitPolicies':
     parameters:
       - schema:
           type: string
@@ -718,8 +718,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/beneficiary'
-      operationId: get-beneficiaries-benefciaryId-benefitPolicy
+                $ref: '#/components/schemas/insurancePolicy'
+              examples: {}
+      operationId: get-beneficiaries-benefciaryId-benefitPolicies
   /appointments:
     get:
       summary: List all appointments
