@@ -48,8 +48,8 @@ paths:
                       userId: string
         '401':
           description: Unauthorized
-        '403':
-          description: Forbidden
+        '500':
+          description: Internal Server Error
       requestBody:
         content:
           application/json:
@@ -135,6 +135,10 @@ paths:
                           benefciaryId: beneficiary ID
                     objectCount: 3
                     hasMore: false
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
       operationId: get-users
       parameters:
         - $ref: '#/components/parameters/limit'
@@ -315,6 +319,7 @@ paths:
             type: string
           in: query
           name: insurancePolicyId
+          description: A string used to retrieve beneficiaries associated with the indicated insurance policy by providing the insurance policy ID
     post:
       summary: Create a new beneficiary
       tags: []
@@ -411,8 +416,8 @@ paths:
       summary: Create a new family member for user
       tags: []
       responses:
-        '200':
-          description: OK
+        '201':
+          description: Created
           content:
             application/json:
               schema:
@@ -896,6 +901,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/starting_after_object'
+        - $ref: '#/components/parameters/city'
     parameters:
       - name: limit
         in: query
@@ -1082,12 +1088,12 @@ paths:
         - schema:
             type: string
           in: query
-          name: startDate
+          name: fromDate
           required: true
         - schema:
             type: string
           in: query
-          name: endDate
+          name: toDate
           required: true
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/starting_after_object'
@@ -1500,7 +1506,16 @@ components:
     user:
       title: user
       type: object
-      x-examples: {}
+      x-examples:
+        Example 1:
+          userId: string
+          username: string
+          phoneNumber: string
+          phoneAuthenticated: true
+          whatsAppNumber: string
+          beneficiary:
+            hasBeneficiary: true
+            benefciaryId: string
       x-internal: false
       properties:
         userId:
@@ -1702,6 +1717,16 @@ components:
         - specialty
         - level
         - gender
+      x-examples:
+        Example 1:
+          doctorId: string
+          firstName: string
+          middleName: string
+          lastName: string
+          specialty: string
+          level: string
+          gender: string
+          birthdate: '2019-08-24'
     doctor-new:
       title: doctor
       x-stoplight:
@@ -1791,6 +1816,20 @@ components:
         - city
         - district
         - address
+      x-examples:
+        Example 1:
+          healthcareCenterId: string
+          name: string
+          city: string
+          district: string
+          description: string
+          address: string
+          phoneNumber:
+            - string
+          email: user@example.com
+          facebookLink: string
+          googleMapLink: string
+          website: string
     healthcareCenter-new:
       title: healthcareCenter new
       x-stoplight:
@@ -1863,6 +1902,40 @@ components:
       x-stoplight:
         id: ssc22rabi387u
       type: object
+      x-examples:
+        Example 1:
+          scheduleId: string
+          healtcareCenterObject:
+            healthcareCenterId: string
+            name: string
+            city: string
+            district: string
+            description: string
+            address: string
+            phoneNumber:
+              - string
+            email: user@example.com
+            facebookLink: string
+            googleMapLink: string
+            website: string
+          doctorObject:
+            doctorId: string
+            firstName: string
+            middleName: string
+            lastName: string
+            specialty: string
+            level: string
+            gender: string
+            birthdate: '2019-08-24'
+          timeslot: string
+          monday: true
+          tuesday: true
+          wednesday: true
+          thursday: true
+          friday: true
+          saturday: true
+          sunday: true
+          price: 0
       properties:
         scheduleId:
           type: string
@@ -1888,6 +1961,14 @@ components:
           type: boolean
         price:
           type: integer
+        startDate:
+          type: string
+          format: date
+        endDate:
+          type: string
+          format: date
+        isActive:
+          type: boolean
       required:
         - scheduleId
         - healtcareCenterObject
@@ -1901,6 +1982,9 @@ components:
         - saturday
         - sunday
         - price
+        - startDate
+        - endDate
+        - isActive
     schedule-new:
       title: schedule new
       x-stoplight:
@@ -1929,6 +2013,12 @@ components:
           type: boolean
         price:
           type: integer
+        startDate:
+          type: string
+          format: date
+        endDate:
+          type: string
+          format: date
       required:
         - healthcareCenterId
         - doctorId
@@ -1941,7 +2031,8 @@ components:
         - saturday
         - sunday
         - price
-      description: ''
+        - startDate
+        - endDate
     schedule-update:
       title: schedule update
       x-stoplight:
@@ -2114,6 +2205,7 @@ components:
         - familyMembers
         - cityResidence
         - account
+      x-examples: {}
     beneficiary-new:
       title: Beneficiary new
       x-stoplight:
@@ -2806,6 +2898,7 @@ components:
       required: false
       schema:
         type: string
+      description: doctor ID
     healthcareCenterId:
       name: healthcareCenterId
       in: query
@@ -2887,4 +2980,11 @@ components:
       schema:
         type: string
       description: institution Id
+    city:
+      name: city
+      in: query
+      required: false
+      schema:
+        type: string
+      description: filter parameter to indicate city
 x-extension-2: null
