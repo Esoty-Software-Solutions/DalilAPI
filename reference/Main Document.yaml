@@ -80,6 +80,8 @@ paths:
           description: OK
         '401':
           description: Unauthorized
+        '500':
+          description: Internal Server Error
       description: user logout
   /users:
     get:
@@ -139,6 +141,8 @@ paths:
           description: Unauthorized
         '403':
           description: Forbidden
+        '500':
+          description: Internal Server Error
       operationId: get-users
       parameters:
         - $ref: '#/components/parameters/limit'
@@ -146,9 +150,45 @@ paths:
     post:
       summary: Create a new user
       tags: []
+      operationId: post-users
+      requestBody:
+        '500':
+          description: Internal Server Error
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/user-new'
+            examples:
+              Example 1:
+                value:
+                  username: username
+                  phoneNumber: string
+                  phoneAuthenticated: true
+                  whatsAppNumber: string
+                  beneficiaryId: string
+                  beneficiary:
+                    hasBeneficiary: true
+                    benefciaryId: string
       responses:
-        '201':
-          description: Created
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user-new'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+  '/users/{username}':
+    get:
+      summary: Get user information
+      tags: []
+      responses:
+        '200':
+          description: OK
           content:
             application/json:
               schema:
@@ -166,38 +206,12 @@ paths:
                       benefciaryId: string
         '401':
           description: Unauthorized
-      operationId: post-users
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/user-new'
-            examples:
-              Example 1:
-                value:
-                  username: username
-                  phoneNumber: string
-                  phoneAuthenticated: true
-                  whatsAppNumber: string
-                  beneficiaryId: string
-                  beneficiary:
-                    hasBeneficiary: true
-                    benefciaryId: string
-  '/users/{username}':
-    get:
-      summary: Get user information
-      tags: []
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/user'
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
       operationId: get-users-username
-      parameters:
-        - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/starting_after_object'
+      parameters: []
     parameters:
       - schema:
           type: string
@@ -311,6 +325,14 @@ paths:
                           userId: string
                     objectCount: 3
                     hasMore: false
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
       operationId: get-beneficiaries
       parameters:
         - $ref: '#/components/parameters/limit'
@@ -330,6 +352,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/beneficiary'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
       operationId: post-beneficiaries
       requestBody:
         content:
@@ -349,6 +379,16 @@ paths:
               schema:
                 $ref: '#/components/schemas/beneficiary'
               examples: {}
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
       operationId: get-beneficiaries-beneficiaryId
       description: Get information about the user
       parameters: []
@@ -370,6 +410,12 @@ paths:
                 $ref: '#/components/schemas/beneficiary'
         '401':
           description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
       requestBody:
         content:
           application/json:
@@ -449,6 +495,16 @@ paths:
                         patientName: string
                     ObjectCount: 0
                     hasMore: true
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
       operationId: get-beneficiaries-benefciaryId-expenseReports
       parameters:
         - $ref: '#/components/parameters/limit'
@@ -463,6 +519,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/expenseReport'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
       operationId: post-beneficiaries-benefciaryId-expenseReport
       requestBody:
         content:
@@ -509,6 +573,16 @@ paths:
                   - object
                   - objectCount
                   - hasMore
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
       operationId: get-beneficiaries-benefciaryId-medicalFiles
       parameters:
         - $ref: '#/components/parameters/limit'
@@ -538,6 +612,16 @@ paths:
                   - Object
                   - objectCount
                   - hasMore
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
       operationId: get-beneficiaries-claims
       parameters:
         - $ref: '#/components/parameters/limit'
@@ -573,6 +657,16 @@ paths:
                   - object
                   - objectCount
                   - hasMore
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
       operationId: get-beneficiaries-benefciaryId-claims
       parameters:
         - $ref: '#/components/parameters/limit'
@@ -587,6 +681,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/manualClaims'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
       operationId: post-beneficiaries-benefciaryId-claims
       requestBody:
         content:
@@ -611,6 +713,16 @@ paths:
               schema:
                 $ref: '#/components/schemas/insurancePolicy'
               examples: {}
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
       operationId: get-beneficiaries-benefciaryId-benefitPolicies
   /appointments:
     get:
@@ -636,6 +748,16 @@ paths:
                   - object
                   - objectCount
                   - hasMore
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
       operationId: get-appointments
       parameters:
         - $ref: '#/components/parameters/pending'
@@ -665,6 +787,16 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/appointments'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
       operationId: patch-appointments-appointmentId
       description: ''
       requestBody:
@@ -675,6 +807,8 @@ paths:
               properties:
                 appointmentStatus:
                   type: string
+              required:
+                - appointmentStatus
   '/appointments/users/{userId}':
     post:
       summary: request an appointment
@@ -686,6 +820,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/appointments'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
       requestBody:
         content:
           application/json:
@@ -712,12 +854,6 @@ paths:
                 - doctorId
                 - priceId
                 - patient
-          application/xml:
-            schema:
-              type: object
-              properties:
-                schedule:
-                  type: string
         description: ''
     parameters:
       - schema:
@@ -748,6 +884,16 @@ paths:
                   - object
                   - objectCount
                   - hasMore
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
       parameters:
         - $ref: '#/components/parameters/booked'
         - $ref: '#/components/parameters/pending'
@@ -811,6 +957,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/medicalCenter'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
       requestBody:
         content:
           application/json:
@@ -833,6 +987,16 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/medicalCenter'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
     patch:
       summary: Get medical center object
       operationId: patch-medicalCenters-medicalCenterId
@@ -843,6 +1007,16 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/medicalCenter'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
       requestBody:
         content:
           application/json:
@@ -860,8 +1034,18 @@ paths:
       summary: ''
       operationId: delete-medicalCenters-medicalCenterId
       responses:
-        '202':
-          description: Accepted
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
   /medicalCenters/claims:
     get:
       summary: Get all claims from medical centers
@@ -898,6 +1082,16 @@ paths:
                   - ApprovedClaimsCount
                   - rejectedClaimsCount
                   - revisedClaimsCount
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
       operationId: get-medicalCenters-claims
       parameters:
         - $ref: '#/components/parameters/limit'
@@ -949,6 +1143,16 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/medicalCenterClaims'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
       operationId: patch-medicalCenters-claims-claimId
       requestBody:
         content:
@@ -1007,6 +1211,16 @@ paths:
                   - object
                   - objectCount
                   - hasMore
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
     parameters: []
     post:
       summary: Create a new schedule
@@ -1018,25 +1232,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/schedule'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/schedule-new'
-            examples:
-              Example 1:
-                value:
-                  medicalCenterId: string
-                  doctorId: string
-                  timeslot: string
-                  monday: true
-                  tuesday: true
-                  wednesday: true
-                  thursday: true
-                  friday: true
-                  saturday: true
-                  sunday: true
-                  price: 0
+            examples: {}
       parameters: []
   /schedules/scheduleId:
     patch:
@@ -1049,6 +1258,16 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/schedule'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
       operationId: patch-schedules-scheduleId
       requestBody:
         content:
@@ -1065,6 +1284,16 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/schedule'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
       operationId: get-schedules-scheduleId
       parameters: []
     delete:
@@ -1074,6 +1303,16 @@ paths:
       responses:
         '200':
           description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
   /doctors:
     post:
       summary: Create a new doctor
@@ -1091,6 +1330,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/doctor'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
     get:
       summary: List doctors
       tags: []
@@ -1114,6 +1361,16 @@ paths:
                   - object
                   - objectCount
                   - hasMore
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
       operationId: get-doctors
       parameters:
         - $ref: '#/components/parameters/limit'
@@ -1130,6 +1387,16 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/doctor'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
       operationId: get-doctors-doctorId
       parameters: []
     parameters:
@@ -1148,6 +1415,16 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/doctor'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
       requestBody:
         content:
           application/json:
@@ -1159,6 +1436,16 @@ paths:
       responses:
         '200':
           description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
   /cities:
     get:
       summary: List cities
@@ -1177,6 +1464,16 @@ paths:
                       type: string
                 required:
                   - cityName
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
       operationId: get-cities
     post:
       summary: Add a city
@@ -1193,6 +1490,14 @@ paths:
                     type: string
                 required:
                   - cityName
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
       requestBody:
         content:
           application/json:
@@ -1221,6 +1526,16 @@ paths:
                       type: string
                 required:
                   - medicalSpecialty
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
       operationId: get-medicalSpecialties
     post:
       summary: Add a medical specialty
@@ -1237,6 +1552,14 @@ paths:
                     type: string
                 required:
                   - specialtyName
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
       operationId: post-medicalSpecialties
       requestBody:
         content:
@@ -1278,6 +1601,16 @@ paths:
                   - object
                   - objectCount
                   - hasMore
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
       operationId: get-medicalServices
       parameters:
         - $ref: '#/components/parameters/limit'
@@ -1298,6 +1631,14 @@ paths:
                     type: string
                 required:
                   - serviceName
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
       operationId: post-medicalServices
       requestBody:
         content:
@@ -1316,6 +1657,16 @@ paths:
       responses:
         '200':
           description: OK
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
       operationId: get-institutions
       parameters:
         - $ref: '#/components/parameters/limit'
@@ -1348,6 +1699,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/institutions'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
       operationId: post-institutions
       requestBody:
         content:
@@ -1371,6 +1730,16 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/institutions'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
       operationId: patch-institutions-institutionId
       requestBody:
         content:
@@ -1387,6 +1756,16 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/institutions'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
 components:
   schemas:
     user:
@@ -2012,6 +2391,8 @@ components:
       properties:
         appointmentId:
           type: string
+        scheduleId:
+          type: string
         date:
           type: string
           format: date
@@ -2034,6 +2415,7 @@ components:
           $ref: '#/components/schemas/medicalCenter'
       required:
         - appointmentId
+        - scheduleId
         - date
         - appointmentStatus
         - price
@@ -2769,7 +3151,7 @@ components:
       in: query
       required: false
       schema:
-        type: string
+        type: integer
       description: 'A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 30'
     starting_after_object:
       name: starting_after_object
