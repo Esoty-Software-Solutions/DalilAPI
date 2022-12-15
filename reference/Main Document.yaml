@@ -151,37 +151,26 @@ paths:
       summary: Create a new user
       tags: []
       operationId: post-users
-      requestBody:
-        '500':
-          description: Internal Server Error
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/user-new'
-            examples:
-              Example 1:
-                value:
-                  username: username
-                  phoneNumber: string
-                  phoneAuthenticated: true
-                  whatsAppNumber: string
-                  beneficiaryId: string
-                  beneficiary:
-                    hasBeneficiary: true
-                    benefciaryId: string
       responses:
-        '200':
-          description: OK
+        '201':
+          description: Created
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/user-new'
+                $ref: '#/components/schemas/user'
         '401':
           description: Unauthorized
         '403':
           description: Forbidden
         '500':
           description: Internal Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/user'
+        description: ''
+      description: ''
   '/users/{username}':
     get:
       summary: Get user information
@@ -1807,11 +1796,13 @@ components:
         - username
         - phoneNumber
     user-new:
-      title: user
+      title: New user
       type: object
       x-examples: {}
       properties:
         username:
+          type: string
+        password:
           type: string
         phoneNumber:
           type: string
