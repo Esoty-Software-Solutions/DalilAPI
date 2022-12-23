@@ -3246,4 +3246,3 @@ components:
       schema:
         type: string
       description: filter parameter to indicate city
-x-extension-2: null

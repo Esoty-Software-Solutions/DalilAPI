@@ -1,0 +1,28 @@
+title: familyMember-update
+x-stoplight:
+  id: j1x83s8f1p3ub
+x-tags:
+  - beneficiary
+type: object
+properties:
+  FirstName:
+    type: string
+  MiddleName:
+    type: string
+  LastName:
+    type: string
+  birthdate:
+    type: string
+    format: date
+  relationshipToUser:
+    type: string
+    enum:
+      - father
+      - mother
+      - son
+      - daughter
+      - husband
+      - wife
+      - user
+  gender:
+    type: string

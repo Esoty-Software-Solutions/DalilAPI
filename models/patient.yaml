@@ -1,0 +1,24 @@
+title: patient
+x-stoplight:
+  id: gfgpmwu5nx5pq
+x-tags:
+  - patient
+  - beneficiary
+type: object
+properties:
+  userId:
+    type: string
+  patientType:
+    type: string
+  patientId:
+    type: string
+  patientName:
+    type: string
+  patientRelationship:
+    type: string
+required:
+  - userId
+  - patientType
+  - patientId
+  - patientName
+  - patientRelationship

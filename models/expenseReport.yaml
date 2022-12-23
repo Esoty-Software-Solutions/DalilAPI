@@ -1,0 +1,34 @@
+title: expenseReport
+x-stoplight:
+  id: y2p4lw7mamovn
+x-tags:
+  - claims
+type: object
+properties:
+  ExepnseReportId:
+    type: string
+  healtcareCenterId:
+    type: string
+  healtcareCenterName:
+    type: string
+  serviceDate:
+    type: string
+    format: date
+  charnge:
+    type: number
+    format: float
+  currency:
+    type: string
+  beneficiaryId:
+    type: string
+  patientName:
+    type: string
+required:
+  - ExepnseReportId
+  - healtcareCenterId
+  - healtcareCenterName
+  - serviceDate
+  - charnge
+  - currency
+  - beneficiaryId
+  - patientName

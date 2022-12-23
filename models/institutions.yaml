@@ -1,0 +1,27 @@
+title: institutions
+x-stoplight:
+  id: sz7ni98s7hkhl
+x-tags:
+  - institutions
+type: object
+properties:
+  instituionId:
+    type: string
+  Name:
+    type: string
+  phoneNumber:
+    type: string
+  cityHq:
+    type: string
+  employeeCount:
+    type: string
+  beneficiaryCount:
+    type: string
+  beneftiPolicy:
+    $ref: ./insurancePolicy.yaml
+required:
+  - instituionId
+  - Name
+  - employeeCount
+  - beneficiaryCount
+  - beneftiPolicy

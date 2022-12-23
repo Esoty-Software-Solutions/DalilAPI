@@ -1,0 +1,22 @@
+title: user-update
+x-stoplight:
+  id: 4mtgiqphhgx0b
+type: object
+properties:
+  username:
+    type: string
+  phoneNumber:
+    type: string
+  phoneAuthenticated:
+    type: boolean
+  whatsAppNumber:
+    type: string
+  beneficiaryId:
+    type: string
+  beneficiary:
+    type: object
+    properties:
+      hasBeneficiary:
+        type: boolean
+      benefciaryId:
+        type: string

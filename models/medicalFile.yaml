@@ -1,0 +1,45 @@
+title: medicalFile
+x-stoplight:
+  id: uvarv6pxqqjyx
+x-tags:
+  - medicalFile
+type: object
+properties:
+  medicalFileId:
+    type: string
+  Name:
+    type: string
+  birthDate:
+    type: string
+    format: date
+  gender:
+    type: string
+  bloodType:
+    type: string
+  height:
+    type: string
+  allergies:
+    type: array
+    items:
+      $ref: ./allergies.yaml
+  chronicDiseases:
+    type: array
+    items:
+      $ref: ./chronicDiseases.yaml
+  surgeryHistory:
+    type: array
+    items:
+      $ref: ./surgeryHistory.yaml
+  clinicalVisits:
+    type: array
+    items:
+      $ref: ./clinicalVisits.yaml
+  medicalTests:
+    type: array
+    items:
+      $ref: ./labReport.yaml
+required:
+  - medicalFileId
+  - Name
+  - birthDate
+  - gender

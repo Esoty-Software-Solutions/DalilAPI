@@ -1,0 +1,23 @@
+title: clinicalVisits
+x-stoplight:
+  id: feep3klhxmgr7
+x-tags:
+  - medicalFile
+type: object
+properties:
+  visitType:
+    type: string
+  visitDate:
+    type: string
+  centerName:
+    type: string
+  doctorName:
+    type: string
+  notes:
+    type: string
+required:
+  - visitType
+  - visitDate
+  - centerName
+  - doctorName
+  - notes

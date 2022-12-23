@@ -1,0 +1,32 @@
+title: doctor
+x-stoplight:
+  id: 1gbzardpygsvm
+x-tags:
+  - doctor
+type: object
+properties:
+  doctorId:
+    type: string
+  firstName:
+    type: string
+  middleName:
+    type: string
+  lastName:
+    type: string
+  specialty:
+    type: string
+  level:
+    type: string
+  gender:
+    type: string
+  birthdate:
+    type: string
+    format: date
+required:
+  - doctorId
+  - firstName
+  - middleName
+  - lastName
+  - specialty
+  - level
+  - gender

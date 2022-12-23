@@ -1,0 +1,55 @@
+title: schedule
+x-stoplight:
+  id: rcx5axsexvfm0
+x-tags:
+  - schedule
+type: object
+properties:
+  scheduleId:
+    type: string
+  healtcareCenterObject:
+    $ref: ./medicalCenter.yaml
+  doctorObject:
+    $ref: ./doctor.yaml
+  timeslot:
+    type: string
+  monday:
+    type: boolean
+  tuesday:
+    type: boolean
+  wednesday:
+    type: boolean
+  thursday:
+    type: boolean
+  friday:
+    type: boolean
+  saturday:
+    type: boolean
+  sunday:
+    type: boolean
+  price:
+    type: integer
+  startDate:
+    type: string
+    format: date
+  endDate:
+    type: string
+    format: date
+  isActive:
+    type: boolean
+required:
+  - scheduleId
+  - healtcareCenterObject
+  - doctorObject
+  - timeslot
+  - monday
+  - tuesday
+  - wednesday
+  - thursday
+  - friday
+  - saturday
+  - sunday
+  - price
+  - startDate
+  - endDate
+  - isActive

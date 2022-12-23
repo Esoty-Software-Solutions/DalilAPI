@@ -1,0 +1,38 @@
+title: medicalCenter
+x-stoplight:
+  id: nbokotvbsuc8z
+x-tags:
+  - medicalCenter
+type: object
+properties:
+  medicalCenterId:
+    type: string
+  name:
+    type: string
+  city:
+    type: string
+  district:
+    type: string
+  description:
+    type: string
+  address:
+    type: string
+  phoneNumber:
+    type: array
+    items:
+      type: string
+  email:
+    type: string
+    format: email
+  facebookLink:
+    type: string
+  googleMapLink:
+    type: string
+  website:
+    type: string
+required:
+  - medicalCenterId
+  - name
+  - city
+  - district
+  - address

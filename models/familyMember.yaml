@@ -1,0 +1,37 @@
+title: familyMember
+x-stoplight:
+  id: x9c0xrz1udkgn
+x-tags:
+  - beneficiary
+type: object
+properties:
+  familyMemberId:
+    type: string
+  firstName:
+    type: string
+  middleName:
+    type: string
+  lastName:
+    type: string
+  birthdate:
+    type: string
+    format: date
+  relationshipToBeneficiary:
+    type: string
+    enum:
+      - Father
+      - mother
+      - daughter
+      - son
+      - husband
+      - wife
+  gender:
+    type: string
+required:
+  - familyMemberId
+  - firstName
+  - middleName
+  - lastName
+  - birthdate
+  - relationshipToBeneficiary
+  - gender

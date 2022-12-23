@@ -1,0 +1,13 @@
+title: allergies
+x-stoplight:
+  id: dwq8it4nm4ugm
+x-tags:
+  - medicalFile
+type: object
+properties:
+  allergyName:
+    type: string
+  notes:
+    type: string
+required:
+  - allergyName

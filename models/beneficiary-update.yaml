@@ -1,0 +1,36 @@
+title: beneficiary-update
+x-stoplight:
+  id: lyjbk2zn0mts1
+x-tags:
+  - beneficiary
+type: object
+properties:
+    firstName:
+      type: string
+    middleName:
+      type: string
+    lastName:
+      type: string
+    birthdate:
+      type: string
+    phoneNumber:
+      type: string
+    gender:
+      type: string
+    familyMembers:
+      type: array
+      items:
+        $ref: ./familyMember-update.yaml
+    insurancePolicyId:
+      type: string
+    residentCity:
+      type: string
+    residentDistrict:
+      type: string
+    account:
+      type: object
+      properties:
+        hasAccount:
+          type: boolean
+        userId:
+          type: string

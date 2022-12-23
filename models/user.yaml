@@ -1,0 +1,28 @@
+title: user
+x-stoplight:
+  id: m4si2pk0h07zi
+type: object
+properties:
+  userId:
+    type: string
+  username:
+    type: string
+  phoneNumber:
+    type: string
+  phoneAuthenticated:
+    type: boolean
+  whatsAppNumber:
+    type: string
+  beneficiary:
+    type: object
+    properties:
+      hasBeneficiary:
+        type: boolean
+      benefciaryId:
+        type: string
+    required:
+      - hasBeneficiary
+required:
+  - userId
+  - username
+  - phoneNumber

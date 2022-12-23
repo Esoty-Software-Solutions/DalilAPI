@@ -1,0 +1,18 @@
+title: institutions-new
+x-stoplight:
+  id: bhbnrvs0g3xr5
+x-tags:
+  - institutions
+type: object
+properties:
+  Name:
+    type: string
+  phoneNumber:
+    type: string
+  cityHq:
+    type: string
+  beneftiPolicy:
+    $ref: ./insurancePolicy-new.yaml
+required:
+  - Name
+  - beneftiPolicy

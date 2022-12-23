@@ -1,0 +1,34 @@
+title: insurancePolicy-update
+x-stoplight:
+  id: 8kj4yt1j8wvc3
+x-tags:
+  - institutions
+type: object
+properties:
+  benefitPolicyId:
+    type: string
+  iInPatientAggregateLimit:
+    type: number
+    format: float
+  inPatientServices:
+    type: array
+    items:
+      type: object
+      properties:
+        service:
+          type: string
+        limit:
+          type: number
+          format: float
+  outPatientAggregateLimit:
+    type: number
+    format: float
+  outPatientServices:
+    type: array
+    items:
+      type: object
+      properties:
+        service:
+          type: string
+        limit:
+          type: string

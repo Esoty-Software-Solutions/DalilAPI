@@ -1,0 +1,187 @@
+openapi: 3.0.0
+x-stoplight:
+  id: qx6c0pjztkc1m
+info:
+  title: Server Integration
+  version: '1.0'
+servers:
+  - url: 'http://localhost:3000/v1'
+paths:
+  /labReports:
+    post:
+      summary: Create lab report record
+      operationId: post-labReports
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                labReportId:
+                  type: string
+                labReportCategory:
+                  type: string
+                centerName:
+                  type: string
+                reportDate:
+                  type: string
+                district:
+                  type: string
+                city:
+                  type: string
+                testEval:
+                  oneOf:
+                    - properties:
+                        testName:
+                          type: string
+                        testAcronym:
+                          type: string
+                        value:
+                          type: number
+                        upperRange:
+                          type: number
+                        lowerRange:
+                          type: number
+                        level:
+                          type: string
+                        unit:
+                          type: string
+                      required:
+                        - testName
+                        - testAcronym
+                        - value
+                        - upperRange
+                        - lowerRange
+                        - level
+                        - unit
+                    - properties:
+                        testName:
+                          type: string
+                        testAcronym:
+                          type: string
+                        value:
+                          type: string
+                        reference:
+                          type: string
+                        level:
+                          type: string
+                        unit:
+                          type: string
+                      required:
+                        - testName
+                        - testAcronym
+                        - value
+                        - reference
+                        - level
+                        - unit
+                  type: object
+                patientId:
+                  type: string
+                patientName:
+                  type: string
+              required:
+                - labReportId
+                - labReportCategory
+                - centerName
+                - reportDate
+                - testEval
+                - patientId
+                - patientName
+      description: ''
+    parameters: []
+  /allergies:
+    post:
+      summary: create allergy record
+      tags: []
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      operationId: post-allergies
+      description: ''
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                patientId:
+                  type: string
+                patientName:
+                  type: string
+                allergyName:
+                  type: string
+                notes:
+                  type: string
+              required:
+                - patientId
+                - patientName
+                - allergyName
+                - notes
+        description: ''
+  /clinicalVisits:
+    post:
+      summary: Create a clinic visit record
+      tags: []
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      operationId: post-clinicalVisits
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                patientId:
+                  type: string
+                patientName:
+                  type: string
+                doctorName:
+                  type: string
+                doctorSpecialty:
+                  type: string
+                date:
+                  type: string
+                medicalCenterName:
+                  type: string
+                notes:
+                  type: string
+              required:
+                - patientId
+                - patientName
+                - doctorName
+                - doctorSpecialty
+                - date
+                - medicalCenterName
+                - notes
+components:
+  schemas: {}

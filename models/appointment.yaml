@@ -1,0 +1,41 @@
+title: appointment
+x-stoplight:
+  id: 6br7f6cdh03sa
+x-tags:
+  - appointment
+type: object
+properties:
+  appointmentId:
+    type: string
+  scheduleId:
+    type: string
+  date:
+    type: string
+    format: date
+  appointmentStatus:
+    type: string
+    enum:
+      - booked
+      - pending
+      - cancelled
+      - completed
+  price:
+    type: string
+  timeslot:
+    type: string
+  patient:
+    $ref: ./patient.yaml
+  doctor:
+    $ref: ./doctor.yaml
+  medicalCenter:
+    $ref: ./medicalCenter.yaml
+required:
+  - appointmentId
+  - scheduleId
+  - date
+  - appointmentStatus
+  - price
+  - timeslot
+  - patient
+  - doctor
+  - medicalCenter

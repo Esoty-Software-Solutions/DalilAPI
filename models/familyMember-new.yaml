@@ -1,0 +1,27 @@
+title: familyMember-new
+x-stoplight:
+  id: vhk58kcw7ewmc
+x-tags:
+  - beneficiary
+type: object
+properties:
+  FirstName:
+    type: string
+  MiddleName:
+    type: string
+  LastName:
+    type: string
+  birthdate:
+    type: string
+    format: date
+  relationshipToUser:
+    type: string
+  gender:
+    type: string
+required:
+  - FirstName
+  - MiddleName
+  - LastName
+  - birthdate
+  - relationshipToUser
+  - gender

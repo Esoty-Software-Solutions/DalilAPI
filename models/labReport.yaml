@@ -1,0 +1,74 @@
+title: labReport
+x-stoplight:
+  id: c8au32bu3yd8r
+type: object
+properties:
+  labReportId:
+    type: string
+  labReportCategory:
+    type: string
+  centerName:
+    type: string
+  reportDate:
+    type: string
+  district:
+    type: string
+  city:
+    type: string
+  testResults:
+    oneOf:
+      - items:
+          type: object
+          properties:
+            testName:
+              type: string
+            acronym:
+              type: string
+            value:
+              type: number
+            upperRange:
+              type: number
+            lowerRange:
+              type: number
+            level:
+              type: string
+            unit:
+              type: string
+          required:
+            - testName
+            - acronym
+            - value
+            - upperRange
+            - lowerRange
+            - level
+            - unit
+      - items:
+          type: object
+          properties:
+            testName:
+              type: string
+            acronym:
+              type: string
+            value:
+              type: string
+            reference:
+              type: string
+            level:
+              type: string
+            unit:
+              type: string
+          required:
+            - testName
+            - acronym
+            - value
+            - reference
+            - level
+            - unit
+    type: array
+required:
+  - labReportId
+  - labReportCategory
+  - centerName
+  - reportDate
+  - city
+  - testResults

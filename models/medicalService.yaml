@@ -1,0 +1,32 @@
+title: medicalService
+x-stoplight:
+  id: 79ccob6xfbgti
+x-tags:
+  - medicalCenter
+type: object
+properties:
+  serviceId:
+    type: string
+  serviceCode:
+    type: string
+  serviceName:
+    type: string
+  serviceType:
+    type: string
+  amountCharged:
+    type: number
+    format: float
+  amountAllowed:
+    type: number
+    format: float
+  percentageCovered:
+    type: number
+    format: float
+required:
+  - serviceId
+  - serviceCode
+  - serviceName
+  - serviceType
+  - amountCharged
+  - amountAllowed
+  - percentageCovered

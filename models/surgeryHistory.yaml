@@ -1,0 +1,20 @@
+title: surgeryHistory
+x-stoplight:
+  id: zz6obqbd6x3uv
+x-tags:
+  - medicalFile
+type: object
+properties:
+  SurgeryName:
+    type: string
+  SurgeryDate:
+    type: string
+    format: date
+  doctorName:
+    type: string
+  medicalCenterName:
+    type: string
+  notes:
+    type: string
+required:
+  - SurgeryName

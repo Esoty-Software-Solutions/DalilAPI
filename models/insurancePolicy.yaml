@@ -1,0 +1,60 @@
+title: insurancePolicy
+x-stoplight:
+  id: o7gdily3hi3fz
+x-tags:
+  - institutions
+type: object
+properties:
+  insurancePolicyId:
+    type: string
+  insuranceType:
+    type: string
+  insuranceIssuer:
+    type: string
+  balanceResetDate:
+    type: string
+    format: date
+  policyExpirationDate:
+    type: string
+    format: date
+  inPatientAggregateLimit:
+    type: number
+    format: float
+  inPatientServices:
+    type: array
+    items:
+      type: object
+      properties:
+        service:
+          type: string
+        limit:
+          type: number
+          format: float
+      required:
+        - service
+        - limit
+  outPatientAggregateLimit:
+    type: number
+    format: float
+  outPatientServices:
+    type: array
+    items:
+      type: object
+      properties:
+        service:
+          type: string
+        limit:
+          type: string
+      required:
+        - service
+        - limit
+required:
+  - insurancePolicyId
+  - insuranceType
+  - insuranceIssuer
+  - balanceResetDate
+  - policyExpirationDate
+  - inPatientAggregateLimit
+  - inPatientServices
+  - outPatientAggregateLimit
+  - outPatientServices

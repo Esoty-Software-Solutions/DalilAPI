@@ -1,0 +1,29 @@
+title: user-new
+x-stoplight:
+  id: qdtuzdvixi3v5
+type: object
+properties:
+  username:
+    type: string
+  password:
+    type: string
+  phoneNumber:
+    type: string
+  phoneAuthenticated:
+    type: boolean
+  whatsAppNumber:
+    type: string
+  beneficiaryId:
+    type: string
+  beneficiary:
+    type: object
+    properties:
+      hasBeneficiary:
+        type: boolean
+      benefciaryId:
+        type: string
+    required:
+      - hasBeneficiary
+required:
+  - username
+  - phoneNumber

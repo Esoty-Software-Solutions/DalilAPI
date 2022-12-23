@@ -1,0 +1,138 @@
+openapi: 3.0.0
+x-stoplight:
+  id: 50ww96c24qa8n
+info:
+  title: DoctorApp
+  version: '1.0'
+  license:
+    name: TBD
+servers:
+  - url: 'http://localhost:3000/v1'
+paths:
+  '/doctors/{doctorId}/appointments':
+    parameters:
+      - schema:
+          type: string
+        name: doctorId
+        in: path
+        required: true
+    get:
+      summary: Get appointments for doctor
+      tags: []
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  object:
+                    type: array
+                    items:
+                      $ref: ../models/appointment.yaml
+                  objectCount:
+                    type: integer
+                  hasMore:
+                    type: boolean
+                required:
+                  - object
+                  - objectCount
+                  - hasMore
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      operationId: get-doctors-doctorId-appointments
+      parameters:
+        - $ref: ./Main Document.yaml#/components/parameters/booked
+        - $ref: ./Main Document.yaml#/components/parameters/pending
+        - $ref: ./Main Document.yaml#/components/parameters/completed
+        - $ref: ./Main Document.yaml#/components/parameters/cancelled
+        - $ref: ./Main Document.yaml#/components/parameters/rejected
+        - schema:
+            type: string
+          in: query
+          name: date
+          description: Filter appointments based on dates
+  '/doctors/{doctorId}/schedules':
+    parameters:
+      - schema:
+          type: string
+        name: doctorId
+        in: path
+        required: true
+    get:
+      summary: Get schedule for doctor
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  '':
+                    type: array
+                    items:
+                      $ref: ../models/schedule.yaml
+                  objectCount:
+                    type: integer
+                  hasMore:
+                    type: boolean
+                required:
+                  - objectCount
+                  - hasMore
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      operationId: get-doctors-doctorId-schedules
+      parameters:
+        - $ref: ./Main Document.yaml#/components/parameters/limit
+        - $ref: ./Main Document.yaml#/components/parameters/starting_after_object
+  '/patients/{patientId}/medicalFiles':
+    parameters:
+      - schema:
+          type: string
+        name: patientId
+        in: path
+        required: true
+    get:
+      summary: Get medical file for patient
+      tags: []
+      operationId: get-patients-patientId-medicalFiles
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/medicalFile.yaml
+              examples: {}
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+components:
+  schemas: {}

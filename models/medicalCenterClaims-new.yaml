@@ -1,0 +1,55 @@
+title: medicalCenterClaims-new
+x-stoplight:
+  id: 9hb06it3m3tzt
+x-tags:
+  - claims
+  - medicalCenter
+type: object
+properties:
+  claimId:
+    type: string
+  patient:
+    $ref: ./patient.yaml
+  checkInConfermation:
+    type: string
+  Staff:
+    type: string
+  serviceDate:
+    type: string
+    format: date
+  submittedOn:
+    type: string
+    format: date-time
+  medicalServices:
+    type: array
+    items:
+      type: object
+      properties:
+        service:
+          $ref: ./medicalService.yaml
+        expenseReviewStatus:
+          type: string
+        medicalReviewStatus:
+          type: string
+        rejectedAmount:
+          type: number
+          format: float
+      required:
+        - service
+        - expenseReviewStatus
+        - medicalReviewStatus
+        - rejectedAmount
+  expenseReview:
+    type: string
+  medicalReview:
+    type: string
+required:
+  - claimId
+  - patient
+  - checkInConfermation
+  - Staff
+  - serviceDate
+  - submittedOn
+  - medicalServices
+  - expenseReview
+  - medicalReview

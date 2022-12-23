@@ -1,0 +1,37 @@
+title: medicalCenter-new
+x-stoplight:
+  id: buqhtc3ifds75
+x-tags:
+  - medicalCenter
+type: object
+properties:
+  name:
+    type: string
+  city:
+    type: string
+  district:
+    type: string
+  description:
+    type: string
+  address:
+    type: string
+  phoneNumber:
+    type: array
+    items:
+      type: string
+  email:
+    type: string
+    format: email
+  facebookLink:
+    type: string
+  googleMapLink:
+    type: string
+  website:
+    type: string
+required:
+  - name
+  - city
+  - district
+  - address
+  - phoneNumber
+  - googleMapLink

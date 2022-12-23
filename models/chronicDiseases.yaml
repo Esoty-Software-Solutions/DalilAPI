@@ -1,0 +1,18 @@
+title: chronicDiseases
+x-stoplight:
+  id: 2jbxem9ygg9jq
+x-tags:
+  - medicalFile
+type: object
+properties:
+  DiseaseName:
+    type: string
+  diagnosisDate:
+    type: string
+    format: date
+  diagnosedBy:
+    type: string
+  notes:
+    type: string
+required:
+  - DiseaseName

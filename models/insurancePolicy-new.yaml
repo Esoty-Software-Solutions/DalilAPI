@@ -1,0 +1,44 @@
+title: insurancePolicy-new
+x-stoplight:
+  id: k3ipiuda1mfcm
+x-tags:
+  - institutions
+type: object
+properties:
+  InPatientAggregateLimit:
+    type: number
+    format: float
+  inPatientServices:
+    type: array
+    items:
+      type: object
+      properties:
+        service:
+          type: string
+        limit:
+          type: number
+          format: float
+      required:
+        - service
+        - limit
+  outPatientAggregateLimit:
+    type: number
+    format: float
+  outPatientServices:
+    type: array
+    items:
+      type: object
+      properties:
+        service:
+          type: string
+        limit:
+          type: string
+      required:
+        - service
+        - limit
+required:
+  - InPatientAggregateLimit
+  - inPatientServices
+  - outPatientAggregateLimit
+  - outPatientServices
+
