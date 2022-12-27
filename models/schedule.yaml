@@ -7,7 +7,7 @@ type: object
 properties:
   scheduleId:
     type: string
-  healtcareCenterObject:
+  medicalCenterObject:
     $ref: ./medicalCenter.yaml
   doctorObject:
     $ref: ./doctor.yaml
@@ -39,7 +39,7 @@ properties:
     type: boolean
 required:
   - scheduleId
-  - healtcareCenterObject
+  - medicalCenterObject
   - doctorObject
   - timeslot
   - monday

@@ -9,59 +9,6 @@ info:
 servers:
   - url: 'http://localhost:3000/v1'
 paths:
-  '/doctors/{doctorId}/appointments':
-    parameters:
-      - schema:
-          type: string
-        name: doctorId
-        in: path
-        required: true
-    get:
-      summary: Get appointments for doctor
-      tags: []
-      responses:
-        '200':
-          description: OK
-          headers: {}
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  object:
-                    type: array
-                    items:
-                      $ref: ../models/appointment.yaml
-                  objectCount:
-                    type: integer
-                  hasMore:
-                    type: boolean
-                required:
-                  - object
-                  - objectCount
-                  - hasMore
-        '400':
-          description: Bad Request
-        '401':
-          description: Unauthorized
-        '403':
-          description: Forbidden
-        '404':
-          description: Not Found
-        '500':
-          description: Internal Server Error
-      operationId: get-doctors-doctorId-appointments
-      parameters:
-        - $ref: ./Main Document.yaml#/components/parameters/booked
-        - $ref: ./Main Document.yaml#/components/parameters/pending
-        - $ref: ./Main Document.yaml#/components/parameters/completed
-        - $ref: ./Main Document.yaml#/components/parameters/cancelled
-        - $ref: ./Main Document.yaml#/components/parameters/rejected
-        - schema:
-            type: string
-          in: query
-          name: date
-          description: Filter appointments based on dates
   '/doctors/{doctorId}/schedules':
     parameters:
       - schema:
@@ -80,7 +27,7 @@ paths:
               schema:
                 type: object
                 properties:
-                  '':
+                  object:
                     type: array
                     items:
                       $ref: ../models/schedule.yaml
@@ -134,5 +81,100 @@ paths:
           description: Not Found
         '500':
           description: Internal Server Error
+  '/doctors/{doctorId}/appointmentSummary':
+    parameters:
+      - schema:
+          type: string
+        name: doctorId
+        in: path
+        required: true
+    get:
+      summary: Get appointment summary for doctor
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  object:
+                    type: array
+                    items:
+                      $ref: ../models/doctorAppointmentSummary.yaml
+                  objectCount:
+                    type: integer
+                  hasMore:
+                    type: boolean
+                required:
+                  - object
+                  - objectCount
+                  - hasMore
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      operationId: get-doctors-doctorId-appointmentSummary
+      parameters: []
+  '/doctors/{doctorId}/appointment':
+    parameters:
+      - schema:
+          type: string
+        name: doctorId
+        in: path
+        required: true
+    get:
+      summary: Get appointment list for doctor
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  object:
+                    type: array
+                    items:
+                      $ref: ../models/appointment.yaml
+                  objectCount:
+                    type: integer
+                  hasMore:
+                    type: boolean
+                required:
+                  - object
+                  - objectCount
+                  - hasMore
+      operationId: get-doctors-doctorId-appointment
+      parameters:
+        - $ref: ./Main Document.yaml#/components/parameters/limit
+        - $ref: ./Main Document.yaml#/components/parameters/starting_after_object
+        - schema:
+            type: string
+          in: query
+          name: medicalCenterId
+          required: true
+          description: medical center ID
+        - schema:
+            type: string
+            format: date
+          in: query
+          required: true
+          name: date
+          description: appointment date
+        - schema:
+            type: string
+          in: query
+          name: timeSlot
+          required: true
+          description: appointment time slot
 components:
   schemas: {}

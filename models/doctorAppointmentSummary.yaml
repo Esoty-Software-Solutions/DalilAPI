@@ -1,0 +1,40 @@
+title: doctorAppointmentSummary
+x-stoplight:
+  id: 1wmb1ixg2yidv
+x-tags:
+  - doctor
+  - appointment
+type: object
+properties:
+  medicalCenterId:
+    type: string
+  medicalCenterName:
+    type: string
+    description: Medical center name
+  expectedVisits:
+    type: array
+    items:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date
+          description: Appointment date.
+        morningSlot:
+          type: integer
+          description: Number of booked patients in the morning slot.
+        afternoonSlot:
+          type: integer
+          description: Number of booked patients in the afternoon slot
+        eveningSlot:
+          type: integer
+          description: Number of booked patient in the evening slot.
+      required:
+        - date
+        - morningSlot
+        - afternoonSlot
+        - eveningSlot
+required:
+  - medicalCenterId
+  - medicalCenterName
+  - expectedVisits
