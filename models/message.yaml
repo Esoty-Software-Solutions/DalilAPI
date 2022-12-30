@@ -1,0 +1,5 @@
+title: message
+x-stoplight:
+  id: yvr33xrbxqigp
+type: string
+description: Response body message

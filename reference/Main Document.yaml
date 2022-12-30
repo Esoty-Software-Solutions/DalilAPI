@@ -21,35 +21,44 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/beneficiary'
-              examples:
-                Example 1:
-                  value:
-                    beneficiaryId: beneficiary ID
-                    firstName: first name
-                    middleName: middle name
-                    lastName: last name
-                    birthdate: 22/12/1990
-                    phoneNumber: 091-234-4432
-                    gender: male
-                    familyMembers:
-                      - familyMemberId: family member ID
-                        firstName: first name
-                        middleName: middle name
-                        lastName: string
-                        birthdate: '2019-08-24'
-                        relationshipToBeneficiary: Father
-                        gender: string
-                    insurancePolicyId: string
-                    cityResidence: string
-                    districtResidence: string
-                    account:
-                      hasAccount: true
-                      userId: string
+                type: object
+                properties:
+                  statusCode:
+                    type: string
+                  message:
+                    type: string
+                  data:
+                    $ref: ../models/beneficiary.yaml
+                required:
+                  - statusCode
+                  - message
+                  - data
+              examples: {}
         '401':
           description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - statusCode
+                  - message
         '500':
           description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: string
+                  message:
+                    type: string
       requestBody:
         content:
           application/json:
@@ -95,54 +104,72 @@ paths:
               schema:
                 type: object
                 properties:
-                  object:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/user'
-                  objectCount:
-                    type: integer
-                  hasMore:
-                    type: boolean
+                  statusCode:
+                    type: string
+                  message:
+                    type: string
+                  data:
+                    type: object
+                    required:
+                      - objectCount
+                      - hasMore
+                      - objectArray
+                    properties:
+                      objectCount:
+                        type: integer
+                      hasMore:
+                        type: boolean
+                      objectArray:
+                        type: array
+                        items:
+                          $ref: ../models/user.yaml
                 required:
-                  - object
-                  - objectCount
-                  - hasMore
-              examples:
-                Example 1:
-                  value:
-                    object:
-                      - userId: user ID
-                        username: username
-                        phoneNumber: 091-223-6699
-                        phoneAuthenticated: true
-                        whatsAppNumber: +21892-244-2113
-                        beneficiary:
-                          hasBeneficiary: true
-                          benefciaryId: beneficiary ID
-                      - userId: user ID
-                        username: username1
-                        phoneNumber: 091-223-6699
-                        phoneAuthenticated: true
-                        whatsAppNumber: +21892-244-2113
-                        beneficiary:
-                          hasBeneficiary: true
-                          benefciaryId: beneficiary ID
-                      - userId: user ID
-                        username: username2
-                        phoneNumber: 091-223-6699
-                        phoneAuthenticated: true
-                        whatsAppNumber: +21892-244-2113
-                        beneficiary:
-                          hasBeneficiary: true
-                          benefciaryId: beneficiary ID
-                    objectCount: 3
-                    hasMore: false
+                  - statusCode
+                  - message
+                  - data
+              examples: {}
         '401':
           description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - statusCode
+                  - message
         '403':
           description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - statusCode
+                  - message
         '500':
           description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - statusCode
+                  - message
       operationId: get-users
       parameters:
         - $ref: '#/components/parameters/limit'
@@ -157,18 +184,53 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/user'
+                type: object
+                properties:
+                  statusCode:
+                    type: string
+                  message:
+                    type: string
+                  date:
+                    $ref: ../models/user.yaml
+              examples: {}
         '401':
           description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: string
+                  message:
+                    type: string
         '403':
           description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: string
+                  message:
+                    type: string
         '500':
           description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: string
+                  message:
+                    type: string
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/user'
+              $ref: ../models/user-new.yaml
         description: ''
       description: ''
   '/users/{username}':
@@ -181,24 +243,61 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/user'
-              examples:
-                Example 1:
-                  value:
-                    userId: string
-                    username: string
-                    phoneNumber: string
-                    phoneAuthenticated: true
-                    whatsAppNumber: string
-                    beneficiary:
-                      hasBeneficiary: true
-                      benefciaryId: string
+                type: object
+                properties:
+                  statusCode:
+                    type: string
+                  message:
+                    type: string
+                  data:
+                    $ref: ../models/user.yaml
+                required:
+                  - statusCode
+                  - message
+                  - data
+              examples: {}
         '401':
           description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - statusCode
+                  - message
         '403':
           description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - statusCode
+                  - message
         '500':
           description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: string
+                  messageBody:
+                    type: string
+                required:
+                  - statusCode
+                  - messageBody
       operationId: get-users-username
       parameters: []
     parameters:
@@ -219,109 +318,86 @@ paths:
               schema:
                 type: object
                 properties:
-                  object:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/beneficiary'
-                  objectCount:
-                    type: integer
-                  hasMore:
-                    type: boolean
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                  date:
+                    type: object
+                    required:
+                      - objectCount
+                      - hasMore
+                      - objectArray
+                    properties:
+                      objectCount:
+                        type: integer
+                      hasMore:
+                        type: boolean
+                      objectArray:
+                        type: array
+                        items:
+                          $ref: ../models/beneficiary.yaml
                 required:
-                  - object
-                  - objectCount
-                  - hasMore
-              examples:
-                Example 1:
-                  value:
-                    object:
-                      - beneficiaryId: beneficiary ID 1
-                        firstName: string
-                        middleName: string
-                        lastName: string
-                        birthdate: string
-                        phoneNumber: string
-                        gender: string
-                        familyMembers:
-                          - familyMemberId: family ID1
-                            firstName: string
-                            middleName: string
-                            lastName: string
-                            birthdate: '2019-08-24'
-                            relationshipToBeneficiary: Father
-                            gender: string
-                          - familyMemberId: family ID2
-                            firstName: string
-                            middleName: string
-                            lastName: string
-                            birthdate: '2019-08-24'
-                            relationshipToBeneficiary: Father
-                            gender: string
-                          - familyMemberId: family ID3
-                            firstName: string
-                            middleName: string
-                            lastName: string
-                            birthdate: '2019-08-24'
-                            relationshipToBeneficiary: Father
-                            gender: string
-                        insurancePolicyId: string
-                        cityResidence: string
-                        districtResidence: string
-                        account:
-                          hasAccount: true
-                          userId: string
-                      - beneficiaryId: string
-                        firstName: string
-                        middleName: string
-                        lastName: string
-                        birthdate: string
-                        phoneNumber: string
-                        gender: string
-                        familyMembers:
-                          - familyMemberId: string
-                            firstName: string
-                            middleName: string
-                            lastName: string
-                            birthdate: '2019-08-24'
-                            relationshipToBeneficiary: Father
-                            gender: string
-                        insurancePolicyId: string
-                        cityResidence: string
-                        districtResidence: string
-                        account:
-                          hasAccount: true
-                          userId: string
-                      - beneficiaryId: string
-                        firstName: string
-                        middleName: string
-                        lastName: string
-                        birthdate: string
-                        phoneNumber: string
-                        gender: string
-                        familyMembers:
-                          - familyMemberId: string
-                            firstName: string
-                            middleName: string
-                            lastName: string
-                            birthdate: '2019-08-24'
-                            relationshipToBeneficiary: Father
-                            gender: string
-                        insurancePolicyId: string
-                        cityResidence: string
-                        districtResidence: string
-                        account:
-                          hasAccount: true
-                          userId: string
-                    objectCount: 3
-                    hasMore: false
+                  - codeStatus
+                  - message
+                  - date
+              examples: {}
         '401':
           description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
         '403':
           description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
         '404':
           description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
         '500':
           description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
       operationId: get-beneficiaries
       parameters:
         - $ref: '#/components/parameters/limit'
@@ -340,21 +416,82 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/beneficiary'
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                  data:
+                    $ref: ../models/beneficiary.yaml
+                required:
+                  - codeStatus
+                  - message
+                  - data
+              examples: {}
         '400':
           description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
         '401':
           description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
         '403':
           description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
         '500':
           description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
       operationId: post-beneficiaries
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/beneficiary-new'
+              $ref: ../models/beneficiary-new.yaml
+        description: ''
     parameters: []
   '/beneficiaries/{beneficiaryId}':
     get:
@@ -366,18 +503,89 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/beneficiary'
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                  data:
+                    $ref: ../models/beneficiary.yaml
+                required:
+                  - codeStatus
+                  - message
+                  - data
               examples: {}
         '400':
           description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
         '401':
           description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
         '403':
           description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
         '404':
           description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
         '500':
           description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
       operationId: get-beneficiaries-beneficiaryId
       description: Get information about the user
       parameters: []
@@ -396,20 +604,79 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/beneficiary'
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                  data:
+                    $ref: ../models/beneficiary.yaml
+                required:
+                  - codeStatus
+                  - message
+                  - data
         '401':
           description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
         '403':
           description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
         '404':
           description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
         '500':
           description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/beneficiary-update'
+              $ref: ../models/beneficiary-update.yaml
             examples:
               Example 1:
                 value:
@@ -808,15 +1075,74 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/appointments'
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                  date:
+                    $ref: ../models/appointment.yaml
+                required:
+                  - codeStatus
+                  - message
+                  - date
         '400':
           description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
         '401':
           description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
         '403':
           description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
         '500':
           description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
       requestBody:
         content:
           application/json:
@@ -861,28 +1187,99 @@ paths:
               schema:
                 type: object
                 properties:
-                  object:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/appointments'
-                  objectCount:
-                    type: integer
-                  hasMore:
-                    type: boolean
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                  data:
+                    type: object
+                    required:
+                      - objectCount
+                      - hasMore
+                      - objectArray
+                    properties:
+                      objectCount:
+                        type: integer
+                      hasMore:
+                        type: boolean
+                      objectArray:
+                        type: array
+                        items:
+                          $ref: ../models/appointment.yaml
                 required:
-                  - object
-                  - objectCount
-                  - hasMore
+                  - codeStatus
+                  - message
+                  - data
         '400':
           description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
         '401':
           description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
         '403':
           description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
         '404':
           description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
         '500':
           description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
       parameters:
         - $ref: '#/components/parameters/booked'
         - $ref: '#/components/parameters/pending'
@@ -1188,28 +1585,99 @@ paths:
               schema:
                 type: object
                 properties:
-                  object:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/schedule'
-                  objectCount:
-                    type: integer
-                  hasMore:
-                    type: boolean
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                  data:
+                    type: object
+                    required:
+                      - objectCount
+                      - hasMore
+                      - objectArray
+                    properties:
+                      objectCount:
+                        type: integer
+                      hasMore:
+                        type: boolean
+                      objectArray:
+                        type: array
+                        items:
+                          $ref: ../models/schedule.yaml
                 required:
-                  - object
-                  - objectCount
-                  - hasMore
+                  - codeStatus
+                  - message
+                  - data
         '400':
           description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
         '401':
           description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
         '403':
           description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
         '404':
           description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
         '500':
           description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
     parameters: []
     post:
       summary: Create a new schedule
@@ -1447,22 +1915,101 @@ paths:
               schema:
                 type: object
                 properties:
-                  cityName:
-                    type: array
-                    items:
-                      type: string
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                  data:
+                    type: object
+                    required:
+                      - objectArray
+                      - objectCount
+                    properties:
+                      objectArray:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            cityName:
+                              type: string
+                          required:
+                            - cityName
+                      objectCount:
+                        type: integer
                 required:
-                  - cityName
+                  - codeStatus
+                  - message
+                  - data
         '400':
           description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
         '401':
           description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
         '403':
           description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
         '404':
           description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
         '500':
           description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
       operationId: get-cities
     post:
       summary: Add a city
@@ -1475,18 +2022,77 @@ paths:
               schema:
                 type: object
                 properties:
-                  cityName:
+                  codeStatus:
                     type: string
+                  message:
+                    type: string
+                  data:
+                    type: object
+                    required:
+                      - cityName
+                    properties:
+                      cityName:
+                        type: string
                 required:
-                  - cityName
+                  - codeStatus
+                  - message
+                  - data
         '400':
           description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
         '401':
           description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
         '403':
           description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
         '500':
           description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
       requestBody:
         content:
           application/json:
@@ -1509,22 +2115,101 @@ paths:
               schema:
                 type: object
                 properties:
-                  medicalSpecialty:
-                    type: array
-                    items:
-                      type: string
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                  data:
+                    type: object
+                    required:
+                      - objectArray
+                      - objectCount
+                    properties:
+                      objectArray:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            medicalSpecialtyName:
+                              type: string
+                          required:
+                            - medicalSpecialtyName
+                      objectCount:
+                        type: integer
                 required:
-                  - medicalSpecialty
+                  - codeStatus
+                  - message
+                  - data
         '400':
           description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
         '401':
           description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
         '403':
           description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
         '404':
           description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
         '500':
           description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
       operationId: get-medicalSpecialties
     post:
       summary: Add a medical specialty
@@ -1537,18 +2222,77 @@ paths:
               schema:
                 type: object
                 properties:
-                  specialtyName:
+                  codeStatus:
                     type: string
+                  message:
+                    type: string
+                  data:
+                    type: object
+                    required:
+                      - medicalSpecialtyName
+                    properties:
+                      medicalSpecialtyName:
+                        type: string
                 required:
-                  - specialtyName
+                  - codeStatus
+                  - message
+                  - data
         '400':
           description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
         '401':
           description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
         '403':
           description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
         '500':
           description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
       operationId: post-medicalSpecialties
       requestBody:
         content:
@@ -1756,1378 +2500,7 @@ paths:
         '500':
           description: Internal Server Error
 components:
-  schemas:
-    user:
-      title: user
-      type: object
-      x-examples:
-        Example 1:
-          userId: string
-          username: string
-          phoneNumber: string
-          phoneAuthenticated: true
-          whatsAppNumber: string
-          beneficiary:
-            hasBeneficiary: true
-            benefciaryId: string
-      x-internal: false
-      properties:
-        userId:
-          type: string
-        username:
-          type: string
-        phoneNumber:
-          type: string
-        phoneAuthenticated:
-          type: boolean
-        whatsAppNumber:
-          type: string
-        beneficiary:
-          type: object
-          properties:
-            hasBeneficiary:
-              type: boolean
-            benefciaryId:
-              type: string
-          required:
-            - hasBeneficiary
-      required:
-        - userId
-        - username
-        - phoneNumber
-    user-new:
-      title: New user
-      type: object
-      x-examples: {}
-      properties:
-        username:
-          type: string
-        password:
-          type: string
-        phoneNumber:
-          type: string
-        phoneAuthenticated:
-          type: boolean
-        whatsAppNumber:
-          type: string
-        beneficiaryId:
-          type: string
-        beneficiary:
-          type: object
-          properties:
-            hasBeneficiary:
-              type: boolean
-            benefciaryId:
-              type: string
-          required:
-            - hasBeneficiary
-      required:
-        - username
-        - phoneNumber
-    user-update:
-      title: user
-      type: object
-      x-examples: {}
-      properties:
-        username:
-          type: string
-        phoneNumber:
-          type: string
-        phoneAuthenticated:
-          type: boolean
-        whatsAppNumber:
-          type: string
-        beneficiaryId:
-          type: string
-        beneficiary:
-          type: object
-          properties:
-            hasBeneficiary:
-              type: boolean
-            benefciaryId:
-              type: string
-    familyMember:
-      title: familyMember
-      x-stoplight:
-        id: g38is04qhgnra
-      type: object
-      description: Description of the family members
-      x-examples: {}
-      properties:
-        familyMemberId:
-          type: string
-        firstName:
-          type: string
-        middleName:
-          type: string
-        lastName:
-          type: string
-        birthdate:
-          type: string
-          format: date
-        relationshipToBeneficiary:
-          type: string
-          enum:
-            - Father
-            - mother
-            - daughter
-            - son
-            - husband
-            - wife
-        gender:
-          type: string
-      required:
-        - familyMemberId
-        - firstName
-        - middleName
-        - lastName
-        - birthdate
-        - relationshipToBeneficiary
-        - gender
-    familyMember-new:
-      title: familyMember
-      x-stoplight:
-        id: g38is04qhgnra
-      type: object
-      description: Description of the family members
-      x-examples: {}
-      properties:
-        FirstName:
-          type: string
-        MiddleName:
-          type: string
-        LastName:
-          type: string
-        birthdate:
-          type: string
-          format: date
-        relationshipToUser:
-          type: string
-        gender:
-          type: string
-      required:
-        - FirstName
-        - MiddleName
-        - LastName
-        - birthdate
-        - relationshipToUser
-        - gender
-    familyMember-update:
-      title: familyMember
-      x-stoplight:
-        id: g38is04qhgnra
-      type: object
-      description: Description of the family members
-      x-examples: {}
-      properties:
-        FirstName:
-          type: string
-        MiddleName:
-          type: string
-        LastName:
-          type: string
-        birthdate:
-          type: string
-          format: date
-        relationshipToUser:
-          type: string
-          enum:
-            - father
-            - mother
-            - son
-            - daughter
-            - husband
-            - wife
-            - user
-        gender:
-          type: string
-    doctor:
-      title: doctor
-      x-stoplight:
-        id: anrn7yyud85dh
-      type: object
-      description: Doctor details
-      properties:
-        doctorId:
-          type: string
-        firstName:
-          type: string
-        middleName:
-          type: string
-        lastName:
-          type: string
-        specialty:
-          type: string
-        level:
-          type: string
-        gender:
-          type: string
-        birthdate:
-          type: string
-          format: date
-      required:
-        - doctorId
-        - firstName
-        - middleName
-        - lastName
-        - specialty
-        - level
-        - gender
-      x-examples:
-        Example 1:
-          doctorId: string
-          firstName: string
-          middleName: string
-          lastName: string
-          specialty: string
-          level: string
-          gender: string
-          birthdate: '2019-08-24'
-    doctor-new:
-      title: doctor
-      x-stoplight:
-        id: anrn7yyud85dh
-      type: object
-      description: Doctor details
-      properties:
-        firstName:
-          type: string
-        middleName:
-          type: string
-        lastName:
-          type: string
-        specialty:
-          type: string
-        level:
-          type: string
-        gender:
-          type: string
-        birthdate:
-          type: string
-          format: date
-      required:
-        - firstName
-        - middleName
-        - lastName
-        - specialty
-        - level
-        - gender
-        - birthdate
-    doctor-update:
-      title: doctor
-      x-stoplight:
-        id: anrn7yyud85dh
-      type: object
-      description: Doctor details
-      properties:
-        firstName:
-          type: string
-        middleName:
-          type: string
-        lastName:
-          type: string
-        specialty:
-          type: string
-        level:
-          type: string
-        gender:
-          type: string
-        birthdate:
-          type: string
-          format: date
-    medicalCenter:
-      title: medicalCenter
-      x-stoplight:
-        id: rb8vssmiibqhe
-      type: object
-      properties:
-        medicalCenterId:
-          type: string
-        name:
-          type: string
-        city:
-          type: string
-        district:
-          type: string
-        description:
-          type: string
-        address:
-          type: string
-        phoneNumber:
-          type: array
-          items:
-            type: string
-        email:
-          type: string
-          format: email
-        facebookLink:
-          type: string
-        googleMapLink:
-          type: string
-        website:
-          type: string
-      required:
-        - medicalCenterId
-        - name
-        - city
-        - district
-        - address
-      x-examples:
-        Example 1:
-          medicalCenterId: string
-          name: string
-          city: string
-          district: string
-          description: string
-          address: string
-          phoneNumber:
-            - string
-          email: user@example.com
-          facebookLink: string
-          googleMapLink: string
-          website: string
-    medicalCenter-new:
-      title: medicalCenter new
-      x-stoplight:
-        id: rb8vssmiibqhe
-      type: object
-      description: ''
-      properties:
-        name:
-          type: string
-        city:
-          type: string
-        district:
-          type: string
-        description:
-          type: string
-        address:
-          type: string
-        phoneNumber:
-          type: array
-          items:
-            type: string
-        email:
-          type: string
-          format: email
-        facebookLink:
-          type: string
-        googleMapLink:
-          type: string
-        website:
-          type: string
-      required:
-        - name
-        - city
-        - district
-        - address
-        - phoneNumber
-        - googleMapLink
-    medicalCenter-update:
-      title: medicalCenter new
-      x-stoplight:
-        id: rb8vssmiibqhe
-      type: object
-      description: ''
-      properties:
-        name:
-          type: string
-        city:
-          type: string
-        district:
-          type: string
-        description:
-          type: string
-        address:
-          type: string
-        phoneNumber:
-          type: array
-          items:
-            type: string
-        email:
-          type: string
-          format: email
-        facebookLink:
-          type: string
-        googleMapLink:
-          type: string
-        website:
-          type: string
-    schedule:
-      title: schedule
-      x-stoplight:
-        id: ssc22rabi387u
-      type: object
-      x-examples:
-        Example 1:
-          scheduleId: string
-          healtcareCenterObject:
-            medicalCenterId: string
-            name: string
-            city: string
-            district: string
-            description: string
-            address: string
-            phoneNumber:
-              - string
-            email: user@example.com
-            facebookLink: string
-            googleMapLink: string
-            website: string
-          doctorObject:
-            doctorId: string
-            firstName: string
-            middleName: string
-            lastName: string
-            specialty: string
-            level: string
-            gender: string
-            birthdate: '2019-08-24'
-          timeslot: string
-          monday: true
-          tuesday: true
-          wednesday: true
-          thursday: true
-          friday: true
-          saturday: true
-          sunday: true
-          price: 0
-      properties:
-        scheduleId:
-          type: string
-        healtcareCenterObject:
-          $ref: '#/components/schemas/medicalCenter'
-        doctorObject:
-          $ref: '#/components/schemas/doctor'
-        timeslot:
-          type: string
-        monday:
-          type: boolean
-        tuesday:
-          type: boolean
-        wednesday:
-          type: boolean
-        thursday:
-          type: boolean
-        friday:
-          type: boolean
-        saturday:
-          type: boolean
-        sunday:
-          type: boolean
-        price:
-          type: integer
-        startDate:
-          type: string
-          format: date
-        endDate:
-          type: string
-          format: date
-        isActive:
-          type: boolean
-      required:
-        - scheduleId
-        - healtcareCenterObject
-        - doctorObject
-        - timeslot
-        - monday
-        - tuesday
-        - wednesday
-        - thursday
-        - friday
-        - saturday
-        - sunday
-        - price
-        - startDate
-        - endDate
-        - isActive
-    schedule-new:
-      title: schedule new
-      x-stoplight:
-        id: ssc22rabi387u
-      type: object
-      properties:
-        medicalCenterId:
-          type: string
-        doctorId:
-          type: string
-        timeslot:
-          type: string
-        monday:
-          type: boolean
-        tuesday:
-          type: boolean
-        wednesday:
-          type: boolean
-        thursday:
-          type: boolean
-        friday:
-          type: boolean
-        saturday:
-          type: boolean
-        sunday:
-          type: boolean
-        price:
-          type: integer
-        startDate:
-          type: string
-          format: date
-        endDate:
-          type: string
-          format: date
-      required:
-        - medicalCenterId
-        - doctorId
-        - timeslot
-        - monday
-        - tuesday
-        - wednesday
-        - thursday
-        - friday
-        - saturday
-        - sunday
-        - price
-        - startDate
-        - endDate
-    schedule-update:
-      title: schedule update
-      x-stoplight:
-        id: ssc22rabi387u
-      type: object
-      properties:
-        timeslot:
-          type: string
-        monday:
-          type: boolean
-        tuesday:
-          type: boolean
-        wednesday:
-          type: boolean
-        thursday:
-          type: boolean
-        friday:
-          type: boolean
-        saturday:
-          type: boolean
-        sunday:
-          type: boolean
-        price:
-          type: integer
-    patient:
-      title: patient
-      x-stoplight:
-        id: g6wsaa75ogqjcqx
-      type: object
-      x-examples:
-        example-1:
-          userId: string
-          patientId: string
-          patientName: string
-          patientRelationship: string
-      properties:
-        userId:
-          type: string
-        patientType:
-          type: string
-        patientId:
-          type: string
-        patientName:
-          type: string
-        patientRelationship:
-          type: string
-      required:
-        - userId
-        - patientType
-        - patientId
-        - patientName
-        - patientRelationship
-    appointments:
-      title: appointment
-      x-stoplight:
-        id: 1r5lis9hylq14
-      type: object
-      x-examples:
-        example-1:
-          id: string
-          date: '2019-08-24'
-          appointmentStatus: booked
-          price: string
-          timeslot: string
-          patient:
-            userId: string
-            patientId: string
-            patientName: string
-            patientRelationship: string
-          doctor:
-            id: string
-            firstName: string
-            lastName: string
-            specialty: string
-            level: string
-            gender: string
-            dateOfBirth: '2019-08-24'
-          medicalCenter:
-            id: string
-            name: string
-            city: string
-            district: string
-            description: string
-            address: string
-            phoneNumber:
-              - string
-            email: user@example.com
-            facebookLink: string
-            googleMapLink: string
-            website: string
-      properties:
-        appointmentId:
-          type: string
-        scheduleId:
-          type: string
-        date:
-          type: string
-          format: date
-        appointmentStatus:
-          type: string
-          enum:
-            - booked
-            - pending
-            - cancelled
-            - completed
-        price:
-          type: string
-        timeslot:
-          type: string
-        patient:
-          $ref: '#/components/schemas/patient'
-        doctor:
-          $ref: '#/components/schemas/doctor'
-        medicalCenter:
-          $ref: '#/components/schemas/medicalCenter'
-      required:
-        - appointmentId
-        - scheduleId
-        - date
-        - appointmentStatus
-        - price
-        - timeslot
-        - patient
-        - doctor
-        - medicalCenter
-    beneficiary:
-      title: Beneficiary
-      x-stoplight:
-        id: lrv9m16yi62iq
-      type: object
-      properties:
-        beneficiaryId:
-          type: string
-        firstName:
-          type: string
-        middleName:
-          type: string
-        lastName:
-          type: string
-        birthdate:
-          type: string
-        phoneNumber:
-          type: string
-        gender:
-          type: string
-        familyMembers:
-          type: array
-          items:
-            $ref: '#/components/schemas/familyMember'
-        insurancePolicyId:
-          type: string
-        cityResidence:
-          type: string
-        districtResidence:
-          type: string
-        account:
-          type: object
-          required:
-            - hasAccount
-          properties:
-            hasAccount:
-              type: boolean
-            userId:
-              type: string
-      required:
-        - beneficiaryId
-        - firstName
-        - middleName
-        - lastName
-        - birthdate
-        - phoneNumber
-        - gender
-        - familyMembers
-        - cityResidence
-        - account
-      x-examples: {}
-    beneficiary-new:
-      title: Beneficiary new
-      x-stoplight:
-        id: lrv9m16yi62iq
-      type: object
-      properties:
-        firstName:
-          type: string
-        middleName:
-          type: string
-        lastName:
-          type: string
-        birthdate:
-          type: string
-        phoneNumber:
-          type: string
-        gender:
-          type: string
-        familyMembers:
-          type: array
-          items:
-            $ref: '#/components/schemas/familyMember-new'
-        insurancePolicyId:
-          type: string
-        residentCity:
-          type: string
-        residentDistrict:
-          type: string
-        account:
-          type: object
-          properties:
-            hasAccount:
-              type: boolean
-            userId:
-              type: string
-          required:
-            - hasAccount
-      required:
-        - firstName
-        - middleName
-        - lastName
-        - birthdate
-        - phoneNumber
-        - gender
-        - familyMembers
-        - insurancePolicyId
-        - residentCity
-    beneficiary-update:
-      title: Beneficiary update
-      x-stoplight:
-        id: lrv9m16yi62iq
-      type: object
-      properties:
-        firstName:
-          type: string
-        middleName:
-          type: string
-        lastName:
-          type: string
-        birthdate:
-          type: string
-        phoneNumber:
-          type: string
-        gender:
-          type: string
-        familyMembers:
-          type: array
-          items:
-            $ref: '#/components/schemas/familyMember-update'
-        insurancePolicyId:
-          type: string
-        residentCity:
-          type: string
-        residentDistrict:
-          type: string
-        account:
-          type: object
-          properties:
-            hasAccount:
-              type: boolean
-            userId:
-              type: string
-    expenseReport:
-      title: Expense report
-      x-stoplight:
-        id: sz4bjpciac3tn
-      type: object
-      properties:
-        ExepnseReportId:
-          type: string
-        healtcareCenterId:
-          type: string
-        healtcareCenterName:
-          type: string
-        serviceDate:
-          type: string
-          format: date
-        charnge:
-          type: number
-          format: float
-        currency:
-          type: string
-        beneficiaryId:
-          type: string
-        patientName:
-          type: string
-      required:
-        - ExepnseReportId
-        - healtcareCenterId
-        - healtcareCenterName
-        - serviceDate
-        - charnge
-        - currency
-        - beneficiaryId
-        - patientName
-    expenseReport-new:
-      title: Expense report new
-      type: object
-      properties:
-        healtcareCenterId:
-          type: string
-        healtcareCenterName:
-          type: string
-        serviceDate:
-          type: string
-          format: date
-        charnge:
-          type: number
-          format: float
-        currency:
-          type: string
-        beneficiaryId:
-          type: string
-        patientName:
-          type: string
-      required:
-        - healtcareCenterId
-        - healtcareCenterName
-        - serviceDate
-        - charnge
-        - currency
-        - beneficiaryId
-        - patientName
-      x-stoplight:
-        id: 9b47c57cd7265
-    manualClaims:
-      title: Manual claims
-      x-stoplight:
-        id: e36e30299e32a
-      type: object
-      properties:
-        claimId:
-          type: string
-        claimType:
-          type: string
-        medicalCenterName:
-          type: string
-        patientName:
-          type: string
-        ServiceType:
-          type: string
-        ClaimAmount:
-          type: string
-        ClaimCurrency:
-          type: string
-        ServiceDate:
-          type: string
-          format: date
-        SubmissionDate:
-          type: string
-          format: date
-        status:
-          type: string
-        notes:
-          type: string
-        files:
-          type: array
-          items:
-            type: string
-            format: binary
-      required:
-        - claimId
-        - claimType
-        - medicalCenterName
-        - patientName
-        - ServiceType
-        - ClaimAmount
-        - ClaimCurrency
-        - ServiceDate
-        - SubmissionDate
-        - status
-        - notes
-        - files
-    manualClaims-new:
-      title: Manual claims new
-      type: object
-      x-stoplight:
-        id: 176e5ea12eff2
-      properties:
-        claimType:
-          type: string
-        medicalCenterName:
-          type: string
-        patientName:
-          type: string
-        ServiceType:
-          type: string
-        ClaimAmount:
-          type: string
-        ClaimCurrency:
-          type: string
-        ServiceDate:
-          type: string
-          format: date
-        SubmissionDate:
-          type: string
-          format: date
-        notes:
-          type: string
-        files:
-          type: array
-          items:
-            type: string
-            format: binary
-      required:
-        - claimType
-        - medicalCenterName
-        - patientName
-        - ServiceType
-        - ClaimAmount
-        - ClaimCurrency
-        - ServiceDate
-        - SubmissionDate
-        - notes
-        - files
-    medicalFile:
-      title: Medical file
-      x-stoplight:
-        id: 3edmc10wtmcvn
-      type: object
-      properties:
-        medicalFileId:
-          type: string
-        Name:
-          type: string
-        birthDate:
-          type: string
-          format: date
-        gender:
-          type: string
-        bloodType:
-          type: string
-        height:
-          type: string
-        allergies:
-          type: array
-          items:
-            $ref: '#/components/schemas/allergies'
-        chronicDiseases:
-          type: array
-          items:
-            $ref: '#/components/schemas/chronicDiseases'
-        surgeryHistory:
-          type: array
-          items:
-            $ref: '#/components/schemas/surgeryHistory'
-        clinicalVisits:
-          type: array
-          items:
-            $ref: '#/components/schemas/clinicalVisits'
-        medicalTests:
-          type: array
-          items:
-            $ref: '#/components/schemas/medicalTests'
-      required:
-        - Name
-        - birthDate
-        - gender
-    allergies:
-      title: Allergies
-      x-stoplight:
-        id: ysms6ruxb34xv
-      type: object
-      properties:
-        allergyName:
-          type: string
-        notes:
-          type: string
-      required:
-        - allergyName
-    chronicDiseases:
-      title: Chronic diseases
-      x-stoplight:
-        id: h60a6988o6yfb
-      type: object
-      properties:
-        DiseaseName:
-          type: string
-        diagnosisDate:
-          type: string
-          format: date
-        diagnosedBy:
-          type: string
-        notes:
-          type: string
-      required:
-        - DiseaseName
-    surgeryHistory:
-      title: Surgery history
-      x-stoplight:
-        id: cyxjsgg4qvswk
-      type: object
-      properties:
-        SurgeryName:
-          type: string
-        SurgeryDate:
-          type: string
-          format: date
-        doctorName:
-          type: string
-        medicalCenterName:
-          type: string
-        notes:
-          type: string
-      required:
-        - SurgeryName
-    medicalTests:
-      title: Medical tests
-      x-stoplight:
-        id: fkzv97xkg2c3u
-      type: object
-      properties:
-        testName:
-          type: string
-        testDate:
-          type: string
-          format: date
-        centerName:
-          type: string
-        notes:
-          type: string
-      required:
-        - testName
-        - testDate
-        - centerName
-    clinicalVisits:
-      title: Clinical visits
-      x-stoplight:
-        id: lmau1wvfkkkru
-      type: object
-      properties:
-        visitType:
-          type: string
-        visitDate:
-          type: string
-        centerName:
-          type: string
-        doctorName:
-          type: string
-        notes:
-          type: string
-      required:
-        - visitType
-        - visitDate
-        - centerName
-        - doctorName
-        - notes
-    institutions:
-      title: institutions
-      x-stoplight:
-        id: ltmivtz54dr4c
-      type: object
-      properties:
-        instituionId:
-          type: string
-        Name:
-          type: string
-        phoneNumber:
-          type: string
-        cityHq:
-          type: string
-        employeeCount:
-          type: string
-        beneficiaryCount:
-          type: string
-        beneftiPolicy:
-          $ref: '#/components/schemas/insurancePolicy'
-      required:
-        - instituionId
-        - Name
-        - employeeCount
-        - beneficiaryCount
-        - beneftiPolicy
-    institutions-new:
-      title: institutions
-      type: object
-      x-stoplight:
-        id: b02921fe61782
-      properties:
-        Name:
-          type: string
-        phoneNumber:
-          type: string
-        cityHq:
-          type: string
-        beneftiPolicy:
-          $ref: '#/components/schemas/insurancePolicy-new'
-      required:
-        - Name
-        - beneftiPolicy
-    institutions-update:
-      title: institutions
-      type: object
-      x-stoplight:
-        id: 945cf2ba6c53a
-      properties:
-        Name:
-          type: string
-        phoneNumber:
-          type: string
-        cityHq:
-          type: string
-        beneftiPolicy:
-          $ref: '#/components/schemas/insurancePolicy-update'
-    insurancePolicy:
-      title: Insurance policy
-      type: object
-      x-stoplight:
-        id: 2702e5c0600f8
-      properties:
-        insurancePolicyId:
-          type: string
-        insuranceType:
-          type: string
-        insuranceIssuer:
-          type: string
-        balanceResetDate:
-          type: string
-          format: date
-        policyExpirationDate:
-          type: string
-          format: date
-        inPatientAggregateLimit:
-          type: number
-          format: float
-        inPatientServices:
-          type: array
-          items:
-            type: object
-            properties:
-              service:
-                type: string
-              limit:
-                type: number
-                format: float
-            required:
-              - service
-              - limit
-        outPatientAggregateLimit:
-          type: number
-          format: float
-        outPatientServices:
-          type: array
-          items:
-            type: object
-            properties:
-              service:
-                type: string
-              limit:
-                type: string
-            required:
-              - service
-              - limit
-      required:
-        - insurancePolicyId
-        - insuranceType
-        - insuranceIssuer
-        - balanceResetDate
-        - policyExpirationDate
-        - inPatientAggregateLimit
-        - inPatientServices
-        - outPatientAggregateLimit
-        - outPatientServices
-    insurancePolicy-new:
-      title: Insurance policy
-      type: object
-      x-stoplight:
-        id: 20ea09c0ec8f9
-      properties:
-        InPatientAggregateLimit:
-          type: number
-          format: float
-        inPatientServices:
-          type: array
-          items:
-            type: object
-            properties:
-              service:
-                type: string
-              limit:
-                type: number
-                format: float
-            required:
-              - service
-              - limit
-        outPatientAggregateLimit:
-          type: number
-          format: float
-        outPatientServices:
-          type: array
-          items:
-            type: object
-            properties:
-              service:
-                type: string
-              limit:
-                type: string
-            required:
-              - service
-              - limit
-      required:
-        - InPatientAggregateLimit
-        - inPatientServices
-        - outPatientAggregateLimit
-        - outPatientServices
-    insurancePolicy-update:
-      title: Insurance policy
-      type: object
-      x-stoplight:
-        id: 12aadf64b3e96
-      properties:
-        benefitPolicyId:
-          type: string
-        iInPatientAggregateLimit:
-          type: number
-          format: float
-        inPatientServices:
-          type: array
-          items:
-            type: object
-            properties:
-              service:
-                type: string
-              limit:
-                type: number
-                format: float
-        outPatientAggregateLimit:
-          type: number
-          format: float
-        outPatientServices:
-          type: array
-          items:
-            type: object
-            properties:
-              service:
-                type: string
-              limit:
-                type: string
-    medicalCenterClaims:
-      title: medicalCenterClaims
-      x-stoplight:
-        id: nszy14pf973yw
-      type: object
-      properties:
-        claimId:
-          type: string
-        patient:
-          $ref: '#/components/schemas/patient'
-        checkInConfermation:
-          type: string
-        Staff:
-          type: string
-        serviceDate:
-          type: string
-          format: date
-        submittedOn:
-          type: string
-          format: date-time
-        medicalServices:
-          type: array
-          items:
-            type: object
-            properties:
-              service:
-                $ref: '#/components/schemas/medicalService'
-              expenseReviewStatus:
-                type: string
-              medicalReviewStatus:
-                type: string
-              rejectedAmount:
-                type: number
-                format: float
-            required:
-              - service
-              - expenseReviewStatus
-              - medicalReviewStatus
-              - rejectedAmount
-        expenseReview:
-          type: string
-        medicalReview:
-          type: string
-      required:
-        - claimId
-        - patient
-        - checkInConfermation
-        - Staff
-        - serviceDate
-        - submittedOn
-        - medicalServices
-        - expenseReview
-        - medicalReview
-    medicalCenterClaims-update:
-      title: medicalCenterClaims update
-      type: object
-      x-stoplight:
-        id: .inf
-      properties:
-        medicalServices:
-          type: array
-          items:
-            type: object
-            properties:
-              expenseReviewStatus:
-                type: string
-              medicalReviewStatus:
-                type: string
-              rejectedAmount:
-                type: number
-                format: float
-      required:
-        - medicalServices
-    medicalService:
-      title: Medical Services
-      x-stoplight:
-        id: fb880cf12f968
-      type: object
-      x-examples: {}
-      properties:
-        serviceId:
-          type: string
-        serviceCode:
-          type: string
-        serviceName:
-          type: string
-        serviceType:
-          type: string
-        amountCharged:
-          type: number
-          format: float
-        amountAllowed:
-          type: number
-          format: float
-        percentageCovered:
-          type: number
-          format: float
-      required:
-        - serviceId
-        - serviceCode
-        - serviceName
-        - serviceType
-        - amountCharged
-        - amountAllowed
-        - percentageCovered
+  schemas: {}
   examples: {}
   responses: {}
   securitySchemes:
