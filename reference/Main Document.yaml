@@ -728,7 +728,7 @@ paths:
                   object:
                     type: array
                     items:
-                      $ref: '#/components/schemas/expenseReport'
+                      $ref: ../models/expenseReport.yaml
                   ObjectCount:
                     type: integer
                   hasMore:
@@ -774,7 +774,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/expenseReport'
+                $ref: ../models/expenseReport.yaml
         '400':
           description: Bad Request
         '401':
@@ -788,7 +788,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/expenseReport-new'
+              $ref: ../models/expenseReport-new.yaml
             examples:
               Example 1:
                 value:
@@ -817,18 +817,29 @@ paths:
               schema:
                 type: object
                 properties:
-                  object:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/medicalFile'
-                  objectCount:
-                    type: integer
-                  hasMore:
-                    type: boolean
+                  statusCode:
+                    type: string
+                  message:
+                    type: string
+                  data:
+                    type: object
+                    required:
+                      - objectCount
+                      - hasMore
+                      - objectArray
+                    properties:
+                      objectCount:
+                        type: integer
+                      hasMore:
+                        type: boolean
+                      objectArray:
+                        type: array
+                        items:
+                          $ref: ../models/medicalFile.yaml
                 required:
-                  - object
-                  - objectCount
-                  - hasMore
+                  - statusCode
+                  - message
+                  - data
         '400':
           description: Bad Request
         '401':
@@ -856,18 +867,29 @@ paths:
               schema:
                 type: object
                 properties:
-                  Object:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/manualClaims'
-                  objectCount:
-                    type: integer
-                  hasMore:
-                    type: boolean
+                  statusCode:
+                    type: string
+                  message:
+                    type: string
+                  data:
+                    type: object
+                    required:
+                      - objectCount
+                      - hasMore
+                      - objectArray
+                    properties:
+                      objectCount:
+                        type: integer
+                      hasMore:
+                        type: boolean
+                      objectArray:
+                        type: array
+                        items:
+                          $ref: ../models/manualClaims.yaml
                 required:
-                  - Object
-                  - objectCount
-                  - hasMore
+                  - statusCode
+                  - message
+                  - data
         '400':
           description: Bad Request
         '401':
@@ -904,7 +926,7 @@ paths:
                   object:
                     type: array
                     items:
-                      $ref: '#/components/schemas/manualClaims'
+                      $ref: ../models/manualClaims.yaml
                   objectCount:
                     type: integer
                   hasMore:
@@ -936,7 +958,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/manualClaims'
+                $ref: ../models/manualClaims.yaml
         '400':
           description: Bad Request
         '401':
@@ -950,7 +972,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/manualClaims-new'
+              $ref: ../models/manualClaims-new.yaml
   '/beneficiaries/{benefciaryId}/benefitPolicies':
     parameters:
       - schema:
@@ -967,7 +989,18 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/insurancePolicy'
+                type: object
+                properties:
+                  statusCode:
+                    type: string
+                  message:
+                    type: string
+                  data:
+                    $ref: ../models/insurancePolicy.yaml
+                required:
+                  - statusCode
+                  - message
+                  - data
               examples: {}
         '400':
           description: Bad Request
@@ -992,18 +1025,29 @@ paths:
               schema:
                 type: object
                 properties:
-                  object:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/appointments'
-                  objectCount:
-                    type: integer
-                  hasMore:
-                    type: boolean
+                  statusCode:
+                    type: string
+                  message:
+                    type: string
+                  data:
+                    type: object
+                    required:
+                      - objectCount
+                      - hasMore
+                      - objectArray
+                    properties:
+                      objectCount:
+                        type: integer
+                      hasMore:
+                        type: boolean
+                      objectArray:
+                        type: array
+                        items:
+                          $ref: ../models/appointment.yaml
                 required:
-                  - object
-                  - objectCount
-                  - hasMore
+                  - statusCode
+                  - message
+                  - data
         '400':
           description: Bad Request
         '401':
@@ -1042,7 +1086,18 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/appointments'
+                type: object
+                properties:
+                  statusCode:
+                    type: string
+                  message:
+                    type: string
+                  data:
+                    $ref: ../models/appointment.yaml
+                required:
+                  - statusCode
+                  - message
+                  - data
         '400':
           description: Bad Request
         '401':
@@ -1158,7 +1213,7 @@ paths:
                 priceId:
                   type: string
                 patient:
-                  $ref: '#/components/schemas/patient'
+                  $ref: ../models/patient.yaml
                 notes:
                   type: string
                 images:
@@ -1305,7 +1360,7 @@ paths:
                   object:
                     type: array
                     items:
-                      $ref: '#/components/schemas/medicalCenter'
+                      $ref: ../models/medicalCenter.yaml
                   objectCount:
                     type: integer
                   hasMore:
@@ -1342,7 +1397,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/medicalCenter'
+                $ref: ../models/medicalCenter.yaml
         '400':
           description: Bad Request
         '401':
@@ -1355,7 +1410,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/medicalCenter-new'
+              $ref: ../models/medicalCenter-new.yaml
   '/medicalCenters/{medicalCenterId}':
     parameters:
       - schema:
@@ -1372,7 +1427,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/medicalCenter'
+                $ref: ../models/medicalCenter.yaml
         '400':
           description: Bad Request
         '401':
@@ -1392,7 +1447,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/medicalCenter'
+                $ref: ../models/medicalCenter.yaml
         '400':
           description: Bad Request
         '401':
@@ -1407,14 +1462,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/medicalCenter-update'
+              $ref: ../models/medicalCenter-update.yaml
           application/xml:
             schema:
               type: object
               properties: {}
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/medicalCenter'
+              $ref: ../models/medicalCenter.yaml
         description: ''
     delete:
       summary: ''
@@ -1447,7 +1502,7 @@ paths:
                   object:
                     type: array
                     items:
-                      $ref: '#/components/schemas/medicalCenterClaims'
+                      $ref: ../models/medicalCenterClaims.yaml
                   objectCount:
                     type: integer
                   hasMore:
@@ -1528,7 +1583,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/medicalCenterClaims'
+                $ref: ../models/medicalCenterClaims.yaml
         '400':
           description: Bad Request
         '401':
@@ -1544,7 +1599,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/medicalCenterClaims-update'
+              $ref: ../models/medicalCenterClaims-update.yaml
   /schedules:
     get:
       summary: List schedules
@@ -1688,7 +1743,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/schedule'
+                $ref: ../models/schedule.yaml
         '400':
           description: Bad Request
         '401':
@@ -1701,7 +1756,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/schedule-new'
+              $ref: ../models/schedule-new.yaml
             examples: {}
       parameters: []
   /schedules/scheduleId:
@@ -1714,7 +1769,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/schedule'
+                $ref: ../models/schedule.yaml
         '400':
           description: Bad Request
         '401':
@@ -1730,7 +1785,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/schedule-update'
+              $ref: ../models/schedule-update.yaml
     get:
       summary: Get schedule by ID
       tags: []
@@ -1740,7 +1795,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/schedule'
+                $ref: ../models/schedule.yaml
         '400':
           description: Bad Request
         '401':
@@ -1779,14 +1834,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/doctor-new'
+              $ref: ../models/doctor-new.yaml
       responses:
         '201':
           description: Created
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/doctor'
+                $ref: ../models/doctor.yaml
         '400':
           description: Bad Request
         '401':
@@ -1809,7 +1864,7 @@ paths:
                   object:
                     type: array
                     items:
-                      $ref: '#/components/schemas/doctor'
+                      $ref: ../models/doctor.yaml
                   objectCount:
                     type: integer
                   hasMore:
@@ -1843,7 +1898,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/doctor'
+                $ref: ../models/doctor.yaml
         '400':
           description: Bad Request
         '401':
@@ -1871,7 +1926,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/doctor'
+                $ref: ../models/doctor.yaml
         '400':
           description: Bad Request
         '401':
@@ -1886,7 +1941,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/doctor-update'
+              $ref: ../models/doctor-update.yaml
     delete:
       summary: ''
       operationId: delete-doctors-doctorId
@@ -1922,9 +1977,11 @@ paths:
                   data:
                     type: object
                     required:
-                      - objectArray
                       - objectCount
+                      - objectArray
                     properties:
+                      objectCount:
+                        type: integer
                       objectArray:
                         type: array
                         items:
@@ -1934,8 +1991,6 @@ paths:
                               type: string
                           required:
                             - cityName
-                      objectCount:
-                        type: integer
                 required:
                   - codeStatus
                   - message
@@ -2122,9 +2177,11 @@ paths:
                   data:
                     type: object
                     required:
-                      - objectArray
                       - objectCount
+                      - objectArray
                     properties:
+                      objectCount:
+                        type: integer
                       objectArray:
                         type: array
                         items:
@@ -2134,8 +2191,6 @@ paths:
                               type: string
                           required:
                             - medicalSpecialtyName
-                      objectCount:
-                        type: integer
                 required:
                   - codeStatus
                   - message
@@ -2317,23 +2372,33 @@ paths:
               schema:
                 type: object
                 properties:
-                  object:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        serviceId:
-                          type: string
-                        serviceName:
-                          type: string
                   objectCount:
                     type: integer
                   hasMore:
                     type: boolean
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        objectCount:
+                          type: integer
+                        objectArray:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              medicaServiceName:
+                                type: string
+                            required:
+                              - medicaServiceName
+                      required:
+                        - objectCount
+                        - objectArray
                 required:
-                  - object
                   - objectCount
                   - hasMore
+                  - data
         '400':
           description: Bad Request
         '401':
@@ -2413,7 +2478,7 @@ paths:
                 object:
                   type: array
                   items:
-                    $ref: '#/components/schemas/institutions'
+                    $ref: ../models/institutions.yaml
                 objectCounts:
                   type: integer
                 hasMore:
@@ -2431,7 +2496,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/institutions'
+                $ref: ../models/institutions.yaml
         '400':
           description: Bad Request
         '401':
@@ -2445,7 +2510,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/institutions-new'
+              $ref: ../models/institutions-new.yaml
   '/institutions/{institutionId}':
     parameters:
       - schema:
@@ -2462,7 +2527,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/institutions'
+                $ref: ../models/institutions.yaml
         '400':
           description: Bad Request
         '401':
@@ -2478,7 +2543,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/institutions-update'
+              $ref: ../models/institutions-update.yaml
     get:
       summary: ''
       operationId: get-institutions-institutionId
@@ -2488,7 +2553,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/institutions'
+                $ref: ../models/institutions.yaml
         '400':
           description: Bad Request
         '401':

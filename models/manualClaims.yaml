@@ -1,0 +1,48 @@
+title: manualClaims
+x-stoplight:
+  id: upe177ra9otie
+type: object
+properties:
+  claimId:
+    type: string
+  claimType:
+    type: string
+  medicalCenterName:
+    type: string
+  patientName:
+    type: string
+  ServiceType:
+    type: string
+  ClaimAmount:
+    type: string
+  ClaimCurrency:
+    type: string
+  ServiceDate:
+    type: string
+    format: date
+  SubmissionDate:
+    type: string
+    format: date
+  status:
+    type: string
+  notes:
+    type: string
+  files:
+    type: array
+    items:
+      type: string
+      format: binary
+required:
+  - claimId
+  - claimType
+  - medicalCenterName
+  - patientName
+  - ServiceType
+  - ClaimAmount
+  - ClaimCurrency
+  - ServiceDate
+  - SubmissionDate
+  - status
+  - notes
+  - files
+  

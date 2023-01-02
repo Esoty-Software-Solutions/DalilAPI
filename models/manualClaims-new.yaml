@@ -1,0 +1,41 @@
+title: manualClaims-new
+x-stoplight:
+  id: sznjyfzc7xs8l
+type: object
+properties:
+  claimType:
+    type: string
+  medicalCenterName:
+    type: string
+  patientName:
+    type: string
+  ServiceType:
+    type: string
+  ClaimAmount:
+    type: string
+  ClaimCurrency:
+    type: string
+  ServiceDate:
+    type: string
+    format: date
+  SubmissionDate:
+    type: string
+    format: date
+  notes:
+    type: string
+  files:
+    type: array
+    items:
+      type: string
+      format: binary
+required:
+  - claimType
+  - medicalCenterName
+  - patientName
+  - ServiceType
+  - ClaimAmount
+  - ClaimCurrency
+  - ServiceDate
+  - SubmissionDate
+  - notes
+  - files
