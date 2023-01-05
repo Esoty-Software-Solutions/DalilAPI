@@ -27,11 +27,14 @@ paths:
                     type: string
                   message:
                     type: string
+                  token:
+                    type: string
                   data:
                     $ref: ../models/beneficiary.yaml
                 required:
                   - statusCode
                   - message
+                  - token
                   - data
               examples: {}
         '401':
@@ -1995,6 +1998,7 @@ paths:
                   - codeStatus
                   - message
                   - data
+              examples: {}
         '400':
           description: Bad Request
           content:

@@ -15,60 +15,59 @@ properties:
     type: string
   city:
     type: string
-  testResults:
-    oneOf:
-      - items:
-          type: object
-          properties:
-            testName:
-              type: string
-            acronym:
-              type: string
-            value:
-              type: number
-            upperRange:
-              type: number
-            lowerRange:
-              type: number
-            level:
-              type: string
-            unit:
-              type: string
-          required:
-            - testName
-            - acronym
-            - value
-            - upperRange
-            - lowerRange
-            - level
-            - unit
-      - items:
-          type: object
-          properties:
-            testName:
-              type: string
-            acronym:
-              type: string
-            value:
-              type: string
-            reference:
-              type: string
-            level:
-              type: string
-            unit:
-              type: string
-          required:
-            - testName
-            - acronym
-            - value
-            - reference
-            - level
-            - unit
+  testInformation:
     type: array
+    items:
+      type: object
+      properties:
+        testName:
+          type: string
+        acronym:
+          type: string
+        resultType:
+          type: string
+        result:
+          oneOf:
+            - properties:
+                value:
+                  type: string
+                upperRange:
+                  type: string
+                lowerRange:
+                  type: string
+                level:
+                  type: string
+                unit:
+                  type: string
+              required:
+                - value
+                - upperRange
+                - lowerRange
+                - level
+                - unit
+            - properties:
+                value:
+                  type: string
+                reference:
+                  type: string
+                level:
+                  type: string
+                unit:
+                  type: string
+              required:
+                - value
+                - reference
+                - level
+                - unit
+          type: object
+      required:
+        - testName
+        - resultType
+        - result
 required:
   - labReportId
   - labReportCategory
   - centerName
   - reportDate
   - city
-  - testResults
+  - testInformation

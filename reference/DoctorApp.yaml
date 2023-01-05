@@ -27,17 +27,29 @@ paths:
               schema:
                 type: object
                 properties:
-                  object:
-                    type: array
-                    items:
-                      $ref: ../models/schedule.yaml
-                  objectCount:
-                    type: integer
-                  hasMore:
-                    type: boolean
+                  statusCode:
+                    type: string
+                  message:
+                    type: string
+                  data:
+                    type: object
+                    required:
+                      - objectCount
+                      - hasMore
+                      - objectArray
+                    properties:
+                      objectCount:
+                        type: integer
+                      hasMore:
+                        type: boolean
+                      objectArray:
+                        type: array
+                        items:
+                          $ref: ../models/schedule.yaml
                 required:
-                  - objectCount
-                  - hasMore
+                  - statusCode
+                  - message
+                  - data
         '400':
           description: Bad Request
         '401':
@@ -69,7 +81,18 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../models/medicalFile.yaml
+                type: object
+                properties:
+                  statusCode:
+                    type: string
+                  message:
+                    type: string
+                  data:
+                    $ref: ../models/medicalFile.yaml
+                required:
+                  - statusCode
+                  - message
+                  - data
               examples: {}
         '400':
           description: Bad Request
@@ -99,18 +122,29 @@ paths:
               schema:
                 type: object
                 properties:
-                  object:
-                    type: array
-                    items:
-                      $ref: ../models/doctorAppointmentSummary.yaml
-                  objectCount:
-                    type: integer
-                  hasMore:
-                    type: boolean
+                  statusCode:
+                    type: string
+                  message:
+                    type: string
+                  data:
+                    type: object
+                    required:
+                      - objectCount
+                      - hasMore
+                      - objectArray
+                    properties:
+                      objectCount:
+                        type: string
+                      hasMore:
+                        type: string
+                      objectArray:
+                        type: array
+                        items:
+                          $ref: ../models/doctorAppointmentSummary.yaml
                 required:
-                  - object
-                  - objectCount
-                  - hasMore
+                  - statusCode
+                  - message
+                  - data
         '400':
           description: Bad Request
         '401':
@@ -141,18 +175,29 @@ paths:
               schema:
                 type: object
                 properties:
-                  object:
-                    type: array
-                    items:
-                      $ref: ../models/appointment.yaml
-                  objectCount:
-                    type: integer
-                  hasMore:
-                    type: boolean
+                  statusCode:
+                    type: string
+                  message:
+                    type: string
+                  data:
+                    type: object
+                    required:
+                      - objectCounter
+                      - hasMore
+                      - objectArray
+                    properties:
+                      objectCounter:
+                        type: integer
+                      hasMore:
+                        type: boolean
+                      objectArray:
+                        type: array
+                        items:
+                          $ref: ../models/appointment.yaml
                 required:
-                  - object
-                  - objectCount
-                  - hasMore
+                  - statusCode
+                  - message
+                  - data
       operationId: get-doctors-doctorId-appointment
       parameters:
         - $ref: ./Main Document.yaml#/components/parameters/limit
