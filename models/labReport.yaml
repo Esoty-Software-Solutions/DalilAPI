@@ -30,11 +30,11 @@ properties:
           oneOf:
             - properties:
                 value:
-                  type: string
+                  type: number
                 upperRange:
-                  type: string
+                  type: number
                 lowerRange:
-                  type: string
+                  type: number
                 level:
                   type: string
                 unit:
