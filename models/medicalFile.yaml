@@ -7,16 +7,22 @@ type: object
 properties:
   medicalFileId:
     type: string
-  Name:
+  patientId:
+    type: string
+  name:
     type: string
   birthDate:
     type: string
     format: date
   gender:
     type: string
+  weight:
+    type: string
   bloodType:
     type: string
   height:
+    type: string
+  relationshipToBeneficiary:
     type: string
   allergies:
     type: array
@@ -40,6 +46,7 @@ properties:
       $ref: ./labReport.yaml
 required:
   - medicalFileId
-  - Name
+  - name
   - birthDate
   - gender
+  - weight

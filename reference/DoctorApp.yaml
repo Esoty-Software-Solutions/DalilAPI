@@ -35,13 +35,10 @@ paths:
                     type: object
                     required:
                       - objectCount
-                      - hasMore
                       - objectArray
                     properties:
                       objectCount:
                         type: integer
-                      hasMore:
-                        type: boolean
                       objectArray:
                         type: array
                         items:
@@ -61,9 +58,7 @@ paths:
         '500':
           description: Internal Server Error
       operationId: get-doctors-doctorId-schedules
-      parameters:
-        - $ref: ./Main Document.yaml#/components/parameters/limit
-        - $ref: ./Main Document.yaml#/components/parameters/starting_after_object
+      parameters: []
   '/patients/{patientId}/medicalFiles':
     parameters:
       - schema:
@@ -104,7 +99,7 @@ paths:
           description: Not Found
         '500':
           description: Internal Server Error
-  '/doctors/{doctorId}/appointmentSummary':
+  '/doctors/{doctorId}/appointmentSummaries':
     parameters:
       - schema:
           type: string
@@ -145,6 +140,26 @@ paths:
                   - statusCode
                   - message
                   - data
+              examples:
+                Example 1:
+                  value:
+                    statusCode: string
+                    message: string
+                    data:
+                      objectCount: string
+                      hasMore: string
+                      objectArray:
+                        - medicalCenterId: MC-sdfdsds
+                          medicalCenterName: Health Center name
+                          expectedVisits:
+                            - date: '2019-08-24'
+                              morningSlot: 0
+                              afternoonSlot: 0
+                              eveningSlot: 1
+                            - date: '2019-08-25'
+                              morningSlot: 0
+                              afternoonSlot: 3
+                              eveningSlot: 4
         '400':
           description: Bad Request
         '401':
@@ -155,9 +170,9 @@ paths:
           description: Not Found
         '500':
           description: Internal Server Error
-      operationId: get-doctors-doctorId-appointmentSummary
+      operationId: get-doctors-doctorId-appointmentSummaries
       parameters: []
-  '/doctors/{doctorId}/appointment':
+  '/doctors/{doctorId}/appointments':
     parameters:
       - schema:
           type: string
@@ -198,7 +213,7 @@ paths:
                   - statusCode
                   - message
                   - data
-      operationId: get-doctors-doctorId-appointment
+      operationId: get-doctors-doctorId-appointments
       parameters:
         - $ref: ./Main Document.yaml#/components/parameters/limit
         - $ref: ./Main Document.yaml#/components/parameters/starting_after_object
@@ -214,7 +229,7 @@ paths:
           in: query
           required: true
           name: date
-          description: appointment date
+          description: appointment date (format yyyy-mm-dd)
         - schema:
             type: string
           in: query

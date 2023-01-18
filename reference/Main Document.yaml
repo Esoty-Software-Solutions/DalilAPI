@@ -1205,28 +1205,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                scheduleId:
-                  type: string
-                medicalCenterId:
-                  type: string
-                doctorId:
-                  type: string
-                priceId:
-                  type: string
-                patient:
-                  $ref: ../models/patient.yaml
-                notes:
-                  type: string
-                images:
-                  type: string
-              required:
-                - scheduleId
-                - medicalCenterId
-                - doctorId
-                - priceId
-                - patient
+              $ref: ../models/appointment-new.yaml
         description: ''
     parameters:
       - schema:

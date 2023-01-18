@@ -40,6 +40,9 @@ paths:
                   type: string
                 city:
                   type: string
+                restulType:
+                  type: string
+                  description: 'qualitative, quantitative, table, or nonStructured'
                 testEval:
                   oneOf:
                     - properties:
@@ -85,6 +88,28 @@ paths:
                         - reference
                         - level
                         - unit
+                    - properties:
+                        testName:
+                          type: string
+                        columnNames:
+                          type: array
+                          items:
+                            type: string
+                        rowNames:
+                          type: array
+                          items:
+                            type: string
+                        values:
+                          type: array
+                          items:
+                            type: array
+                            items:
+                              type: string
+                      required:
+                        - testName
+                        - columnNames
+                        - rowNames
+                        - values
                   type: object
                 patientId:
                   type: string
@@ -95,6 +120,7 @@ paths:
                 - labReportCategory
                 - centerName
                 - reportDate
+                - restulType
                 - testEval
                 - patientId
                 - patientName
@@ -183,5 +209,52 @@ paths:
                 - date
                 - medicalCenterName
                 - notes
+  '/beneficiaries/{beneficiaryId}/examination':
+    post:
+      summary: Post examination and service claims
+      tags: []
+      responses: {}
+      operationId: post-beneficiaries-beneficiaryId-examination
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                patientId:
+                  type: string
+                patientName:
+                  type: string
+                beneficiaryId:
+                  type: string
+                examinationDetails:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    price:
+                      type: string
+                    id:
+                      type: string
+                    doctorId:
+                      type: string
+                    doctorName:
+                      type: string
+                    diagnosisImg:
+                      type: string
+                biometricesDetails:
+                  type: object
+                serviceDetails:
+                  type: object
+                medicalCenterDetails:
+                  type: object
+            examples: {}
+        description: ''
+    parameters:
+      - schema:
+          type: string
+        name: beneficiaryId
+        in: path
+        required: true
 components:
   schemas: {}

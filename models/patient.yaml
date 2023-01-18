@@ -16,6 +16,9 @@ properties:
     type: string
   patientRelationship:
     type: string
+  fileEntries:
+    type: integer
+    description: number of medical file entries
 required:
   - userId
   - patientType

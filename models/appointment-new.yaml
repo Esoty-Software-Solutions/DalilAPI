@@ -1,0 +1,27 @@
+title: appointment
+x-stoplight:
+  id: gs47fjvis79gh
+x-tags:
+  - appointment
+type: object
+properties:
+  scheduleId:
+    type: string
+  doctorId:
+    type: string
+  medicalCenterId:
+    type: string
+  appointmentDate:
+    type: string
+    format: date
+  timeslot:
+    type: string
+  patient:
+    $ref: ./patient.yaml
+required:
+  - scheduleId
+  - doctorId
+  - medicalCenterId
+  - appointmentDate
+  - timeslot
+  - patient
