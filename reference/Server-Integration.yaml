@@ -125,6 +125,12 @@ paths:
                 - patientId
                 - patientName
       description: ''
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Idempotency-Key
+          description: ' V4 UUIDs key'
     parameters: []
   /allergies:
     post:
@@ -258,3 +264,4 @@ paths:
         required: true
 components:
   schemas: {}
+  securitySchemes: {}

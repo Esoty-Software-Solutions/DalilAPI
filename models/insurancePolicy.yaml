@@ -13,10 +13,10 @@ properties:
     type: string
   balanceResetDate:
     type: string
-    format: date
+    format: MM-DD
   policyExpirationDate:
     type: string
-    format: date
+    format: YYYY-MM-DD
   inPatientAggregateLimit:
     type: number
     format: float

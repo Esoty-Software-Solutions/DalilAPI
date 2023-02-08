@@ -29,6 +29,17 @@ properties:
     $ref: ./doctor.yaml
   medicalCenter:
     $ref: ./medicalCenter.yaml
+  sad:
+    type: array
+    items:
+      oneOf:
+        - properties:
+            dd:
+              type: string
+        - properties:
+            ddd:
+              type: string
+      type: object
 required:
   - appointmentId
   - scheduleId

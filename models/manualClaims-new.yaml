@@ -23,11 +23,21 @@ properties:
     format: date
   notes:
     type: string
-  files:
-    type: array
-    items:
-      type: string
-      format: binary
+  fileNames:
+    type: object
+    properties:
+      file1Name:
+        type: string
+        example: text.txt
+      file2Name:
+        type: string
+        example: text.txt
+      file3Name:
+        type: string
+        example: text.txt
+      file4Name:
+        type: string
+        example: text.txt
 required:
   - claimType
   - medicalCenterName
@@ -38,4 +48,4 @@ required:
   - ServiceDate
   - SubmissionDate
   - notes
-  - files
+  - fileNames

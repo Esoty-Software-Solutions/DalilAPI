@@ -19,19 +19,29 @@ properties:
     type: string
   ServiceDate:
     type: string
-    format: date
+    format: YYYY-MM-DD
   SubmissionDate:
     type: string
-    format: date
+    format: YYYY-MM-DD
   status:
     type: string
   notes:
     type: string
-  files:
-    type: array
-    items:
-      type: string
-      format: binary
+  fileNames:
+    type: object
+    properties:
+      file1Name:
+        type: string
+        example: text.txt
+      file2Name:
+        type: string
+        example: text.txt
+      file3Name:
+        type: string
+        example: text.txt
+      file4Name:
+        type: string
+        example: text.txt
 required:
   - claimId
   - claimType
@@ -44,5 +54,4 @@ required:
   - SubmissionDate
   - status
   - notes
-  - files
-  
+  - fileNames

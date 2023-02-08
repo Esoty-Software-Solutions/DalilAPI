@@ -5,30 +5,32 @@ x-tags:
   - claims
 type: object
 properties:
-  ExepnseReportId:
+  expenseReportId:
     type: string
-  healtcareCenterId:
+  medicalCenterId:
     type: string
-  healtcareCenterName:
+  medicalCenterName:
     type: string
   serviceDate:
     type: string
     format: date
-  charnge:
+  charge:
     type: number
     format: float
   currency:
     type: string
   beneficiaryId:
     type: string
+  patientId:
+    type: string
   patientName:
     type: string
 required:
-  - ExepnseReportId
-  - healtcareCenterId
-  - healtcareCenterName
+  - expenseReportId
+  - medicalCenterId
+  - medicalCenterName
   - serviceDate
-  - charnge
+  - charge
   - currency
   - beneficiaryId
   - patientName

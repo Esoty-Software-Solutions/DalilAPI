@@ -710,11 +710,11 @@ paths:
                   account:
                     hasAccount: true
                     userId: string
-  '/beneficiaries/{benefciaryId}/expenseReports':
+  '/beneficiaries/{beneficiaryId}/expenseReports':
     parameters:
       - schema:
           type: string
-        name: benefciaryId
+        name: beneficiaryId
         in: path
         required: true
     get:
@@ -726,34 +726,30 @@ paths:
           content:
             application/json:
               schema:
-                type: object
                 properties:
-                  object:
-                    type: array
-                    items:
-                      $ref: ../models/expenseReport.yaml
-                  ObjectCount:
-                    type: integer
-                  hasMore:
-                    type: boolean
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                  date:
+                    type: object
+                    required:
+                      - objectCount
+                      - hasMore
+                      - objectArray
+                    properties:
+                      objectCount:
+                        type: integer
+                      hasMore:
+                        type: boolean
+                      objectArray:
+                        type: array
+                        items:
+                          $ref: ../models/expenseReport.yaml
                 required:
-                  - object
-                  - ObjectCount
-                  - hasMore
-              examples:
-                Example 1:
-                  value:
-                    object:
-                      - ExepnseReportId: string
-                        healtcareCenterId: string
-                        healtcareCenterName: string
-                        serviceDate: '2019-08-24'
-                        charnge: 0
-                        currency: string
-                        beneficiaryId: string
-                        patientName: string
-                    ObjectCount: 0
-                    hasMore: true
+                  - codeStatus
+                  - message
+                  - date
         '400':
           description: Bad Request
         '401':
@@ -764,7 +760,7 @@ paths:
           description: Not Found
         '500':
           description: Internal Server Error
-      operationId: get-beneficiaries-benefciaryId-expenseReports
+      operationId: get-beneficiaries-beneficiaryId-expenseReports
       parameters:
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/starting_after_object'
@@ -786,7 +782,7 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
-      operationId: post-beneficiaries-benefciaryId-expenseReport
+      operationId: post-beneficiaries-beneficiaryId-expenseReport
       requestBody:
         content:
           application/json:
@@ -802,11 +798,11 @@ paths:
                   currency: string
                   beneficiaryId: string
                   patientName: string
-  '/beneficiaries/{benefciaryId}/medicalFiles':
+  '/beneficiaries/{beneficiaryId}/medicalFiles':
     parameters:
       - schema:
           type: string
-        name: benefciaryId
+        name: beneficiaryId
         in: path
         required: true
     get:
@@ -853,7 +849,7 @@ paths:
           description: Not Found
         '500':
           description: Internal Server Error
-      operationId: get-beneficiaries-benefciaryId-medicalFiles
+      operationId: get-beneficiaries-beneficiaryId-medicalFiles
       parameters:
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/starting_after_object'
@@ -868,13 +864,12 @@ paths:
           content:
             application/json:
               schema:
-                type: object
                 properties:
-                  statusCode:
+                  codeStatus:
                     type: string
                   message:
                     type: string
-                  data:
+                  date:
                     type: object
                     required:
                       - objectCount
@@ -890,9 +885,9 @@ paths:
                         items:
                           $ref: ../models/manualClaims.yaml
                 required:
-                  - statusCode
+                  - codeStatus
                   - message
-                  - data
+                  - date
         '400':
           description: Bad Request
         '401':
@@ -908,11 +903,11 @@ paths:
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/starting_after_object'
       description: ''
-  '/beneficiaries/{benefciaryId}/claims':
+  '/beneficiaries/{beneficiaryId}/claims':
     parameters:
       - schema:
           type: string
-        name: benefciaryId
+        name: beneficiaryId
         in: path
         required: true
     get:
@@ -926,18 +921,25 @@ paths:
               schema:
                 type: object
                 properties:
-                  object:
-                    type: array
-                    items:
-                      $ref: ../models/manualClaims.yaml
-                  objectCount:
-                    type: integer
-                  hasMore:
-                    type: boolean
-                required:
-                  - object
-                  - objectCount
-                  - hasMore
+                  statusCode:
+                    type: string
+                  message:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      objectCount:
+                        type: integer
+                      hasMore:
+                        type: boolean
+                      object:
+                        type: array
+                        items:
+                          $ref: ../models/manualClaims.yaml
+                    required:
+                      - object
+                      - objectCount
+                      - hasMore
         '400':
           description: Bad Request
         '401':
@@ -948,7 +950,7 @@ paths:
           description: Not Found
         '500':
           description: Internal Server Error
-      operationId: get-beneficiaries-benefciaryId-claims
+      operationId: get-beneficiaries-beneficiaryId-claims
       parameters:
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/starting_after_object'
@@ -962,6 +964,7 @@ paths:
             application/json:
               schema:
                 $ref: ../models/manualClaims.yaml
+              examples: {}
         '400':
           description: Bad Request
         '401':
@@ -970,17 +973,36 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
-      operationId: post-beneficiaries-benefciaryId-claims
+      operationId: post-beneficiaries-beneficiaryId-claims
       requestBody:
         content:
-          application/json:
+          multipart/form-data:
             schema:
-              $ref: ../models/manualClaims-new.yaml
-  '/beneficiaries/{benefciaryId}/benefitPolicies':
+              type: object
+              properties:
+                description:
+                  $ref: ../models/manualClaims-new.yaml
+                file1:
+                  type: string
+                  format: binary
+                file2:
+                  type: string
+                  format: binary
+                file3:
+                  type: string
+                  format: binary
+                file4:
+                  type: string
+                  format: binary
+              required:
+                - description
+            examples: {}
+        description: ''
+  '/beneficiaries/{beneficiaryId}/benefitPolicies':
     parameters:
       - schema:
           type: string
-        name: benefciaryId
+        name: beneficiaryId
         in: path
         required: true
     get:
@@ -1015,7 +1037,7 @@ paths:
           description: Not Found
         '500':
           description: Internal Server Error
-      operationId: get-beneficiaries-benefciaryId-benefitPolicies
+      operationId: get-beneficiaries-beneficiaryId-benefitPolicies
   /appointments:
     get:
       summary: List all appointments
@@ -1357,19 +1379,6 @@ paths:
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/starting_after_object'
         - $ref: '#/components/parameters/city'
-    parameters:
-      - name: limit
-        in: query
-        required: false
-        schema:
-          type: string
-        description: 'A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 30'
-      - name: starting_after_object
-        in: query
-        required: false
-        schema:
-          type: string
-        description: 'A cursor for use in pagination. starting_after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include starting_after=obj_foo in order to fetch the next page of the list.'
     post:
       summary: create a medical center
       operationId: post-medicalCenters
@@ -1390,9 +1399,18 @@ paths:
           description: Internal Server Error
       requestBody:
         content:
-          application/json:
+          multipart/form-data:
             schema:
-              $ref: ../models/medicalCenter-new.yaml
+              type: object
+              properties:
+                description:
+                  $ref: ../models/medicalCenter-new.yaml
+                files:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
+                
   '/medicalCenters/{medicalCenterId}':
     parameters:
       - schema:
@@ -1741,7 +1759,7 @@ paths:
               $ref: ../models/schedule-new.yaml
             examples: {}
       parameters: []
-  /schedules/scheduleId:
+  '/schedules/{scheduleId}':
     patch:
       summary: Update schedule
       tags: []
@@ -1807,6 +1825,12 @@ paths:
           description: Not Found
         '500':
           description: Internal Server Error
+    parameters:
+      - schema:
+          type: string
+        name: scheduleId
+        in: path
+        required: true
   /doctors:
     post:
       summary: Create a new doctor
