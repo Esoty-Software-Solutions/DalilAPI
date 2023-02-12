@@ -1379,6 +1379,7 @@ paths:
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/starting_after_object'
         - $ref: '#/components/parameters/city'
+        - $ref: '#/components/parameters/searchQuery'
     post:
       summary: create a medical center
       operationId: post-medicalCenters
@@ -1894,6 +1895,7 @@ paths:
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/starting_after_object'
         - $ref: '#/components/parameters/specialty'
+        - $ref: '#/components/parameters/searchQuery'
   '/doctors/{doctorId}':
     get:
       summary: Get doctor by ID
@@ -2690,4 +2692,11 @@ components:
       required: false
       schema:
         type: string
-      description: filter parameter to indicate city
+      description: filter parameter to indicated city
+    searchQuery:
+      name: searchQuery
+      in: query
+      required: false
+      schema:
+        type: string
+      description: filter string parameters like name and ID
