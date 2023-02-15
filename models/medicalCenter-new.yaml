@@ -28,6 +28,11 @@ properties:
     type: string
   website:
     type: string
+  images:
+    type: array
+    items: 
+      type: string
+      format: binary
 required:
   - name
   - city
