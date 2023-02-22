@@ -1,0 +1,158 @@
+title: insurer statistics
+type: object
+properties:
+
+  insurerDetails:
+    type: object
+    properties:
+      name:
+        type: string
+      dateJoined:
+        type: string
+        format: YYYY-MM-DD
+      contractEndDate:
+        type: string
+        format: YYYY-MM-DD
+      contractResetDate:
+        type: string
+        format: MM-DD
+
+  YearStatistics:
+    type: object
+    properties:
+      subscribersCount:
+        type: integer
+      centersCount:
+        type: integer
+      claimAmount:
+        type: integer
+      claimCurrency:
+        type: string
+        enum: [EUR, USD, LYD]
+      servicesCount:
+        type: integer
+      debtAmount:
+        type: integer
+      debtCurrency:
+        type: string
+        enum: [EUR, USD, LYD]
+
+  prevMonthStatistics:
+    type: object
+    properties:
+      subscribersCount:
+        type: integer
+      medicalCentersCount:
+        type: integer
+      claimAmount:
+        type: integer
+      claimCurrency:
+        type: string
+        enum: [EUR, USD, LYD]
+      servicesCount:
+        type: integer
+      debtAmount:
+        type: integer
+      debtCurrency:
+        type: string
+        enum: [EUR, USD, LYD]
+        
+  expenseChart:
+    type: array
+    items:
+      type: object
+      properties:
+        expenseAmount:
+          type: number
+        expenseCurrency:
+          type: string
+          enum: [EUR, USD, LYD]
+        expenseMonth:
+          type: string
+          format: YYYY-MM
+  
+  budgetChart:
+    type: object
+    properties:
+      TotalBudget:
+        type: number
+      TotalExpenses:
+        type: number
+      Balance:
+        type: number
+      PendingExpenses:
+        type: number
+
+  topExpenseCities:
+    type: array
+    items:
+      type: object
+      properties:
+        cityName:
+          type: string
+        expenseAmount:
+          type: number
+        medicalCentersCount:
+          type: integer        
+        servicesCount:
+          type: string
+
+  topExpenseMedicalCenters:
+    type: array
+    items:
+      type: object
+      properties:
+        claimID:
+          type: string
+        medicalCenterName:
+          type: string
+        city:
+          type: string
+        claimAmount:
+          type: number
+        servicesCount:
+          type: integer
+        claimStatus:
+          type: string
+          enum: ["underReview", "processed", "paid", "rejected"]
+
+  transactions:
+    type: array
+    items:
+      type: object
+      properties:
+        medicalCenterName:
+          type: string
+        transactionAmount:
+          type: number
+        transactionDate:
+          type: string
+          format: YYYY-MM-DD
+        transactionCurrency:
+          type: string
+          enum: [EUR, USD, LYD]
+
+  topExpenseSubscribers:
+    type: array
+    items:
+      type: object
+      properties:
+        subscriberId:
+          type: string
+        fullName:
+          type: string
+        phoneNumber:
+          type: string
+        dateJoined:
+          type: string
+          format: YYYY-MM-DD
+        expenseAmount:
+          type: number
+        expenseCurrency:
+          type: string
+          enum: [EUR, USD, LYD]
+        servicesCount:
+          type: integer
+        isActive:
+          type: boolean
+   

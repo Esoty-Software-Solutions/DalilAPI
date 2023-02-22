@@ -1,0 +1,38 @@
+title: insurer statistics
+type: object
+properties:
+
+  subscriberId:
+    type: string
+  firstName:
+    type: string
+  middleName:
+    type: string
+  lastName:
+    type: string
+  birthdate:
+    type: string
+  phoneNumber:
+    type: string
+  gender:
+    type: string
+  dateJoined:
+    type: string
+    format: YYYY-MM-DD
+  familyMembers:
+    type: array
+    items:
+      $ref: ./familyMember.yaml
+  insurancePolicyId:
+    type: string
+  claimAmount:
+    type: integer
+  claimCurrency:
+    type: string
+  cityResidence:
+    type: string
+  districtResidence:
+    type: string
+  isActive:
+    type: boolean
+   

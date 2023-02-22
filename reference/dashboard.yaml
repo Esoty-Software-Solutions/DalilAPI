@@ -1,0 +1,99 @@
+openapi: 3.0.0
+info:
+  title: Dashboard
+  version: '1.0'
+  license:
+    name: TBD
+servers:
+  - url: 'http://localhost:3000/v1'
+paths:
+  '/dashboard/institution/{institutionId}/mainStatistics':
+    parameters:
+      - schema:
+          type: string
+        name: institutionId
+        in: path
+        required: true
+    get:
+      operationId: get-dashboard-institution-institutionId-mainStatistics
+      summary: dashboard statistics for main page for institution
+      description: dashboard statistics for main page for institution
+      parameters: []
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/dashboard/insurerStatistics.yaml
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                required:
+                  - statusCode
+                  - message
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                required:
+                  - statusCode
+                  - message
+      
+  '/dashboard/institution/{institutionId}/subscribers':
+    parameters:
+      - schema:
+          type: string
+        name: institutionId
+        in: path
+        required: true
+    get:
+      operationId: get-dashboard-institution-institutionId-subscribers
+      summary: dashboard statistics for main page for institution
+      description: dashboard statistics for main page for institution
+      parameters: []
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/dashboard/subscribers.yaml
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                required:
+                  - statusCode
+                  - message
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                required:
+                  - statusCode
+                  - message
+      

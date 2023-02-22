@@ -1,0 +1,35 @@
+title: familyMember
+type: object
+properties:
+  familyMemberId:
+    type: string
+  firstName:
+    type: string
+  middleName:
+    type: string
+  lastName:
+    type: string
+  birthdate:
+    type: string
+    format: YYYY-MM-DD
+  relationshipToBeneficiary:
+    type: string
+    enum:
+      - Father
+      - mother
+      - daughter
+      - son
+      - husband
+      - wife
+  gender:
+    type: string
+  isActive:
+    type: boolean
+required:
+  - familyMemberId
+  - firstName
+  - middleName
+  - lastName
+  - birthdate
+  - relationshipToBeneficiary
+  - gender
