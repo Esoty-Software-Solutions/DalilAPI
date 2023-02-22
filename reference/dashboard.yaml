@@ -26,7 +26,28 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../models/dashboard/insurerStatistics.yaml
+                type: object
+                properties:
+                  message:
+                    type: string
+                  dataContent:
+                    type: string
+                    description: description of the data list returned. Example "subscriber list"
+                  data:
+                    type: object
+                    required:
+                      - objectCount
+                      - hasMore
+                      - objectArray
+                    properties:
+                      objectCount:
+                        type: integer
+                      hasMore:
+                        type: boolean
+                      objectArray:
+                        type: array
+                        items:
+                          $ref: ../models/dashboard/insurerStatistics.yaml
         '401':
           description: Unauthorized
           content:
@@ -74,17 +95,26 @@ paths:
               schema:
                 type: object
                 properties:
-                  objectCount:
-                    type: integer
-                  hasMore:
-                    type: boolean
-                  responseObject:
+                  message:
                     type: string
-                    description: description of the object returned. Example "subscriber list"
-                  objectArray:
-                    type: array
-                    items:
-                      $ref: ../models/dashboard/subscriber.yaml
+                  dataContent:
+                    type: string
+                    description: description of the data list returned. Example "subscriber list"
+                  data:
+                    type: object
+                    required:
+                      - objectCount
+                      - hasMore
+                      - objectArray
+                    properties:
+                      objectCount:
+                        type: integer
+                      hasMore:
+                        type: boolean
+                      objectArray:
+                        type: array
+                        items:
+                          $ref: ../models/dashboard/subscriber.yaml                      
         '401':
           description: Unauthorized
           content:
