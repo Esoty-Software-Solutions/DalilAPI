@@ -61,7 +61,7 @@ paths:
     get:
       operationId: get-dashboard-institution-institutionId-subscribers
       summary: Institution Subscribers
-      description: dashboard statistics for main page for institution
+      description: subscribers associated with the institution
       parameters:
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/skip'
@@ -72,7 +72,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../models/dashboard/subscribers.yaml
+                type: object
+                properties:
+                  objectCount:
+                    type: integer
+                  hasMore:
+                    type: boolean
+                  responseObject:
+                    type: string
+                    description: description of the object returned. Example "subscriber list"
+                  objectArray:
+                    type: array
+                    items:
+                      $ref: ../models/dashboard/subscriber.yaml
         '401':
           description: Unauthorized
           content:
@@ -106,8 +118,8 @@ paths:
         required: true
     get:
       operationId: get-dashboard-institution-institutionId-subscribers
-      summary: Institution Subscribers
-      description: dashboard statistics for main page for institution
+      summary: Institution Claims
+      description: claims associated with the institution
       parameters:
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/skip'
@@ -118,7 +130,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../models/dashboard/claims.yaml
+                type: object
+                properties:
+                  objectCount:
+                    type: integer
+                  hasMore:
+                    type: boolean
+                  responseObject:
+                    type: string
+                    description: description of the object returned. Example "subscriber list"
+                  objectArray:
+                    type: array
+                    items:
+                      $ref: ../models/dashboard/claim.yaml
         '401':
           description: Unauthorized
           content:
