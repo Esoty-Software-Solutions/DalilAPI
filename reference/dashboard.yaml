@@ -16,7 +16,7 @@ paths:
         required: true
     get:
       operationId: get-dashboard-institution-institutionId-mainStatistics
-      summary: dashboard statistics for main page for institution
+      summary: Main Statistics
       description: dashboard statistics for main page for institution
       parameters: []
       tags: []
@@ -51,7 +51,6 @@ paths:
                 required:
                   - statusCode
                   - message
-      
   '/dashboard/institution/{institutionId}/subscribers':
     parameters:
       - schema:
@@ -61,7 +60,7 @@ paths:
         required: true
     get:
       operationId: get-dashboard-institution-institutionId-subscribers
-      summary: dashboard statistics for main page for institution
+      summary: Institution Subscribers
       description: dashboard statistics for main page for institution
       parameters: []
       tags: []
@@ -96,4 +95,3 @@ paths:
                 required:
                   - statusCode
                   - message
-      
