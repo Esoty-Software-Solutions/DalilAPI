@@ -7,7 +7,7 @@ info:
 servers:
   - url: 'http://localhost:3000/v1'
 paths:
-  '/dashboard/institution/{institutionId}/mainStatistics':
+  /dashboard/institution/{institutionId}/mainStatistics:
     parameters:
       - schema:
           type: string
@@ -51,7 +51,7 @@ paths:
                 required:
                   - statusCode
                   - message
-  '/dashboard/institution/{institutionId}/subscribers':
+  /dashboard/institution/{institutionId}/subscribers:
     parameters:
       - schema:
           type: string
@@ -62,7 +62,9 @@ paths:
       operationId: get-dashboard-institution-institutionId-subscribers
       summary: Institution Subscribers
       description: dashboard statistics for main page for institution
-      parameters: []
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/skip'
       tags: []
       responses:
         '200':
@@ -95,3 +97,73 @@ paths:
                 required:
                   - statusCode
                   - message
+  /dashboard/institution/{institutionId}/claims:
+    parameters:
+      - schema:
+          type: string
+        name: institutionId
+        in: path
+        required: true
+    get:
+      operationId: get-dashboard-institution-institutionId-subscribers
+      summary: Institution Subscribers
+      description: dashboard statistics for main page for institution
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/skip'
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/dashboard/claims.yaml
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                required:
+                  - statusCode
+                  - message
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                required:
+                  - statusCode
+                  - message
+
+
+# ------------------------- Components Section --------------------------
+components:
+  securitySchemes:
+    'Authorization: Basic ZGVtbzpwQDU1dzByZA==':
+      type: http
+      scheme: basic
+      description: ''
+  parameters:
+    limit:
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+      description: 'A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 30'
+    skip:
+      name: skip
+      in: query
+      required: false
+      schema:
+        type: integer
+      description: 'Skip a number of objects. Used for pagination'

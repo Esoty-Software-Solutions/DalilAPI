@@ -12,6 +12,7 @@ properties:
     type: string
   birthdate:
     type: string
+    format: YYYY-MM-DD
   phoneNumber:
     type: string
   gender:

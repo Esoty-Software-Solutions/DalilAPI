@@ -1,0 +1,31 @@
+title: Claims for institution
+type: object
+properties:
+
+  claimId:
+    type: string
+  claimType:
+    type: string
+  batchNumber:
+    type: string
+  claimNumber:
+    type: string
+  claimDate:
+    type: string
+    format: YYYY-MM-DD
+  submissionDate:
+    type: string
+    format: YYYY-MM-DD
+  paymentDate:
+    type: string
+    format: YYYY-MM-DD
+  claimAmount:
+    type: integer
+  claimCurrency:
+    type: string
+  status:
+    type: string
+    enum: ["underReview", "processed", "paid", "rejected"]
+  reason:
+    type: string
+   
