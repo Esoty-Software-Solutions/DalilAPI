@@ -19,12 +19,13 @@ properties:
   relationshipToBeneficiary:
     type: string
     enum:
-      - Father
+      - father
       - mother
       - daughter
       - son
       - husband
       - wife
+      - self
   gender:
     type: string
 required:
