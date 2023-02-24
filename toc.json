@@ -1,0 +1,337 @@
+{
+  "collapseTableOfContents": false,
+  "items": [
+    {
+      "type": "divider",
+      "title": "APIS"
+    },
+    {
+      "type": "item",
+      "title": "Main Document",
+      "uri": "/reference/Main Document.yaml"
+    },
+    {
+      "type": "item",
+      "title": "DoctorApp",
+      "uri": "/reference/DoctorApp.yaml"
+    },
+    {
+      "type": "item",
+      "title": "Server Integration",
+      "uri": "/reference/Server-Integration.yaml"
+    },
+    {
+      "type": "item",
+      "title": "Dashboard",
+      "uri": "/reference/dashboard.yaml"
+    },
+    {
+      "type": "item",
+      "title": "medicalCenter",
+      "uri": "/reference/medicalCenter.yaml"
+    },
+    {
+      "type": "item",
+      "title": "test",
+      "uri": "/reference/test.yaml"
+    },
+    {
+      "type": "divider",
+      "title": "Schemas"
+    },
+    {
+      "type": "group",
+      "title": "medicalFile",
+      "items": [
+        {
+          "type": "item",
+          "title": "allergies",
+          "uri": "/models/allergies.yaml"
+        },
+        {
+          "type": "item",
+          "title": "chronicDiseases",
+          "uri": "/models/chronicDiseases.yaml"
+        },
+        {
+          "type": "item",
+          "title": "clinicalVisits",
+          "uri": "/models/clinicalVisits.yaml"
+        },
+        {
+          "type": "item",
+          "title": "medicalFile",
+          "uri": "/models/medicalFile.yaml"
+        },
+        {
+          "type": "item",
+          "title": "surgeryHistory",
+          "uri": "/models/surgeryHistory.yaml"
+        }
+      ]
+    },
+    {
+      "type": "group",
+      "title": "appointment",
+      "items": [
+        {
+          "type": "item",
+          "title": "appointment",
+          "uri": "/models/appointment-new.yaml"
+        },
+        {
+          "type": "item",
+          "title": "appointment",
+          "uri": "/models/appointment.yaml"
+        }
+      ]
+    },
+    {
+      "type": "group",
+      "title": "beneficiary",
+      "items": [
+        {
+          "type": "item",
+          "title": "beneficiary-update",
+          "uri": "/models/beneficiary-update.yaml"
+        },
+        {
+          "type": "item",
+          "title": "beneficiary",
+          "uri": "/models/beneficiary.yaml"
+        },
+        {
+          "type": "item",
+          "title": "familyMember-new",
+          "uri": "/models/familyMember-new.yaml"
+        },
+        {
+          "type": "item",
+          "title": "familyMember-update",
+          "uri": "/models/familyMember-update.yaml"
+        },
+        {
+          "type": "item",
+          "title": "familyMember",
+          "uri": "/models/familyMember.yaml"
+        },
+        {
+          "type": "item",
+          "title": "beneficiary-new",
+          "uri": "/models/beneficiary-new.yaml"
+        }
+      ]
+    },
+    {
+      "type": "group",
+      "title": "doctor",
+      "items": [
+        {
+          "type": "item",
+          "title": "doctor",
+          "uri": "/models/doctor.yaml"
+        },
+        {
+          "type": "item",
+          "title": "doctorAppointmentSummary",
+          "uri": "/models/doctorAppointmentSummary.yaml"
+        },
+        {
+          "type": "item",
+          "title": "doctor-update",
+          "uri": "/models/doctor-update.yaml"
+        },
+        {
+          "type": "item",
+          "title": "doctor-new",
+          "uri": "/models/doctor-new.yaml"
+        }
+      ]
+    },
+    {
+      "type": "group",
+      "title": "claims",
+      "items": [
+        {
+          "type": "item",
+          "title": "expenseReport",
+          "uri": "/models/expenseReport.yaml"
+        },
+        {
+          "type": "item",
+          "title": "medicalCenterClaims-new",
+          "uri": "/models/medicalCenterClaims-new.yaml"
+        },
+        {
+          "type": "item",
+          "title": "medicalCenterClaims-update",
+          "uri": "/models/medicalCenterClaims-update.yaml"
+        },
+        {
+          "type": "item",
+          "title": "medicalCenterClaims",
+          "uri": "/models/medicalCenterClaims.yaml"
+        },
+        {
+          "type": "item",
+          "title": "expenseReport-new",
+          "uri": "/models/expenseReport-new.yaml"
+        }
+      ]
+    },
+    {
+      "type": "group",
+      "title": "institutions",
+      "items": [
+        {
+          "type": "item",
+          "title": "institutions-new",
+          "uri": "/models/institutions-new.yaml"
+        },
+        {
+          "type": "item",
+          "title": "institutions-update",
+          "uri": "/models/institutions-update.yaml"
+        },
+        {
+          "type": "item",
+          "title": "institutions",
+          "uri": "/models/institutions.yaml"
+        },
+        {
+          "type": "item",
+          "title": "insurancePolicy-update",
+          "uri": "/models/insurancePolicy-update.yaml"
+        },
+        {
+          "type": "item",
+          "title": "insurancePolicy",
+          "uri": "/models/insurancePolicy.yaml"
+        },
+        {
+          "type": "item",
+          "title": "insurancePolicy-new",
+          "uri": "/models/insurancePolicy-new.yaml"
+        }
+      ]
+    },
+    {
+      "type": "group",
+      "title": "medicalCenter",
+      "items": [
+        {
+          "type": "item",
+          "title": "medicalCenter-new",
+          "uri": "/models/medicalCenter-new.yaml"
+        },
+        {
+          "type": "item",
+          "title": "medicalCenter",
+          "uri": "/models/medicalCenter.yaml"
+        },
+        {
+          "type": "item",
+          "title": "medicalService",
+          "uri": "/models/medicalService.yaml"
+        },
+        {
+          "type": "item",
+          "title": "medicalCenter-update",
+          "uri": "/models/medicalCenter-update.yaml"
+        }
+      ]
+    },
+    {
+      "type": "group",
+      "title": "patient",
+      "items": [
+        {
+          "type": "item",
+          "title": "patient",
+          "uri": "/models/patient.yaml"
+        }
+      ]
+    },
+    {
+      "type": "group",
+      "title": "schedule",
+      "items": [
+        {
+          "type": "item",
+          "title": "schedule-new",
+          "uri": "/models/schedule-new.yaml"
+        },
+        {
+          "type": "item",
+          "title": "schedule-update",
+          "uri": "/models/schedule-update.yaml"
+        },
+        {
+          "type": "item",
+          "title": "schedule",
+          "uri": "/models/schedule.yaml"
+        }
+      ]
+    },
+    {
+      "type": "item",
+      "title": "codeStatus",
+      "uri": "/models/codeStatus.yaml"
+    },
+    {
+      "type": "item",
+      "title": "labReport",
+      "uri": "/models/labReport.yaml"
+    },
+    {
+      "type": "item",
+      "title": "manualClaims-new",
+      "uri": "/models/manualClaims-new.yaml"
+    },
+    {
+      "type": "item",
+      "title": "message",
+      "uri": "/models/message.yaml"
+    },
+    {
+      "type": "item",
+      "title": "user-new",
+      "uri": "/models/user-new.yaml"
+    },
+    {
+      "type": "item",
+      "title": "user-update",
+      "uri": "/models/user-update.yaml"
+    },
+    {
+      "type": "item",
+      "title": "user",
+      "uri": "/models/user.yaml"
+    },
+    {
+      "type": "item",
+      "title": "manualClaims",
+      "uri": "/models/manualClaims.yaml"
+    },
+    {
+      "type": "item",
+      "title": "insurer statistics",
+      "uri": "/models/dashboard/insurerStatistics.yaml"
+    },
+    {
+      "type": "item",
+      "title": "familyMember",
+      "uri": "/models/dashboard/familyMember.yaml"
+    },
+    {
+      "type": "item",
+      "title": "insurer statistics",
+      "uri": "/models/dashboard/subscriber.yaml"
+    },
+    {
+      "type": "item",
+      "title": "Claims for institution",
+      "uri": "/models/dashboard/claim.yaml"
+    }
+  ]
+}
