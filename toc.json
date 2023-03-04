@@ -1,5 +1,5 @@
 {
-  "collapseTableOfContents": false,
+  "collapseTableOfContents": true,
   "items": [
     {
       "type": "divider",
@@ -29,11 +29,6 @@
       "type": "item",
       "title": "medicalCenter",
       "uri": "/reference/medicalCenter.yaml"
-    },
-    {
-      "type": "item",
-      "title": "test",
-      "uri": "/reference/test.yaml"
     },
     {
       "type": "divider",
