@@ -131,11 +131,14 @@ paths:
           in: header
           name: Idempotency-Key
           description: ' V4 UUIDs key'
+      tags:
+        - test
     parameters: []
   /allergies:
     post:
       summary: create allergy record
-      tags: []
+      tags:
+        - test
       responses:
         '201':
           description: Created
@@ -172,7 +175,8 @@ paths:
   /clinicalVisits:
     post:
       summary: Create a clinic visit record
-      tags: []
+      tags:
+        - what
       responses:
         '201':
           description: Created
@@ -218,7 +222,6 @@ paths:
   '/beneficiaries/{beneficiaryId}/examination':
     post:
       summary: Post examination and service claims
-      tags: []
       responses: {}
       operationId: post-beneficiaries-beneficiaryId-examination
       requestBody:
@@ -256,6 +259,9 @@ paths:
                   type: object
             examples: {}
         description: ''
+      tags:
+        - what
+      description: ''
     parameters:
       - schema:
           type: string
