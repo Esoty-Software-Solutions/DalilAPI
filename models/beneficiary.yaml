@@ -23,21 +23,12 @@ properties:
     type: array
     items:
       $ref: ./familyMember.yaml
-  insurancePolicyId:
+  institutionId:
     type: string
   cityResidence:
     type: string
   districtResidence:
     type: string
-  account:
-    type: object
-    required:
-      - hasAccount
-    properties:
-      hasAccount:
-        type: boolean
-      userId:
-        type: string
 required:
   - beneficiaryId
   - firstName

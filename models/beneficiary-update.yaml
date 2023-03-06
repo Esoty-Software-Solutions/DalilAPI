@@ -21,16 +21,9 @@ properties:
       type: array
       items:
         $ref: ./familyMember-update.yaml
-    insurancePolicyId:
+    institutionId:
       type: string
     residentCity:
       type: string
     residentDistrict:
       type: string
-    account:
-      type: object
-      properties:
-        hasAccount:
-          type: boolean
-        userId:
-          type: string

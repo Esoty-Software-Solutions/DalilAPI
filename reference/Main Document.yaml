@@ -10,9 +10,10 @@ info:
 servers:
   - url: 'http://localhost:3000/v1'
 paths:
-  /login:
+  /login:      
     parameters: []
     post:
+      tags: [users]      
       summary: login
       operationId: post-login
       responses:
@@ -85,6 +86,7 @@ paths:
   /logout:
     parameters: []
     post:
+      tags: [users]
       summary: logout
       operationId: post-logout
       responses:
@@ -96,9 +98,9 @@ paths:
           description: Internal Server Error
       description: user logout
   /users:
-    get:
+    get:      
       summary: List all users
-      tags: []
+      tags: [users]
       responses:
         '200':
           description: OK
@@ -181,7 +183,7 @@ paths:
         - $ref: '#/components/parameters/skip'
     post:
       summary: Create a new user
-      tags: []
+      tags: [users]
       operationId: post-users
       responses:
         '201':
@@ -314,7 +316,7 @@ paths:
   /beneficiaries:
     get:
       summary: List all beneficiaries
-      tags: []
+      tags: [beneficiaries]
       responses:
         '200':
           description: OK
@@ -412,8 +414,8 @@ paths:
         - schema:
             type: string
           in: query
-          name: insurancePolicyId
-          description: A string used to retrieve beneficiaries associated with the indicated insurance policy by providing the insurance policy ID
+          name: instituionId
+          description: A string used to retrieve beneficiaries associated with the indicated institution by providing the institution  ID
     post:
       summary: Create a new beneficiary
       tags: []
@@ -708,7 +710,7 @@ paths:
                       birthdate: '2019-08-24'
                       relationshipToBeneficiary: Father
                       gender: string
-                  insurancePolicyId: string
+                  institutionId: string
                   residentCity: string
                   residentDistrict: string
                   account:
@@ -1627,26 +1629,29 @@ paths:
         - $ref: '#/components/parameters/specialty'
         - schema:
             type: string
+            enum: ["morning", "afternoon", "evening"]
           in: query
           name: timeSlot
         - schema:
             type: string
+            format: YYYY-MM-DD
           in: query
           name: fromDate
           required: true
         - schema:
             type: string
+            format: YYYY-MM-DD
           in: query
           name: toDate
-          required: true
+          required: true          
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/starting_after_object'
         - $ref: '#/components/parameters/searchQuery'
         - $ref: '#/components/parameters/skip'
-        - $ref: '#/components/parameters/skip'
         - $ref: '#/components/parameters/doctorId'
         - $ref: '#/components/parameters/medicalCenterId'
         - $ref: '#/components/parameters/sortBy'
+        - $ref: '#/components/parameters/groupBy'
       description: ''
       responses:
         '200':
@@ -2692,6 +2697,16 @@ components:
           - doctor
           - medicalCenter
       description: 'Flag to sort the objects by either doctor, medical centers or objectId. Default will be to sort by object id'
+    groupBy:
+      name: groupBy
+      in: query
+      required: false
+      schema:
+        type: string
+        enum:
+          - doctor
+          - medicalCenter
+      description: 'Flag to group the objects by either doctor or medical centers'
     rejected:
       name: rejected
       in: query
