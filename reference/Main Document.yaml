@@ -240,7 +240,7 @@ paths:
               $ref: ../models/user-new.yaml
         description: ''
       description: ''
-  '/users/{username}':
+  '/users/{userId}':
     get:
       summary: Get user information
       tags: []
@@ -310,7 +310,7 @@ paths:
     parameters:
       - schema:
           type: string
-        name: username
+        name: userId
         in: path
         required: true
   /beneficiaries:
