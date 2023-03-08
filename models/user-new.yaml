@@ -15,15 +15,6 @@ properties:
     type: string
   beneficiaryId:
     type: string
-  beneficiary:
-    type: object
-    properties:
-      hasBeneficiary:
-        type: boolean
-      benefciaryId:
-        type: string
-    required:
-      - hasBeneficiary
 required:
   - username
   - phoneNumber

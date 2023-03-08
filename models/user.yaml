@@ -13,15 +13,8 @@ properties:
     type: boolean
   whatsAppNumber:
     type: string
-  beneficiary:
-    type: object
-    properties:
-      hasBeneficiary:
-        type: boolean
-      benefciaryId:
-        type: string
-    required:
-      - hasBeneficiary
+  benefciaryId:
+    type: string
 required:
   - userId
   - username
