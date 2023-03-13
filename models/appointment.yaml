@@ -9,9 +9,9 @@ properties:
     type: string
   scheduleId:
     type: string
-  date:
+  appointmentDate:
     type: string
-    format: date
+    format: YYYY-MM-DD
   appointmentStatus:
     type: string
     enum:
@@ -19,6 +19,7 @@ properties:
       - pending
       - cancelled
       - completed
+      - rejected
   price:
     type: string
   timeslot:

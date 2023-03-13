@@ -73,6 +73,11 @@ paths:
                   type: string
                 password:
                   type: string
+                deviceToken:
+                  type: string
+                deviceType:
+                  type: string
+                  enum: [android, ios, browser]
               required:
                 - username
                 - password
