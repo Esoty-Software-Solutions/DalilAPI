@@ -1,4 +1,4 @@
-title: schedule grouped by medicalCenter
+title: schedule grouped by doctor
 type: object
 properties:
   medicalCenterObject:
