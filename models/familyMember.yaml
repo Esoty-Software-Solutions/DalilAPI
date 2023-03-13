@@ -15,19 +15,13 @@ properties:
     type: string
   birthdate:
     type: string
-    format: date
+    format: YYYY-MM-DD
   relationshipToBeneficiary:
     type: string
-    enum:
-      - father
-      - mother
-      - daughter
-      - son
-      - husband
-      - wife
-      - self
+    enum: [self, father, mother, wife, husband, daughter, son]
   gender:
     type: string
+    enum: [male, female]
 required:
   - familyMemberId
   - firstName

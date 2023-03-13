@@ -13,10 +13,12 @@ properties:
     type: string
   birthdate:
     type: string
+    format: YYYY-MM-DD
   phoneNumber:
     type: string
   gender:
     type: string
+    enum: [male, female]
   familyMembers:
     type: array
     items:

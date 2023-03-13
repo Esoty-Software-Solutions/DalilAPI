@@ -240,10 +240,10 @@ paths:
               $ref: ../models/user-new.yaml
         description: ''
       description: ''
-  '/users/{userId}':
+  /users/{userId}:
     get:
       summary: Get user information
-      tags: []
+      tags: [users]
       responses:
         '200':
           description: OK
@@ -418,7 +418,7 @@ paths:
           description: A string used to retrieve beneficiaries associated with the indicated institution by providing the institution  ID
     post:
       summary: Create a new beneficiary
-      tags: []
+      tags: [beneficiaries]
       responses:
         '201':
           description: Created
@@ -502,10 +502,10 @@ paths:
               $ref: ../models/beneficiary-new.yaml
         description: ''
     parameters: []
-  '/beneficiaries/{beneficiaryId}':
+  /beneficiaries/{beneficiaryId}:
     get:
       summary: Get beneficiary Information by ID
-      tags: []
+      tags: [beneficiaries]
       responses:
         '200':
           description: OK
@@ -604,7 +604,30 @@ paths:
         name: beneficiaryId
         in: path
         required: true
+    post:
+      tags: [beneficiaries]
+      summary: ''
+      operationId: post-users-userId
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                  data:
+                    $ref: ../models/beneficiary.yaml
+                required:
+                  - codeStatus
+                  - message
+                  - data
     patch:
+      tags: [beneficiaries]
       summary: ''
       operationId: patch-users-userId
       responses:
@@ -716,7 +739,7 @@ paths:
                   account:
                     hasAccount: true
                     userId: string
-  '/beneficiaries/{beneficiaryId}/expenseReports':
+  /beneficiaries/{beneficiaryId}/expenseReports:
     parameters:
       - schema:
           type: string
@@ -725,7 +748,7 @@ paths:
         required: true
     get:
       summary: Get expense reports
-      tags: []
+      tags: [beneficiaries]
       responses:
         '200':
           description: OK
@@ -774,7 +797,7 @@ paths:
         - $ref: '#/components/parameters/skip'
     post:
       summary: Add expense report
-      tags: []
+      tags: [beneficiaries]
       responses:
         '201':
           description: Created
@@ -806,7 +829,7 @@ paths:
                   currency: string
                   beneficiaryId: string
                   patientName: string
-  '/beneficiaries/{beneficiaryId}/medicalFiles':
+  /beneficiaries/{beneficiaryId}/medicalFiles:
     parameters:
       - schema:
           type: string
@@ -815,7 +838,7 @@ paths:
         required: true
     get:
       summary: Get medical files
-      tags: []
+      tags: [beneficiaries, medicalFiles]
       responses:
         '200':
           description: OK
@@ -863,11 +886,13 @@ paths:
         - $ref: '#/components/parameters/starting_after_object'
         - $ref: '#/components/parameters/searchQuery'
         - $ref: '#/components/parameters/skip'
+  
+  
   /beneficiaries/claims:
     parameters: []
     get:
       summary: Get all claims from all beneficiary
-      tags: []
+      tags: [beneficiaries, claims]
       responses:
         '200':
           description: OK
@@ -915,7 +940,7 @@ paths:
         - $ref: '#/components/parameters/searchQuery'
         - $ref: '#/components/parameters/skip'
       description: ''
-  '/beneficiaries/{beneficiaryId}/claims':
+  /beneficiaries/{beneficiaryId}/claims:
     parameters:
       - schema:
           type: string
@@ -924,7 +949,7 @@ paths:
         required: true
     get:
       summary: Get all claims from beneficiary
-      tags: []
+      tags: [beneficiaries, claims]
       responses:
         '200':
           description: OK
@@ -970,7 +995,7 @@ paths:
         - $ref: '#/components/parameters/skip'
     post:
       summary: submit a claim
-      tags: []
+      tags: [beneficiaries, claims]
       responses:
         '201':
           description: Created
@@ -1011,7 +1036,7 @@ paths:
               required:
                 - description
         description: ''
-  '/beneficiaries/{beneficiaryId}/benefitPolicies':
+  /beneficiaries/{beneficiaryId}/benefitPolicies:
     parameters:
       - schema:
           type: string
@@ -1020,7 +1045,7 @@ paths:
         required: true
     get:
       summary: Get benefit policy information
-      tags: []
+      tags: [beneficiaries]
       responses:
         '200':
           description: OK
@@ -1051,10 +1076,11 @@ paths:
         '500':
           description: Internal Server Error
       operationId: get-beneficiaries-beneficiaryId-benefitPolicies
+
   /appointments:
     get:
       summary: List all appointments
-      tags: []
+      tags: [bookings]
       responses:
         '200':
           description: OK
@@ -1110,16 +1136,37 @@ paths:
         - $ref: '#/components/parameters/toDate'
         - $ref: '#/components/parameters/rejected'
         - $ref: '#/components/parameters/medicalCenterId'
-  '/appointments/{appointmentId}':
+  /appointments/{appointmentId}:
     parameters:
       - schema:
           type: string
         name: appointmentId
         in: path
         required: true
+    post:
+      summary: update appointment
+      tags: [bookings]
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: string
+                  message:
+                    type: string
+                  data:
+                    $ref: ../models/appointment.yaml
+                required:
+                  - statusCode
+                  - message
+                  - data
     patch:
       summary: update appointment
-      tags: []
+      tags: [bookings]
       responses:
         '200':
           description: OK
@@ -1162,6 +1209,7 @@ paths:
                 - appointmentStatus
   '/appointments/users/{userId}':
     post:
+      tags: [bookings, users]
       summary: request an appointment
       operationId: post-appointments
       responses:
@@ -1251,6 +1299,7 @@ paths:
         in: path
         required: true
     get:
+      tags: [bookings, users]
       summary: List all appointments for user
       operationId: get-appointments-users-userId
       responses:
@@ -1362,10 +1411,11 @@ paths:
         - $ref: '#/components/parameters/rejected'
       x-internal: false
       description: ''
+
   /medicalCenters:
     get:
       summary: List medical
-      tags: []
+      tags: [medicalCenters]
       operationId: get-medicalCenters
       description: ''
       responses:
@@ -1397,6 +1447,7 @@ paths:
         - $ref: '#/components/parameters/skip'
         - $ref: '#/components/parameters/city'
     post:
+      tags: [medicalCenters]
       summary: create a medical center
       operationId: post-medicalCenters
       responses:
@@ -1432,6 +1483,7 @@ paths:
         in: path
         required: true
     get:
+      tags: [medicalCenters]
       summary: Get medical center
       operationId: get-medicalCenters-medicalCenterId
       responses:
@@ -1451,9 +1503,10 @@ paths:
           description: Not Found
         '500':
           description: Internal Server Error
-    patch:
+    post:
+      tags: [medicalCenters]
       summary: Get medical center object
-      operationId: patch-medicalCenters-medicalCenterId
+      operationId: post-medicalCenters-medicalCenterId
       responses:
         '200':
           description: OK
@@ -1485,6 +1538,7 @@ paths:
               $ref: ../models/medicalCenter.yaml
         description: ''
     delete:
+      tags: [medicalCenters]
       summary: ''
       operationId: delete-medicalCenters-medicalCenterId
       responses:
@@ -1500,10 +1554,11 @@ paths:
           description: Not Found
         '500':
           description: Internal Server Error
+
   /medicalCenters/claims:
     get:
       summary: Get all claims from medical centers
-      tags: []
+      tags: [medicalCenters, claims]
       responses:
         '200':
           description: OK
@@ -1582,7 +1637,7 @@ paths:
             type: string
           in: query
           name: toDate
-  '/medicalCenters/claims/{claimId}':
+  /medicalCenters/claims/{claimId}:
     parameters:
       - schema:
           type: string
@@ -1591,7 +1646,7 @@ paths:
         required: true
     patch:
       summary: Update claim information
-      tags: []
+      tags: [medicalCenters, claims]
       responses:
         '200':
           description: OK
@@ -1615,10 +1670,11 @@ paths:
           application/json:
             schema:
               $ref: ../models/medicalCenterClaims-update.yaml
+
   /schedules:
     get:
       summary: List schedules
-      tags: []
+      tags: [bookings]
       operationId: get-schedules
       parameters:
         - schema:
@@ -1659,31 +1715,29 @@ paths:
           content:
             application/json:
               schema:
-                type: object
                 properties:
-                  codeStatus:
-                    type: string
-                  message:
-                    type: string
-                  data:
-                    type: object
-                    required:
-                      - objectCount
-                      - hasMore
-                      - objectArray
-                    properties:
-                      objectCount:
-                        type: integer
-                      hasMore:
-                        type: boolean
-                      objectArray:
-                        type: array
-                        items:
-                          $ref: ../models/schedule.yaml
-                required:
-                  - codeStatus
-                  - message
-                  - data
+                    codeStatus:
+                      type: string
+                    message:
+                      type: string
+                    data:
+                      type: object
+                      required:
+                        - objectCount
+                        - hasMore
+                        - objectArray
+                      properties:
+                        objectCount:
+                          type: integer
+                        hasMore:
+                          type: boolean
+                        objectArray:
+                          type: array
+                          items:                              
+                            oneOf:
+                              - $ref: ../models/schedule.yaml
+                              - $ref: ../models/scheduleMedicalCenter.yaml
+                              - $ref: ../models/scheduleDoctor.yaml
         '400':
           description: Bad Request
           content:
@@ -1756,6 +1810,7 @@ paths:
                   - message
     parameters: []
     post:
+      tags: [bookings]
       summary: Create a new schedule
       operationId: post-schedules
       responses:
@@ -1781,9 +1836,9 @@ paths:
             examples: {}
       parameters: []
   '/schedules/{scheduleId}':
-    patch:
+    post:
+      tags: [bookings]
       summary: Update schedule
-      tags: []
       responses:
         '200':
           description: OK
@@ -1809,7 +1864,7 @@ paths:
               $ref: ../models/schedule-update.yaml
     get:
       summary: Get schedule by ID
-      tags: []
+      tags: [bookings]
       responses:
         '200':
           description: OK
@@ -1831,7 +1886,7 @@ paths:
       parameters: []
     delete:
       summary: Delete schedule
-      tags: []
+      tags: [bookings]
       operationId: delete-schedules-scheduleId
       responses:
         '200':
@@ -1852,10 +1907,11 @@ paths:
         name: scheduleId
         in: path
         required: true
+
   /doctors:
     post:
       summary: Create a new doctor
-      tags: []
+      tags: [doctors]
       operationId: post-doctors
       requestBody:
         content:
@@ -1879,7 +1935,7 @@ paths:
           description: Internal Server Error
     get:
       summary: List doctors
-      tags: []
+      tags: [doctors]
       responses:
         '200':
           description: OK
@@ -1917,10 +1973,10 @@ paths:
         - $ref: '#/components/parameters/searchQuery'
         - $ref: '#/components/parameters/skip'
         - $ref: '#/components/parameters/specialty'
-  '/doctors/{doctorId}':
+  /doctors/{doctorId}:
     get:
       summary: Get doctor by ID
-      tags: []
+      tags: [doctors]
       responses:
         '200':
           description: OK
@@ -1947,6 +2003,7 @@ paths:
         in: path
         required: true
     patch:
+      tags: [doctors]
       summary: ''
       operationId: patch-doctors-doctorId
       responses:
@@ -1972,6 +2029,7 @@ paths:
             schema:
               $ref: ../models/doctor-update.yaml
     delete:
+      tags: [doctors]
       summary: ''
       operationId: delete-doctors-doctorId
       responses:
@@ -1987,10 +2045,11 @@ paths:
           description: Not Found
         '500':
           description: Internal Server Error
+
   /cities:
     get:
       summary: List cities
-      tags: []
+      tags: [miscellaneous]
       responses:
         '200':
           description: OK
@@ -2097,6 +2156,7 @@ paths:
                   - message
       operationId: get-cities
     post:
+      tags: [miscellaneous]
       summary: Add a city
       operationId: post-cities
       responses:
@@ -2190,8 +2250,8 @@ paths:
                 - cityName
   /medicalSpecialties:
     get:
+      tags: [miscellaneous]
       summary: List medical specialties
-      tags: []
       responses:
         '200':
           description: OK
@@ -2298,7 +2358,7 @@ paths:
       operationId: get-medicalSpecialties
     post:
       summary: Add a medical specialty
-      tags: []
+      tags: [miscellaneous]
       responses:
         '201':
           description: Created
@@ -2393,7 +2453,7 @@ paths:
   /medicalServices:
     get:
       summary: Get medical Services
-      tags: []
+      tags: [miscellaneous]
       responses:
         '200':
           description: OK
@@ -2448,7 +2508,7 @@ paths:
       description: ''
     post:
       summary: Add medical service
-      tags: []
+      tags: [miscellaneous]
       responses:
         '201':
           description: Created
@@ -2480,10 +2540,11 @@ paths:
                   type: string
               required:
                 - serviceName
+
   /institutions:
     get:
       summary: Get all institution
-      tags: []
+      tags: [institutions]
       responses:
         '200':
           description: OK
@@ -2523,7 +2584,7 @@ paths:
                 - hasMore
     post:
       summary: Create an institution
-      tags: []
+      tags: [institutions]
       responses:
         '201':
           description: Created
@@ -2545,7 +2606,7 @@ paths:
           application/json:
             schema:
               $ref: ../models/institutions-new.yaml
-  '/institutions/{institutionId}':
+  /institutions/{institutionId}:
     parameters:
       - schema:
           type: string
@@ -2554,7 +2615,7 @@ paths:
         required: true
     patch:
       summary: Update institution
-      tags: []
+      tags: [institutions]
       responses:
         '200':
           description: OK
@@ -2579,6 +2640,7 @@ paths:
             schema:
               $ref: ../models/institutions-update.yaml
     get:
+      tags: [institutions]
       summary: ''
       operationId: get-institutions-institutionId
       responses:
@@ -2598,6 +2660,8 @@ paths:
           description: Not Found
         '500':
           description: Internal Server Error
+
+
 components:
   schemas: {}
   examples: {}
