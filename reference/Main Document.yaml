@@ -2699,7 +2699,15 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../models/sms.yaml#/components/schemas/sms
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:                      
+                      objectArray:
+                        type: array
+                        items:
+                          $ref: ../models/sms.yaml#/components/schemas/sms
         '400':
           description: Bad Request
         '401':
