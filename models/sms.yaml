@@ -1,0 +1,27 @@
+components:
+  schemas: 
+    sms:
+      type: object
+      properties:
+        smsId:
+          type: string
+          readOnly: true
+        messageStatus:
+          type: string
+          enum: [pending, sent]
+        phoneNumber:
+          type: string
+        messageContent:
+          type: string
+    sms-new:
+      type: object
+      properties:
+        smsId:
+          type: string
+        messageStatus:
+          type: string
+          enum: [pending, sent]
+        phoneNumber:
+          type: string
+        messageContent:
+          type: string
