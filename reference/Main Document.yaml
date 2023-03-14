@@ -81,11 +81,6 @@ paths:
               required:
                 - username
                 - password
-            examples:
-              Example 1:
-                value:
-                  username: user name
-                  password: password hash
       description: user login
       parameters: []
   /logout:
@@ -102,6 +97,34 @@ paths:
         '500':
           description: Internal Server Error
       description: user logout
+
+  /deviceToken:
+    parameters: []
+    post:
+      tags: [users]
+      summary: update device token
+      operationId: post-deviceToken
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                deviceToken:
+                  type: string
+                deviceType:
+                  type: string
+                  enum: [android, ios, browser]
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal Server Error
+      description: user logout
+
+
   /users:
     get:      
       summary: List all users
