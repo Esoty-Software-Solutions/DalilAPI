@@ -377,6 +377,82 @@ paths:
         name: userId
         in: path
         required: true
+  
+  /users/{userId}/changePassword:
+    post:
+      summary: change user password
+      tags: [users]
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - statusCode
+                  - message
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - statusCode
+                  - message
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - statusCode
+                  - message
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: string
+                  messageBody:
+                    type: string
+                required:
+                  - statusCode
+                  - messageBody
+      operationId: get-users-userId-changePassword
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/changePassword.yaml
+      parameters: []
+    parameters:
+      - schema:
+          type: string
+        name: userId
+        in: path
+        required: true
+  
   /beneficiaries:
     get:
       summary: List all beneficiaries
