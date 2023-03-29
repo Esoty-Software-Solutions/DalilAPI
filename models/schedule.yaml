@@ -13,6 +13,7 @@ properties:
     $ref: ./doctor.yaml
   timeslot:
     type: string
+    enum: [morning, afternoon, afternoon]
   monday:
     type: boolean
   tuesday:

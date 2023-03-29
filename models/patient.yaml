@@ -3,7 +3,7 @@ x-stoplight:
   id: gfgpmwu5nx5pq
 x-tags:
   - patient
-  - beneficiary
+  - subscriber
 type: object
 properties:
   userId:

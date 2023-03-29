@@ -19,7 +19,7 @@ properties:
     format: float
   currency:
     type: string
-  beneficiaryId:
+  subscriberId:
     type: string
   patientId:
     type: string
@@ -32,5 +32,5 @@ required:
   - serviceDate
   - charge
   - currency
-  - beneficiaryId
+  - subscriberId
   - patientName

@@ -7,19 +7,24 @@ properties:
     type: string
   username:
     type: string
-  phoneNumber:
-    type: string
   firstName:
     type: string
   secondName:
     type: string
-  lastName:
+  thirdName:
     type: string
+  lastName:
+    type: string    
+  phoneNumber:
+    type: string   
+  email:
+    type: string
+    format: email
   phoneAuthenticated:
     type: boolean  
   resetPassword:
     type: boolean
-  beneficiaryId:
+  subscriberId:
     type: string
   doctorId:
     type: string
@@ -27,3 +32,5 @@ required:
   - userId
   - username
   - resetPassword
+  - firstName
+  - lastName

@@ -1,5 +1,0 @@
-title: codeStatus
-x-stoplight:
-  id: drygoraz5hjl3
-type: string
-description: 'response code status like "200", "400", or "500"'

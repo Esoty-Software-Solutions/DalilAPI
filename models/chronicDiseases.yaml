@@ -14,5 +14,9 @@ properties:
     type: string
   notes:
     type: string
+  thumbnail:
+    type: string
+  file:
+    type: string
 required:
   - DiseaseName

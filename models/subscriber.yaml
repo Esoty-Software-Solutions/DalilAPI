@@ -1,41 +1,42 @@
-title: beneficiary-new
+title: subscriber
 x-stoplight:
-  id: sdd60qlizhwrs
+  id: ep2eonszfkxut
 x-tags:
-  - beneficiary
+  - subscriber
 type: object
 properties:
+  subscriberId:
+    type: string
   firstName:
     type: string
-  middleName:
+  secondName:
     type: string
   lastName:
     type: string
   birthdate:
     type: string
-    format: YYYY-MM-DD
   phoneNumber:
     type: string
   gender:
     type: string
-    enum: [male, female]
-  familyMembers:
+  beneficiarys:
     type: array
     items:
-      $ref: ./familyMember-new.yaml
+      $ref: ./beneficiary.yaml
   institutionId:
     type: string
-  residentCity:
+  cityResidence:
     type: string
-  residentDistrict:
+  districtResidence:
     type: string
 required:
+  - subscriberId
   - firstName
-  - middleName
+  - secondName
   - lastName
   - birthdate
   - phoneNumber
   - gender
-  - familyMembers
-  - insurancePolicyId
-  - residentCity
+  - beneficiarys
+  - cityResidence
+  - account

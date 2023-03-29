@@ -15,7 +15,7 @@ properties:
     type: string
   employeeCount:
     type: string
-  beneficiaryCount:
+  subscriberCount:
     type: string
   beneftiPolicy:
     $ref: ./insurancePolicy.yaml
@@ -23,5 +23,5 @@ required:
   - instituionId
   - Name
   - employeeCount
-  - beneficiaryCount
+  - subscriberCount
   - beneftiPolicy

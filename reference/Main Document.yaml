@@ -31,8 +31,6 @@ paths:
                       data:
                         $ref: ../models/user.yaml
                     required:
-                      - statusCode
-                      - message
                       - token
                       - data
         '401':
@@ -69,6 +67,7 @@ paths:
                 - password
       description: user login
       parameters: []
+
   /logout:
     parameters: []
     post:
@@ -78,72 +77,22 @@ paths:
       responses:
         '200':
           description: OK
-        '401':
-          description: Unauthorized
-        '500':
-          description: Internal Server Error
-      description: user logout
-
-  /deviceToken:
-    parameters: []
-    post:
-      tags: [users]
-      summary: update device token
-      operationId: post-deviceToken
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                deviceToken:
-                  type: string
-                deviceType:
-                  type: string
-                  enum: [android, ios, browser]
-      responses:
-        '200':
-          description: OK
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  statusCode:
-                    type: string
-                  message:
-                    type: string
-                required:
-                  - statusCode
-                  - message
+                $ref: ../models/standardResponse.yaml
         '401':
           description: Unauthorized
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  statusCode:
-                    type: string
-                  message:
-                    type: string
-                required:
-                  - statusCode
-                  - message
+                $ref: ../models/standardResponse.yaml
         '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  statusCode:
-                    type: string
-                  message:
-                    type: string
-                required:
-                  - statusCode
-                  - message
+                $ref: ../models/standardResponse.yaml
       description: user logout
 
 
@@ -157,32 +106,27 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  statusCode:
-                    type: string
-                  message:
-                    type: string
-                  data:
-                    type: object
-                    required:
-                      - objectCount
-                      - hasMore
-                      - objectArray
+                allOf:
+                  - $ref: ../models/standardResponse.yaml
+                  - type: object
                     properties:
-                      objectCount:
-                        type: integer
-                      hasMore:
-                        type: boolean
-                      objectArray:
-                        type: array
-                        items:
-                          $ref: ../models/user.yaml
+                      data:
+                        type: object
+                        required:
+                          - objectCount
+                          - hasMore
+                          - objectArray
+                        properties:
+                          objectCount:
+                            type: integer
+                          hasMore:
+                            type: boolean
+                          objectArray:
+                            type: array
+                            items:
+                              $ref: ../models/user.yaml
                 required:
-                  - statusCode
-                  - message
                   - data
-              examples: {}
         '401':
           description: Unauthorized
           content:
@@ -241,15 +185,13 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  statusCode:
-                    type: string
-                  message:
-                    type: string
-                  date:
-                    $ref: ../models/user.yaml
-              examples: {}
+                allOf:
+                  - $ref: ../models/standardResponse.yaml
+                  - type: object
+                    properties:                    
+                      data:
+                        $ref: ../models/user.yaml
+                  
         '401':
           description: Unauthorized
           content:
@@ -287,9 +229,10 @@ paths:
         content:
           application/json:
             schema:
-              $ref: ../models/user-new.yaml
+              $ref: ../models/user.yaml
         description: ''
       description: ''
+  
   /users/{userId}:
     get:
       summary: Get user information
@@ -363,6 +306,44 @@ paths:
         name: userId
         in: path
         required: true
+  
+  /users/{userId}/deviceTokens:
+    parameters: []
+    post:
+      tags: [users]
+      summary: update device token for user
+      description: update device token for user
+      operationId: post-deviceToken
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                deviceToken:
+                  type: string
+                deviceType:
+                  type: string
+                  enum: [android, ios, browser]
+      responses:
+          '200':
+            description: OK
+            content:
+              application/json:
+                schema:
+                  $ref: ../models/standardResponse.yaml
+          '401':
+            description: Unauthorized
+            content:
+              application/json:
+                schema:
+                  $ref: ../models/standardResponse.yaml
+          '500':
+            description: Internal Server Error
+            content:
+              application/json:
+                schema:
+                  $ref: ../models/standardResponse.yaml
   
   /users/{userId}/changePassword:
     post:
@@ -439,10 +420,10 @@ paths:
         in: path
         required: true
   
-  /beneficiaries:
+  /subscribers:
     get:
-      summary: List all beneficiaries
-      tags: [beneficiaries]
+      summary: List all subscribers
+      tags: [subscribers]
       responses:
         '200':
           description: OK
@@ -469,7 +450,7 @@ paths:
                       objectArray:
                         type: array
                         items:
-                          $ref: ../models/beneficiary.yaml
+                          $ref: ../models/subscriber.yaml
                 required:
                   - codeStatus
                   - message
@@ -531,7 +512,7 @@ paths:
                 required:
                   - codeStatus
                   - message
-      operationId: get-beneficiaries
+      operationId: get-subscribers
       parameters:
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/starting_after_object'
@@ -541,10 +522,10 @@ paths:
             type: string
           in: query
           name: instituionId
-          description: A string used to retrieve beneficiaries associated with the indicated institution by providing the institution  ID
+          description: A string used to retrieve subscribers associated with the indicated institution by providing the institution  ID
     post:
-      summary: Create a new beneficiary
-      tags: [beneficiaries]
+      summary: Create a new subscriber
+      tags: [subscribers]
       responses:
         '201':
           description: Created
@@ -558,7 +539,7 @@ paths:
                   message:
                     type: string
                   data:
-                    $ref: ../models/beneficiary.yaml
+                    $ref: ../models/subscriber.yaml
                 required:
                   - codeStatus
                   - message
@@ -620,18 +601,18 @@ paths:
                 required:
                   - codeStatus
                   - message
-      operationId: post-beneficiaries
+      operationId: post-subscribers
       requestBody:
         content:
           application/json:
             schema:
-              $ref: ../models/beneficiary-new.yaml
+              $ref: ../models/subscriber.yaml
         description: ''
     parameters: []
-  /beneficiaries/{beneficiaryId}:
+  /subscribers/{subscriberId}:
     get:
-      summary: Get beneficiary Information by ID
-      tags: [beneficiaries]
+      summary: Get subscriber Information by ID
+      tags: [subscribers]
       responses:
         '200':
           description: OK
@@ -645,7 +626,7 @@ paths:
                   message:
                     type: string
                   data:
-                    $ref: ../models/beneficiary.yaml
+                    $ref: ../models/subscriber.yaml
                 required:
                   - codeStatus
                   - message
@@ -721,17 +702,17 @@ paths:
                 required:
                   - codeStatus
                   - message
-      operationId: get-beneficiaries-beneficiaryId
+      operationId: get-subscribers-subscriberId
       description: Get information about the user
       parameters: []
     parameters:
       - schema:
           type: string
-        name: beneficiaryId
+        name: subscriberId
         in: path
         required: true
     post:
-      tags: [beneficiaries]
+      tags: [subscribers]
       summary: ''
       operationId: post-users-userId
       responses:
@@ -747,13 +728,13 @@ paths:
                   message:
                     type: string
                   data:
-                    $ref: ../models/beneficiary.yaml
+                    $ref: ../models/subscriber.yaml
                 required:
                   - codeStatus
                   - message
                   - data
     patch:
-      tags: [beneficiaries]
+      tags: [subscribers]
       summary: ''
       operationId: patch-users-userId
       responses:
@@ -769,7 +750,7 @@ paths:
                   message:
                     type: string
                   data:
-                    $ref: ../models/beneficiary.yaml
+                    $ref: ../models/subscriber.yaml
                 required:
                   - codeStatus
                   - message
@@ -834,7 +815,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: ../models/beneficiary-update.yaml
+              $ref: ../models/subscriber.yaml
             examples:
               Example 1:
                 value:
@@ -844,20 +825,20 @@ paths:
                   birthdate: string
                   phoneNumber: string
                   gender: string
-                  familyMembers:
-                    - familyMemberId: string
+                  beneficiaries:
+                    - beneficiaryId: string
                       firstName: string
                       middleName: string
                       lastName: string
                       birthdate: '2019-08-24'
-                      relationshipToBeneficiary: Father
+                      relationshipToSubscriber: Father
                       gender: string
-                    - familyMemberId: string
+                    - beneficiaryId: string
                       firstName: string
                       middleName: string
                       lastName: string
                       birthdate: '2019-08-24'
-                      relationshipToBeneficiary: Father
+                      relationshipToSubscriber: Father
                       gender: string
                   institutionId: string
                   residentCity: string
@@ -865,16 +846,16 @@ paths:
                   account:
                     hasAccount: true
                     userId: string
-  /beneficiaries/{beneficiaryId}/expenseReports:
+  /subscribers/{subscriberId}/expenseReports:
     parameters:
       - schema:
           type: string
-        name: beneficiaryId
+        name: subscriberId
         in: path
         required: true
     get:
       summary: Get expense reports
-      tags: [beneficiaries]
+      tags: [subscribers]
       responses:
         '200':
           description: OK
@@ -915,7 +896,7 @@ paths:
           description: Not Found
         '500':
           description: Internal Server Error
-      operationId: get-beneficiaries-beneficiaryId-expenseReports
+      operationId: get-subscribers-subscriberId-expenseReports
       parameters:
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/starting_after_object'
@@ -923,7 +904,7 @@ paths:
         - $ref: '#/components/parameters/skip'
     post:
       summary: Add expense report
-      tags: [beneficiaries]
+      tags: [subscribers]
       responses:
         '201':
           description: Created
@@ -939,12 +920,12 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
-      operationId: post-beneficiaries-beneficiaryId-expenseReport
+      operationId: post-subscribers-subscriberId-expenseReport
       requestBody:
         content:
           application/json:
             schema:
-              $ref: ../models/expenseReport-new.yaml
+              $ref: ../models/expenseReport.yaml
             examples:
               Example 1:
                 value:
@@ -953,18 +934,18 @@ paths:
                   serviceDate: '2019-08-24'
                   charnge: 0
                   currency: string
-                  beneficiaryId: string
+                  subscriberId: string
                   patientName: string
-  /beneficiaries/{beneficiaryId}/medicalFiles:
+  /subscribers/{subscriberId}/medicalFiles:
     parameters:
       - schema:
           type: string
-        name: beneficiaryId
+        name: subscriberId
         in: path
         required: true
     get:
       summary: Get medical files
-      tags: [beneficiaries, medicalFiles]
+      tags: [subscribers, medicalFiles]
       responses:
         '200':
           description: OK
@@ -1006,7 +987,7 @@ paths:
           description: Not Found
         '500':
           description: Internal Server Error
-      operationId: get-beneficiaries-beneficiaryId-medicalFiles
+      operationId: get-subscribers-subscriberId-medicalFiles
       parameters:
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/starting_after_object'
@@ -1014,11 +995,11 @@ paths:
         - $ref: '#/components/parameters/skip'
   
   
-  /beneficiaries/claims:
+  /subscribers/claims:
     parameters: []
     get:
-      summary: Get all claims from all beneficiary
-      tags: [beneficiaries, claims]
+      summary: Get all claims from all subscriber
+      tags: [subscribers, claims]
       responses:
         '200':
           description: OK
@@ -1059,23 +1040,23 @@ paths:
           description: Not Found
         '500':
           description: Internal Server Error
-      operationId: get-beneficiaries-claims
+      operationId: get-subscribers-claims
       parameters:
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/starting_after_object'
         - $ref: '#/components/parameters/searchQuery'
         - $ref: '#/components/parameters/skip'
       description: ''
-  /beneficiaries/{beneficiaryId}/claims:
+  /subscribers/{subscriberId}/claims:
     parameters:
       - schema:
           type: string
-        name: beneficiaryId
+        name: subscriberId
         in: path
         required: true
     get:
-      summary: Get all claims from beneficiary
-      tags: [beneficiaries, claims]
+      summary: Get all claims from subscriber
+      tags: [subscribers, claims]
       responses:
         '200':
           description: OK
@@ -1113,7 +1094,7 @@ paths:
           description: Not Found
         '500':
           description: Internal Server Error
-      operationId: get-beneficiaries-beneficiaryId-claims
+      operationId: get-subscribers-subscriberId-claims
       parameters:
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/starting_after_object'
@@ -1121,7 +1102,7 @@ paths:
         - $ref: '#/components/parameters/skip'
     post:
       summary: submit a claim
-      tags: [beneficiaries, claims]
+      tags: [subscribers, claims]
       responses:
         '201':
           description: Created
@@ -1138,7 +1119,7 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
-      operationId: post-beneficiaries-beneficiaryId-claims
+      operationId: post-subscribers-subscriberId-claims
       requestBody:
         content:
           multipart/form-data:
@@ -1146,7 +1127,7 @@ paths:
               type: object
               properties:
                 description:
-                  $ref: ../models/manualClaims-new.yaml
+                  $ref: ../models/manualClaims.yaml
                 file1:
                   type: string
                   format: binary
@@ -1162,16 +1143,16 @@ paths:
               required:
                 - description
         description: ''
-  /beneficiaries/{beneficiaryId}/benefitPolicies:
+  /subscribers/{subscriberId}/benefitPolicies:
     parameters:
       - schema:
           type: string
-        name: beneficiaryId
+        name: subscriberId
         in: path
         required: true
     get:
       summary: Get benefit policy information
-      tags: [beneficiaries]
+      tags: [subscribers]
       responses:
         '200':
           description: OK
@@ -1201,7 +1182,7 @@ paths:
           description: Not Found
         '500':
           description: Internal Server Error
-      operationId: get-beneficiaries-beneficiaryId-benefitPolicies
+      operationId: get-subscribers-subscriberId-benefitPolicies
 
   /appointments:
     get:
@@ -1416,7 +1397,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: ../models/appointment-new.yaml
+              $ref: ../models/appointment.yaml
         description: ''
     parameters:
       - schema:
@@ -1595,10 +1576,10 @@ paths:
         content:
           application/json:
               schema:
-                $ref: ../models/medicalCenter-new.yaml
+                $ref: ../models/medicalCenter.yaml
           multipart/form-data:
             schema:
-              $ref: ../models/medicalCenter-new.yaml                  
+              $ref: ../models/medicalCenter.yaml                  
                 
                 
   '/medicalCenters/{medicalCenterId}':
@@ -1654,7 +1635,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: ../models/medicalCenter-update.yaml
+              $ref: ../models/medicalCenter.yaml
           application/xml:
             schema:
               type: object
@@ -1795,7 +1776,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: ../models/medicalCenterClaims-update.yaml
+              $ref: ../models/medicalCenterClaims.yaml
 
   /schedules:
     get:
@@ -1958,7 +1939,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: ../models/schedule-new.yaml
+              $ref: ../models/schedule.yaml
             examples: {}
       parameters: []
   '/schedules/{scheduleId}':
@@ -1987,7 +1968,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: ../models/schedule-update.yaml
+              $ref: ../models/schedule.yaml
     get:
       summary: Get schedule by ID
       tags: [bookings]
@@ -2043,7 +2024,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: ../models/doctor-new.yaml
+              $ref: ../models/doctor.yaml
       responses:
         '201':
           description: Created
@@ -2153,7 +2134,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: ../models/doctor-update.yaml
+              $ref: ../models/doctor.yaml
     delete:
       tags: [doctors]
       summary: ''
@@ -2731,7 +2712,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: ../models/institutions-new.yaml
+              $ref: ../models/institutions.yaml
   /institutions/{institutionId}:
     parameters:
       - schema:
@@ -2764,7 +2745,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: ../models/institutions-update.yaml
+              $ref: ../models/institutions.yaml
     get:
       tags: [institutions]
       summary: ''

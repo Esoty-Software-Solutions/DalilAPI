@@ -1,18 +1,18 @@
-title: familyMember
+title: beneficiary
 type: object
 properties:
-  familyMemberId:
+  beneficiaryId:
     type: string
   firstName:
     type: string
-  middleName:
+  secondName:
     type: string
   lastName:
     type: string
   birthdate:
     type: string
     format: YYYY-MM-DD
-  relationshipToBeneficiary:
+  relationshipToSubscriber:
     type: string
     enum:
       - father
@@ -27,10 +27,10 @@ properties:
   isActive:
     type: boolean
 required:
-  - familyMemberId
+  - beneficiaryId
   - firstName
-  - middleName
+  - secondName
   - lastName
   - birthdate
-  - relationshipToBeneficiary
+  - relationshipToSubscriber
   - gender

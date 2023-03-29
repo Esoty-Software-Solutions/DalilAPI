@@ -9,7 +9,7 @@ properties:
     type: string
   firstName:
     type: string
-  middleName:
+  secondName:
     type: string
   lastName:
     type: string
@@ -25,7 +25,7 @@ properties:
 required:
   - doctorId
   - firstName
-  - middleName
+  - secondName
   - lastName
   - specialty
   - level
