@@ -22,21 +22,19 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  statusCode:
-                    type: string
-                  message:
-                    type: string
-                  token:
-                    type: string
-                  data:
-                    $ref: ../models/user.yaml
-                required:
-                  - statusCode
-                  - message
-                  - token
-                  - data
+                allOf:
+                  - $ref: ../models/standardResponse.yaml
+                  - type: object
+                    properties:
+                      token:
+                        type: string
+                      data:
+                        $ref: ../models/user.yaml
+                    required:
+                      - statusCode
+                      - message
+                      - token
+                      - data
         '401':
           description: Unauthorized
           content:
