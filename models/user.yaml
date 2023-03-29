@@ -9,13 +9,21 @@ properties:
     type: string
   phoneNumber:
     type: string
-  phoneAuthenticated:
-    type: boolean
-  whatsAppNumber:
+  firstName:
     type: string
-  benefciaryId:
+  secondName:
+    type: string
+  lastName:
+    type: string
+  phoneAuthenticated:
+    type: boolean  
+  resetPassword:
+    type: boolean
+  beneficiaryId:
+    type: string
+  doctorId:
     type: string
 required:
   - userId
   - username
-  - phoneNumber
+  - resetPassword

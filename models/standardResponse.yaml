@@ -1,0 +1,10 @@
+title: standardResponse
+type: object
+properties:
+  statusCode:
+    type: string
+  message:
+    type: string
+required:
+  - statusCode
+  - message

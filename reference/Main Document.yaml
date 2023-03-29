@@ -3,7 +3,7 @@ x-stoplight:
   id: v0r49t68fw391
 info:
   title: Main Document
-  version: '1.0'
+  version: '2.0'
   description: API for creating and updating information about accounts
   license:
     name: TBD
@@ -31,38 +31,26 @@ paths:
                   token:
                     type: string
                   data:
-                    $ref: ../models/beneficiary.yaml
+                    $ref: ../models/user.yaml
                 required:
                   - statusCode
                   - message
                   - token
                   - data
-              examples: {}
         '401':
           description: Unauthorized
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  statusCode:
-                    type: string
-                  message:
-                    type: string
-                required:
-                  - statusCode
-                  - message
+                $ref: ../models/standardResponse.yaml
         '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  statusCode:
-                    type: string
-                  message:
-                    type: string
+                schema:
+                $ref: ../models/standardResponse.yaml
+                
       requestBody:
         content:
           application/json:
