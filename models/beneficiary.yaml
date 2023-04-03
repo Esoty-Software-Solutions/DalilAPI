@@ -28,7 +28,8 @@ properties:
   medicalFileId:
     type: string
     nullable: true
-    description: if there is not medicalFileId "null" would be returned
+    readOnly: true
+    description: if there is no medicalFileId "null" would be returned
 required:
   - beneficiaryId
   - firstName

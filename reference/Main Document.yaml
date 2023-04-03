@@ -3,7 +3,7 @@ x-stoplight:
   id: v0r49t68fw391
 info:
   title: Main Document
-  version: '2.0'
+  version: '1.5'
   description: API for creating and updating information about accounts
   license:
     name: TBD
@@ -770,36 +770,6 @@ paths:
                 required:
                   - codeStatus
                   - message
-      
-              Example 1:
-                value:
-                  firstName: string
-                  middleName: string
-                  lastName: string
-                  birthdate: string
-                  phoneNumber: string
-                  gender: string
-                  beneficiaries:
-                    - beneficiaryId: string
-                      firstName: string
-                      middleName: string
-                      lastName: string
-                      birthdate: '2019-08-24'
-                      relationshipToSubscriber: Father
-                      gender: string
-                    - beneficiaryId: string
-                      firstName: string
-                      middleName: string
-                      lastName: string
-                      birthdate: '2019-08-24'
-                      relationshipToSubscriber: Father
-                      gender: string
-                  institutionId: string
-                  residentCity: string
-                  residentDistrict: string
-                  account:
-                    hasAccount: true
-                    userId: string
 
   /subscribers/{subscriberId}/beneficiaries:
     parameters:
@@ -1148,7 +1118,129 @@ paths:
                   - codeStatus
                   - message
 
-# I stopped here
+  /subscribers/{subscriberId}/beneficiaries/{beneficiaryId}/medicalFiles:
+    parameters:
+      - schema:
+          type: string
+        name: subscriberId
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: beneficiaryId
+        in: path
+        required: true   
+    get:
+      summary: Get medical file for beneficiary
+      tags: [medicalFiles]
+      operationId: get-subscribers-subscriberId-beneficiaries-beneficiaryId-medicalFiles
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../models/standardResponse.yaml
+                  - type: object
+                    properties:
+                      data:
+                        $ref: ../models/medicalFile.yaml
+                    required:
+                      - data
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+
+    post:
+      operationId: post--subscribers-subscriberId-beneficiaries-beneficiaryId-medicalFiles-clinicalVisits
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/clinicalVisit.yaml
+        description: ''    
+      summary: Create clinicalVisit document for medical file
+      tags: [subscribers]
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../models/standardResponse.yaml
+                  - type: object
+                    properties:
+                      data:
+                        $ref: ../models/subscriber.yaml
+                    required:
+                      - data
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+ 
+
   /subscribers/{subscriberId}/beneficiaries/{beneficiaryId}/medicalFiles/diagnosis:
     parameters:
       - schema:
@@ -1162,9 +1254,9 @@ paths:
         in: path
         required: true   
     get:
-      summary: Get medical files
-      tags: [subscribers, medicalFiles]
-      operationId: get-subscribers-subscriberId-beneficiaries-beneficiaryId-medicalFiles-diagnosis
+      summary: Get clinicalVisits of medical file
+      tags: [medicalFiles]
+      operationId: get-subscribers-subscriberId-beneficiaries-beneficiaryId-medicalFiles-clinicalVisits
       parameters:
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/searchQuery'
@@ -1175,28 +1267,24 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  statusCode:
-                    type: string
-                  message:
-                    type: string
-                  data:
-                    type: object
-                    required:
-                      - objectCount
-                      - objectArray
+                allOf:
+                  - $ref: ../models/standardResponse.yaml
+                  - type: object
                     properties:
-                      objectCount:
-                        type: integer
-                      objectArray:
-                        type: array
-                        items:
-                          $ref: ../models/medicalFile.yaml
-                required:
-                  - statusCode
-                  - message
-                  - data
+                      data:
+                        type: object
+                        required:
+                          - objectCount
+                          - objectArray
+                        properties:
+                          objectCount:
+                            type: integer
+                          objectArray:
+                            type: array
+                            items:
+                              $ref: ../models/clinicalVisit.yaml
+                    required:
+                      - data
         '400':
           description: Bad Request
         '401':
@@ -1209,14 +1297,14 @@ paths:
           description: Internal Server Error
 
     post:
-      operationId: post-subscribers
+      operationId: post--subscribers-subscriberId-beneficiaries-beneficiaryId-medicalFiles-clinicalVisits
       requestBody:
         content:
           application/json:
             schema:
-              $ref: ../models/subscriber.yaml
+              $ref: ../models/clinicalVisit.yaml
         description: ''    
-      summary: Create a new subscriber
+      summary: Create clinicalVisit document for medical file
       tags: [subscribers]
       responses:
         '201':
@@ -1692,7 +1780,7 @@ paths:
                 - appointmentStatus
   '/appointments/users/{userId}':
     post:
-      tags: [bookings, users]
+      tags: [bookings]
       summary: request an appointment
       operationId: post-appointments
       responses:
@@ -1782,7 +1870,7 @@ paths:
         in: path
         required: true
     get:
-      tags: [bookings, users]
+      tags: [bookings]
       summary: List all appointments for user
       operationId: get-appointments-users-userId
       responses:

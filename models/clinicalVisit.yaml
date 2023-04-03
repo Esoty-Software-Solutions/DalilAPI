@@ -5,6 +5,9 @@ x-tags:
   - medicalFile
 type: object
 properties:
+  documentId:
+    type: string
+    readOnly: true
   visitType:
     type: string
   visitDate:
@@ -15,10 +18,14 @@ properties:
     type: string
   notes:
     type: string
-  thumbnail:
+  thumbnailLink:
     type: string
-  file:
+    nullable: true
+    description: if there is no file "null" would be returned
+  fileLink:
     type: string
+    nullable: true
+    description: if there is no file "null" would be returned
 required:
   - visitType
   - visitDate

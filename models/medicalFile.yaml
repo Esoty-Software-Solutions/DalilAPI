@@ -1,52 +1,28 @@
 title: medicalFile
-x-stoplight:
-  id: uvarv6pxqqjyx
 x-tags:
   - medicalFile
 type: object
 properties:
   medicalFileId:
     type: string
-  patientId:
+    readOnly: true
+  beneficiaryId:
     type: string
-  name:
-    type: string
-  birthDate:
-    type: string
-    format: date
-  gender:
-    type: string
+    readOnly: true
   weight:
     type: string
+    nullable: true
+    description: Unit is in kg
   bloodType:
     type: string
+    nullable: true
   height:
     type: string
-  relationshipToSubscriber:
-    type: string
-  allergies:
-    type: array
-    items:
-      $ref: ./allergies.yaml
-  chronicDiseases:
-    type: array
-    items:
-      $ref: ./chronicDiseases.yaml
-  surgeryHistory:
-    type: array
-    items:
-      $ref: ./surgeryHistory.yaml
-  clinicalVisits:
-    type: array
-    items:
-      $ref: ./clinicalVisits.yaml
-  medicalTests:
-    type: array
-    items:
-      $ref: ./labReport.yaml
+    nullable: true
+    description: Unit is in cm
 required:
   - medicalFileId
-  - name
+  - beneficiaryId
   - birthDate
   - gender
   - weight
