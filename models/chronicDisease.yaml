@@ -1,19 +1,23 @@
-title: surgeryHistory
+title: chronicDiseases
 x-tags:
   - medicalFile
 type: object
 properties:
+  documentId:
+    type: string
+    readOnly: true
   title:
     type: string
-  surgeryDate:
+  diagnosisDate:
     type: string
-    format: date
-  doctorName:
+    format: YYYY-MM-DD
+    nullable: true
+  diagnosedBy:
     type: string
-  centerName:
-    type: string
+    nullable: true
   notes:
     type: string
+    nullable: true
   thumbnailLink:
     type: string
     nullable: true
@@ -23,6 +27,8 @@ properties:
     type: string
     nullable: true
     readOnly: true
-    description: if there is no file "null" would be returned    
+    description: if there is no file "null" would be returned
 required:
+  - documentId
   - title
+

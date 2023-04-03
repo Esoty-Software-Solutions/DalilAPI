@@ -1,19 +1,16 @@
-title: surgeryHistory
+title: allergy
 x-tags:
   - medicalFile
 type: object
 properties:
+  _Id:
+    type: string
+    readOnly: true
   title:
-    type: string
-  surgeryDate:
-    type: string
-    format: date
-  doctorName:
-    type: string
-  centerName:
     type: string
   notes:
     type: string
+    nullable: true
   thumbnailLink:
     type: string
     nullable: true
@@ -23,6 +20,6 @@ properties:
     type: string
     nullable: true
     readOnly: true
-    description: if there is no file "null" would be returned    
+    description: if there is no file "null" would be returned
 required:
   - title

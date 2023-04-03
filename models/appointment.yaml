@@ -7,6 +7,7 @@ type: object
 properties:
   appointmentId:
     type: string
+    readOnly: true
   scheduleId:
     type: string
   appointmentDate:
@@ -20,6 +21,7 @@ properties:
       - cancelled
       - completed
       - rejected
+    
   price:
     type: string
   timeslot:

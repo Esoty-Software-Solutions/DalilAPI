@@ -1158,17 +1158,156 @@ paths:
           description: Not Found
         '500':
           description: Internal Server Error
-
-    post:
-      operationId: post--subscribers-subscriberId-beneficiaries-beneficiaryId-medicalFiles-clinicalVisits
+    patch:
+      tags: [medicalFiles]
+      summary: ''
+      operationId: patch-subscribers-subscriberId-beneficiaries-beneficiaryId-medicalFiles
       requestBody:
         content:
           application/json:
             schema:
-              $ref: ../models/clinicalVisit.yaml
-        description: ''    
+              $ref: ../models/medicalFile.yaml
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../models/standardResponse.yaml
+                  - type: object
+                    properties:
+                      data:
+                        $ref: ../models/medicalFile.yaml
+                    required:
+                      - data
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+
+   
+  /subscribers/{subscriberId}/beneficiaries/{beneficiaryId}/medicalFiles/clinicalVisits:
+    parameters:
+      - schema:
+          type: string
+        name: subscriberId
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: beneficiaryId
+        in: path
+        required: true   
+    get:
+      summary: Get clinicalVisits of medical file
+      tags: [medicalFiles]
+      operationId: get-subscribers-subscriberId-beneficiaries-beneficiaryId-medicalFiles-clinicalVisits
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/searchQuery'
+        - $ref: '#/components/parameters/skip'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../models/standardResponse.yaml
+                  - type: object
+                    properties:
+                      data:
+                        type: object
+                        required:
+                          - objectCount
+                          - objectArray
+                        properties:
+                          objectCount:
+                            type: integer
+                          objectArray:
+                            type: array
+                            items:
+                              $ref: ../models/clinicalVisit.yaml
+                    required:
+                      - data
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+    post:
+      operationId: post--subscribers-subscriberId-beneficiaries-beneficiaryId-medicalFiles-clinicalVisits
       summary: Create clinicalVisit document for medical file
-      tags: [subscribers]
+      tags: [medicalFiles]
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              allOf:
+                - $ref: ../models/clinicalVisit.yaml
+                - type: object
+                  properties:
+                    file:
+                      type: string
+                      format: binary      
       responses:
         '201':
           description: Created
@@ -1180,7 +1319,567 @@ paths:
                   - type: object
                     properties:
                       data:
-                        $ref: ../models/subscriber.yaml
+                        $ref: ../models/clinicalVisit.yaml
+                    required:
+                      - data
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+ 
+  /subscribers/{subscriberId}/beneficiaries/{beneficiaryId}/medicalFiles/allergies:
+    parameters:
+      - schema:
+          type: string
+        name: subscriberId
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: beneficiaryId
+        in: path
+        required: true   
+    get:
+      summary: Get allergies of medical file
+      tags: [medicalFiles]
+      operationId: get-subscribers-subscriberId-beneficiaries-beneficiaryId-medicalFiles-allergies
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/searchQuery'
+        - $ref: '#/components/parameters/skip'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../models/standardResponse.yaml
+                  - type: object
+                    properties:
+                      data:
+                        type: object
+                        required:
+                          - objectCount
+                          - objectArray
+                        properties:
+                          objectCount:
+                            type: integer
+                          objectArray:
+                            type: array
+                            items:
+                              $ref: ../models/allergy.yaml
+                    required:
+                      - data
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+    post:
+      operationId: post--subscribers-subscriberId-beneficiaries-beneficiaryId-medicalFiles-allergies
+      summary: Create allergy document for medical file
+      tags: [medicalFiles]
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              allOf:
+                - $ref: ../models/allergy.yaml
+                - type: object
+                  properties:
+                    file:
+                      type: string
+                      format: binary      
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../models/standardResponse.yaml
+                  - type: object
+                    properties:
+                      data:
+                        $ref: ../models/allergy.yaml
+                    required:
+                      - data
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+
+  /subscribers/{subscriberId}/beneficiaries/{beneficiaryId}/medicalFiles/surgeryHistories:
+    parameters:
+      - schema:
+          type: string
+        name: subscriberId
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: beneficiaryId
+        in: path
+        required: true   
+    get:
+      summary: Get surgeryHistories of medical file
+      tags: [medicalFiles]
+      operationId: get-subscribers-subscriberId-beneficiaries-beneficiaryId-medicalFiles-surgeryHistories
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/searchQuery'
+        - $ref: '#/components/parameters/skip'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../models/standardResponse.yaml
+                  - type: object
+                    properties:
+                      data:
+                        type: object
+                        required:
+                          - objectCount
+                          - objectArray
+                        properties:
+                          objectCount:
+                            type: integer
+                          objectArray:
+                            type: array
+                            items:
+                              $ref: ../models/surgeryHistory.yaml
+                    required:
+                      - data
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+    post:
+      operationId: post--subscribers-subscriberId-beneficiaries-beneficiaryId-medicalFiles-surgeryHistories
+      summary: Create surgeryHistory document for medical file
+      tags: [medicalFiles]
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              allOf:
+                - $ref: ../models/surgeryHistory.yaml
+                - type: object
+                  properties:
+                    file:
+                      type: string
+                      format: binary      
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../models/standardResponse.yaml
+                  - type: object
+                    properties:
+                      data:
+                        $ref: ../models/surgeryHistory.yaml
+                    required:
+                      - data
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+
+  /subscribers/{subscriberId}/beneficiaries/{beneficiaryId}/medicalFiles/chronicDiseases:
+    parameters:
+      - schema:
+          type: string
+        name: subscriberId
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: beneficiaryId
+        in: path
+        required: true   
+    get:
+      summary: Get chronicDiseases of medical file
+      tags: [medicalFiles]
+      operationId: get-subscribers-subscriberId-beneficiaries-beneficiaryId-medicalFiles-chronicDiseases
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/searchQuery'
+        - $ref: '#/components/parameters/skip'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../models/standardResponse.yaml
+                  - type: object
+                    properties:
+                      data:
+                        type: object
+                        required:
+                          - objectCount
+                          - objectArray
+                        properties:
+                          objectCount:
+                            type: integer
+                          objectArray:
+                            type: array
+                            items:
+                              $ref: ../models/chronicDisease.yaml
+                    required:
+                      - data
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+    post:
+      operationId: post--subscribers-subscriberId-beneficiaries-beneficiaryId-medicalFiles-chronicDiseases
+      summary: Create chronicDisease document for medical file
+      tags: [medicalFiles]
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              allOf:
+                - $ref: ../models/chronicDisease.yaml
+                - type: object
+                  properties:
+                    file:
+                      type: string
+                      format: binary      
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../models/standardResponse.yaml
+                  - type: object
+                    properties:
+                      data:
+                        $ref: ../models/chronicDisease.yaml
+                    required:
+                      - data
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+ 
+  /subscribers/{subscriberId}/beneficiaries/{beneficiaryId}/medicalFiles/medicalTests:
+    parameters:
+      - schema:
+          type: string
+        name: subscriberId
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: beneficiaryId
+        in: path
+        required: true   
+    get:
+      summary: Get medicalTests of medical file
+      tags: [medicalFiles]
+      operationId: get-subscribers-subscriberId-beneficiaries-beneficiaryId-medicalFiles-medicalTests
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/searchQuery'
+        - $ref: '#/components/parameters/skip'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../models/standardResponse.yaml
+                  - type: object
+                    properties:
+                      data:
+                        type: object
+                        required:
+                          - objectCount
+                          - objectArray
+                        properties:
+                          objectCount:
+                            type: integer
+                          objectArray:
+                            type: array
+                            items:
+                              $ref: ../models/medicalTest.yaml
+                    required:
+                      - data
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+    post:
+      operationId: post--subscribers-subscriberId-beneficiaries-beneficiaryId-medicalFiles-medicalTests
+      summary: Create medicalTest document for medical file
+      tags: [medicalFiles]
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              allOf:
+                - $ref: ../models/medicalTest.yaml
+                - type: object
+                  properties:
+                    file:
+                      type: string
+                      format: binary      
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../models/standardResponse.yaml
+                  - type: object
+                    properties:
+                      data:
+                        $ref: ../models/medicalTest.yaml
                     required:
                       - data
         '400':
@@ -1241,415 +1940,280 @@ paths:
                   - message
  
 
-  /subscribers/{subscriberId}/beneficiaries/{beneficiaryId}/medicalFiles/diagnosis:
-    parameters:
-      - schema:
-          type: string
-        name: subscriberId
-        in: path
-        required: true
-      - schema:
-          type: string
-        name: beneficiaryId
-        in: path
-        required: true   
-    get:
-      summary: Get clinicalVisits of medical file
-      tags: [medicalFiles]
-      operationId: get-subscribers-subscriberId-beneficiaries-beneficiaryId-medicalFiles-clinicalVisits
-      parameters:
-        - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/searchQuery'
-        - $ref: '#/components/parameters/skip'
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: ../models/standardResponse.yaml
-                  - type: object
-                    properties:
-                      data:
-                        type: object
-                        required:
-                          - objectCount
-                          - objectArray
-                        properties:
-                          objectCount:
-                            type: integer
-                          objectArray:
-                            type: array
-                            items:
-                              $ref: ../models/clinicalVisit.yaml
-                    required:
-                      - data
-        '400':
-          description: Bad Request
-        '401':
-          description: Unauthorized
-        '403':
-          description: Forbidden
-        '404':
-          description: Not Found
-        '500':
-          description: Internal Server Error
 
-    post:
-      operationId: post--subscribers-subscriberId-beneficiaries-beneficiaryId-medicalFiles-clinicalVisits
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: ../models/clinicalVisit.yaml
-        description: ''    
-      summary: Create clinicalVisit document for medical file
-      tags: [subscribers]
-      responses:
-        '201':
-          description: Created
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: ../models/standardResponse.yaml
-                  - type: object
-                    properties:
-                      data:
-                        $ref: ../models/subscriber.yaml
-                    required:
-                      - data
-        '400':
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  codeStatus:
-                    type: string
-                  message:
-                    type: string
-                required:
-                  - codeStatus
-                  - message
-        '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  codeStatus:
-                    type: string
-                  message:
-                    type: string
-                required:
-                  - codeStatus
-                  - message
-        '403':
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  codeStatus:
-                    type: string
-                  message:
-                    type: string
-                required:
-                  - codeStatus
-                  - message
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  codeStatus:
-                    type: string
-                  message:
-                    type: string
-                required:
-                  - codeStatus
-                  - message
-  
+
+
+  # /subscribers/{subscriberId}/expenseReports:
+  #   parameters:
+  #     - schema:
+  #         type: string
+  #       name: subscriberId
+  #       in: path
+  #       required: true
+  #   get:
+  #     summary: Get expense reports
+  #     tags: [subscribers]
+  #     responses:
+  #       '200':
+  #         description: OK
+  #         content:
+  #           application/json:
+  #             schema:
+  #               properties:
+  #                 codeStatus:
+  #                   type: string
+  #                 message:
+  #                   type: string
+  #                 data:
+  #                   type: object
+  #                   required:
+  #                     - objectCount
+  #                     - objectArray
+  #                   properties:
+  #                     objectCount:
+  #                       type: integer
+  #                     objectArray:
+  #                       type: array
+  #                       items:
+  #                         $ref: ../models/expenseReport.yaml
+  #               required:
+  #                 - codeStatus
+  #                 - message
+  #                 - data
+  #       '400':
+  #         description: Bad Request
+  #       '401':
+  #         description: Unauthorized
+  #       '403':
+  #         description: Forbidden
+  #       '404':
+  #         description: Not Found
+  #       '500':
+  #         description: Internal Server Error
+  #     operationId: get-subscribers-subscriberId-expenseReports
+  #     parameters:
+  #       - $ref: '#/components/parameters/limit'
+  #       - $ref: '#/components/parameters/starting_after_object'
+  #       - $ref: '#/components/parameters/searchQuery'
+  #       - $ref: '#/components/parameters/skip'
+  #   post:
+  #     summary: Add expense report
+  #     tags: [subscribers]
+  #     responses:
+  #       '201':
+  #         description: Created
+  #         content:
+  #           application/json:
+  #             schema:
+  #               $ref: ../models/expenseReport.yaml
+  #       '400':
+  #         description: Bad Request
+  #       '401':
+  #         description: Unauthorized
+  #       '403':
+  #         description: Forbidden
+  #       '500':
+  #         description: Internal Server Error
+  #     operationId: post-subscribers-subscriberId-expenseReport
+  #     requestBody:
+  #       content:
+  #         application/json:
+  #           schema:
+  #             $ref: ../models/expenseReport.yaml
+  #           examples:
+  #             Example 1:
+  #               value:
+  #                 healtcareCenterId: string
+  #                 healtcareCenterName: string
+  #                 serviceDate: '2019-08-24'
+  #                 charnge: 0
+  #                 currency: string
+  #                 subscriberId: string
+  #                 patientName: string
 
   
-  /subscribers/{subscriberId}/expenseReports:
-    parameters:
-      - schema:
-          type: string
-        name: subscriberId
-        in: path
-        required: true
-    get:
-      summary: Get expense reports
-      tags: [subscribers]
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                properties:
-                  codeStatus:
-                    type: string
-                  message:
-                    type: string
-                  data:
-                    type: object
-                    required:
-                      - objectCount
-                      - objectArray
-                    properties:
-                      objectCount:
-                        type: integer
-                      objectArray:
-                        type: array
-                        items:
-                          $ref: ../models/expenseReport.yaml
-                required:
-                  - codeStatus
-                  - message
-                  - data
-        '400':
-          description: Bad Request
-        '401':
-          description: Unauthorized
-        '403':
-          description: Forbidden
-        '404':
-          description: Not Found
-        '500':
-          description: Internal Server Error
-      operationId: get-subscribers-subscriberId-expenseReports
-      parameters:
-        - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/starting_after_object'
-        - $ref: '#/components/parameters/searchQuery'
-        - $ref: '#/components/parameters/skip'
-    post:
-      summary: Add expense report
-      tags: [subscribers]
-      responses:
-        '201':
-          description: Created
-          content:
-            application/json:
-              schema:
-                $ref: ../models/expenseReport.yaml
-        '400':
-          description: Bad Request
-        '401':
-          description: Unauthorized
-        '403':
-          description: Forbidden
-        '500':
-          description: Internal Server Error
-      operationId: post-subscribers-subscriberId-expenseReport
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: ../models/expenseReport.yaml
-            examples:
-              Example 1:
-                value:
-                  healtcareCenterId: string
-                  healtcareCenterName: string
-                  serviceDate: '2019-08-24'
-                  charnge: 0
-                  currency: string
-                  subscriberId: string
-                  patientName: string
-
-  
-  /subscribers/claims:
-    parameters: []
-    get:
-      summary: Get all claims from all subscriber
-      tags: [subscribers, claims]
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                properties:
-                  codeStatus:
-                    type: string
-                  message:
-                    type: string
-                  data:
-                    type: object
-                    required:
-                      - objectCount
-                      - objectArray
-                    properties:
-                      objectCount:
-                        type: integer
-                      objectArray:
-                        type: array
-                        items:
-                          $ref: ../models/manualClaims.yaml
-                required:
-                  - codeStatus
-                  - message
-                  - data
-        '400':
-          description: Bad Request
-        '401':
-          description: Unauthorized
-        '403':
-          description: Forbidden
-        '404':
-          description: Not Found
-        '500':
-          description: Internal Server Error
-      operationId: get-subscribers-claims
-      parameters:
-        - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/starting_after_object'
-        - $ref: '#/components/parameters/searchQuery'
-        - $ref: '#/components/parameters/skip'
-      description: ''
-  /subscribers/{subscriberId}/claims:
-    parameters:
-      - schema:
-          type: string
-        name: subscriberId
-        in: path
-        required: true
-    get:
-      summary: Get all claims from subscriber
-      tags: [subscribers, claims]
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  statusCode:
-                    type: string
-                  message:
-                    type: string
-                  data:
-                    type: object
-                    properties:
-                      objectCount:
-                        type: integer
-                      object:
-                        type: array
-                        items:
-                          $ref: ../models/manualClaims.yaml
-                    required:
-                      - object
-                      - objectCount
-        '400':
-          description: Bad Request
-        '401':
-          description: Unauthorized
-        '403':
-          description: Forbidden
-        '404':
-          description: Not Found
-        '500':
-          description: Internal Server Error
-      operationId: get-subscribers-subscriberId-claims
-      parameters:
-        - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/starting_after_object'
-        - $ref: '#/components/parameters/searchQuery'
-        - $ref: '#/components/parameters/skip'
-    post:
-      summary: submit a claim
-      tags: [subscribers, claims]
-      responses:
-        '201':
-          description: Created
-          content:
-            application/json:
-              schema:
-                $ref: ../models/manualClaims.yaml
-              examples: {}
-        '400':
-          description: Bad Request
-        '401':
-          description: Unauthorized
-        '403':
-          description: Forbidden
-        '500':
-          description: Internal Server Error
-      operationId: post-subscribers-subscriberId-claims
-      requestBody:
-        content:
-          multipart/form-data:
-            schema:
-              type: object
-              properties:
-                description:
-                  $ref: ../models/manualClaims.yaml
-                file1:
-                  type: string
-                  format: binary
-                file2:
-                  type: string
-                  format: binary
-                file3:
-                  type: string
-                  format: binary
-                file4:
-                  type: string
-                  format: binary
-              required:
-                - description
-        description: ''
-  /subscribers/{subscriberId}/benefitPolicies:
-    parameters:
-      - schema:
-          type: string
-        name: subscriberId
-        in: path
-        required: true
-    get:
-      summary: Get benefit policy information
-      tags: [subscribers]
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  statusCode:
-                    type: string
-                  message:
-                    type: string
-                  data:
-                    $ref: ../models/insurancePolicy.yaml
-                required:
-                  - statusCode
-                  - message
-                  - data
-              examples: {}
-        '400':
-          description: Bad Request
-        '401':
-          description: Unauthorized
-        '403':
-          description: Forbidden
-        '404':
-          description: Not Found
-        '500':
-          description: Internal Server Error
-      operationId: get-subscribers-subscriberId-benefitPolicies
+  # /subscribers/claims:
+  #   parameters: []
+  #   get:
+  #     summary: Get all claims from all subscriber
+  #     tags: [subscribers, claims]
+  #     responses:
+  #       '200':
+  #         description: OK
+  #         content:
+  #           application/json:
+  #             schema:
+  #               properties:
+  #                 codeStatus:
+  #                   type: string
+  #                 message:
+  #                   type: string
+  #                 data:
+  #                   type: object
+  #                   required:
+  #                     - objectCount
+  #                     - objectArray
+  #                   properties:
+  #                     objectCount:
+  #                       type: integer
+  #                     objectArray:
+  #                       type: array
+  #                       items:
+  #                         $ref: ../models/manualClaims.yaml
+  #               required:
+  #                 - codeStatus
+  #                 - message
+  #                 - data
+  #       '400':
+  #         description: Bad Request
+  #       '401':
+  #         description: Unauthorized
+  #       '403':
+  #         description: Forbidden
+  #       '404':
+  #         description: Not Found
+  #       '500':
+  #         description: Internal Server Error
+  #     operationId: get-subscribers-claims
+  #     parameters:
+  #       - $ref: '#/components/parameters/limit'
+  #       - $ref: '#/components/parameters/starting_after_object'
+  #       - $ref: '#/components/parameters/searchQuery'
+  #       - $ref: '#/components/parameters/skip'
+  #     description: ''
+  # /subscribers/{subscriberId}/claims:
+  #   parameters:
+  #     - schema:
+  #         type: string
+  #       name: subscriberId
+  #       in: path
+  #       required: true
+  #   get:
+  #     summary: Get all claims from subscriber
+  #     tags: [subscribers, claims]
+  #     responses:
+  #       '200':
+  #         description: OK
+  #         content:
+  #           application/json:
+  #             schema:
+  #               type: object
+  #               properties:
+  #                 statusCode:
+  #                   type: string
+  #                 message:
+  #                   type: string
+  #                 data:
+  #                   type: object
+  #                   properties:
+  #                     objectCount:
+  #                       type: integer
+  #                     object:
+  #                       type: array
+  #                       items:
+  #                         $ref: ../models/manualClaims.yaml
+  #                   required:
+  #                     - object
+  #                     - objectCount
+  #       '400':
+  #         description: Bad Request
+  #       '401':
+  #         description: Unauthorized
+  #       '403':
+  #         description: Forbidden
+  #       '404':
+  #         description: Not Found
+  #       '500':
+  #         description: Internal Server Error
+  #     operationId: get-subscribers-subscriberId-claims
+  #     parameters:
+  #       - $ref: '#/components/parameters/limit'
+  #       - $ref: '#/components/parameters/starting_after_object'
+  #       - $ref: '#/components/parameters/searchQuery'
+  #       - $ref: '#/components/parameters/skip'
+  #   post:
+  #     summary: submit a claim
+  #     tags: [subscribers, claims]
+  #     responses:
+  #       '201':
+  #         description: Created
+  #         content:
+  #           application/json:
+  #             schema:
+  #               $ref: ../models/manualClaims.yaml
+  #             examples: {}
+  #       '400':
+  #         description: Bad Request
+  #       '401':
+  #         description: Unauthorized
+  #       '403':
+  #         description: Forbidden
+  #       '500':
+  #         description: Internal Server Error
+  #     operationId: post-subscribers-subscriberId-claims
+  #     requestBody:
+  #       content:
+  #         multipart/form-data:
+  #           schema:
+  #             type: object
+  #             properties:
+  #               description:
+  #                 $ref: ../models/manualClaims.yaml
+  #               file1:
+  #                 type: string
+  #                 format: binary
+  #               file2:
+  #                 type: string
+  #                 format: binary
+  #               file3:
+  #                 type: string
+  #                 format: binary
+  #               file4:
+  #                 type: string
+  #                 format: binary
+  #             required:
+  #               - description
+  #       description: ''
+  # /subscribers/{subscriberId}/benefitPolicies:
+  #   parameters:
+  #     - schema:
+  #         type: string
+  #       name: subscriberId
+  #       in: path
+  #       required: true
+  #   get:
+  #     summary: Get benefit policy information
+  #     tags: [subscribers]
+  #     responses:
+  #       '200':
+  #         description: OK
+  #         content:
+  #           application/json:
+  #             schema:
+  #               type: object
+  #               properties:
+  #                 statusCode:
+  #                   type: string
+  #                 message:
+  #                   type: string
+  #                 data:
+  #                   $ref: ../models/insurancePolicy.yaml
+  #               required:
+  #                 - statusCode
+  #                 - message
+  #                 - data
+  #             examples: {}
+  #       '400':
+  #         description: Bad Request
+  #       '401':
+  #         description: Unauthorized
+  #       '403':
+  #         description: Forbidden
+  #       '404':
+  #         description: Not Found
+  #       '500':
+  #         description: Internal Server Error
+  #     operationId: get-subscribers-subscriberId-benefitPolicies
 
   /appointments:
     get:
@@ -1707,6 +2271,7 @@ paths:
         - $ref: '#/components/parameters/toDate'
         - $ref: '#/components/parameters/rejected'
         - $ref: '#/components/parameters/medicalCenterId'
+  
   /appointments/{appointmentId}:
     parameters:
       - schema:

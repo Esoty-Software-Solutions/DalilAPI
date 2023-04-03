@@ -1,6 +1,4 @@
 title: clinicalVisits
-x-stoplight:
-  id: feep3klhxmgr7
 x-tags:
   - medicalFile
 type: object
@@ -10,25 +8,30 @@ properties:
     readOnly: true
   visitType:
     type: string
+    nullable: true
   visitDate:
     type: string
+    format: YYYY-MM-DD
+    nullable: true
   centerName:
     type: string
   doctorName:
     type: string
   notes:
     type: string
+    nullable: true
   thumbnailLink:
     type: string
     nullable: true
+    readOnly: true
     description: if there is no file "null" would be returned
   fileLink:
     type: string
     nullable: true
+    readOnly: true
     description: if there is no file "null" would be returned
 required:
-  - visitType
-  - visitDate
+  - documentId
   - centerName
   - doctorName
   - notes
