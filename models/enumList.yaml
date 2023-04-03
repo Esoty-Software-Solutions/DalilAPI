@@ -1,0 +1,16 @@
+title: enumList
+x-tags:
+  - miscellaneous
+type: object
+properties:
+  Enum:
+    type: array
+    items:
+      type: object
+      properties:
+        itemId:
+          type: string
+          description: Id to use in API
+        displayName:
+          type: string
+          description: name to display in the UI

@@ -20,7 +20,7 @@ properties:
   dateJoined:
     type: string
     format: YYYY-MM-DD
-  beneficiarys:
+  beneficiaries:
     type: array
     items:
       $ref: ./beneficiary.yaml

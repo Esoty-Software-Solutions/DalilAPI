@@ -5,6 +5,7 @@ type: object
 properties:
   userId:
     type: string
+    readOnly: true
   username:
     type: string
   firstName:
@@ -21,16 +22,31 @@ properties:
     type: string
     format: email
   phoneAuthenticated:
-    type: boolean  
+    type: boolean
+    readOnly: true  
   resetPassword:
     type: boolean
+    readOnly: true
   subscriberId:
     type: string
+    readOnly: true
+    nullable: true
+    description: if there is not subscriberId "null" would be returned
   doctorId:
     type: string
+    readOnly: true
+    nullable: true
+    description: if there is not doctorId "null" would be returned
+  instituionId:
+    type: string
+    readOnly: true
+    nullable: true
+    description: if there is not doctorId "null" would be returned
 required:
   - userId
   - username
   - resetPassword
   - firstName
   - lastName
+  - subscriberId
+  - doctorId

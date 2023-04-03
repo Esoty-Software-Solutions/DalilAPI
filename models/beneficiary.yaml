@@ -7,10 +7,13 @@ type: object
 properties:
   beneficiaryId:
     type: string
+    readOnly: true
   firstName:
     type: string
   secondName:
     type: string
+  thirdName:
+    type: string    
   lastName:
     type: string
   birthdate:
@@ -22,6 +25,10 @@ properties:
   gender:
     type: string
     enum: [male, female]
+  medicalFileId:
+    type: string
+    nullable: true
+    description: if there is not medicalFileId "null" would be returned
 required:
   - beneficiaryId
   - firstName
@@ -29,4 +36,5 @@ required:
   - lastName
   - birthdate
   - relationshipToSubscriber
+  - medicalFileId
   - gender

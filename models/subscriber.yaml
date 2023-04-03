@@ -7,9 +7,12 @@ type: object
 properties:
   subscriberId:
     type: string
+    readOnly: true
   firstName:
     type: string
   secondName:
+    type: string
+  thirdName:
     type: string
   lastName:
     type: string
@@ -19,24 +22,20 @@ properties:
     type: string
   gender:
     type: string
-  beneficiarys:
+  beneficiaries:
     type: array
     items:
       $ref: ./beneficiary.yaml
   institutionId:
     type: string
-  cityResidence:
-    type: string
-  districtResidence:
+  city:
     type: string
 required:
   - subscriberId
   - firstName
   - secondName
   - lastName
-  - birthdate
   - phoneNumber
   - gender
-  - beneficiarys
-  - cityResidence
+  - beneficiaries
   - account
