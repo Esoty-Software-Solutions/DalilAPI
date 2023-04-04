@@ -38,15 +38,19 @@ properties:
 
   beneficiary:
     readOnly: true
-    $ref: ./beneficiary.yaml    
+    $ref: ./beneficiary.yaml
+    description: readyOnly, do not send in the request body    
   doctor:
     readOnly: true
+    description: readyOnly, do not send in the request body
     $ref: ./doctor.yaml    
   medicalCenter:
     $ref: ./medicalCenter.yaml
+    description: readyOnly, do not send in the request body
     readOnly: true
   schedule:
     $ref: ./schedule.yaml
+    description: readyOnly, do not send in the request body
     readOnly: true
 required:
   - _id
