@@ -1,4 +1,4 @@
-openapi: 3.1
+openapi: 3.1.0
 x-stoplight:
   id: v0r49t68fw391
 info:
