@@ -5,7 +5,7 @@ x-tags:
   - schedule
 type: object
 properties:
-  scheduleId:
+  _id:
     type: string
   medicalCenterObject:
     $ref: ./medicalCenter.yaml
@@ -39,7 +39,7 @@ properties:
   isActive:
     type: boolean
 required:
-  - scheduleId
+  - _id
   - medicalCenterObject
   - doctorObject
   - timeslot

@@ -6,7 +6,7 @@ x-tags:
   - subscriber
 type: object
 properties:
-  userId:
+  _id:
     type: string
   patientType:
     type: string
@@ -20,7 +20,7 @@ properties:
     type: integer
     description: number of medical file entries
 required:
-  - userId
+  - _id
   - patientType
   - patientId
   - patientName

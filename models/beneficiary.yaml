@@ -1,11 +1,9 @@
 title: beneficiary
-x-stoplight:
-  id: x9c0xrz1udkgn
 x-tags:
   - subscriber
 type: object
 properties:
-  beneficiaryId:
+  _id:
     type: string
     readOnly: true
   firstName:
@@ -31,7 +29,7 @@ properties:
     readOnly: true
     description: if there is no medicalFileId "null" would be returned
 required:
-  - beneficiaryId
+  - _id
   - firstName
   - secondName
   - lastName

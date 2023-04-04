@@ -3,7 +3,7 @@ x-tags:
   - medicalFile
 type: object
 properties:
-  documentId:
+  _id:
     type: string
     readOnly: true
   visitType:
@@ -31,7 +31,7 @@ properties:
     readOnly: true
     description: if there is no file "null" would be returned
 required:
-  - documentId
+  - _id
   - centerName
   - doctorName
   - notes

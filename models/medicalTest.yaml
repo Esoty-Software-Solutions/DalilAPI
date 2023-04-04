@@ -3,7 +3,7 @@ x-tags:
   - medicalFile
 type: object
 properties:
-  documentId:
+  _id:
     type: string
     readOnly: true
   title:

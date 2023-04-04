@@ -5,11 +5,22 @@ x-tags:
   - appointment
 type: object
 properties:
-  appointmentId:
+  _id:
     type: string
     readOnly: true
   scheduleId:
     type: string
+    writeOnly: true
+  beneficiaryId:
+    type: string
+    writeOnly: true
+  doctorId:
+    type: string
+    writeOnly: true
+  medicalCenterId:
+    type: string
+    writeOnly: true
+  
   appointmentDate:
     type: string
     format: YYYY-MM-DD
@@ -21,33 +32,34 @@ properties:
       - cancelled
       - completed
       - rejected
-    
-  price:
-    type: string
   timeslot:
     type: string
-  patient:
-    $ref: ./patient.yaml
+
+
+  beneficiary:
+    $ref: ./beneficiary.yaml
+    readOnly: true
   doctor:
     $ref: ./doctor.yaml
+    readOnly: true
   medicalCenter:
     $ref: ./medicalCenter.yaml
-  sad:
-    type: array
-    items:
-      oneOf:
-        - properties:
-            dd:
-              type: string
-        - properties:
-            ddd:
-              type: string
-      type: object
+    readOnly: true
+  schedule:
+    $ref: ./schedule.yaml
+    readOnly: true
 required:
-  - appointmentId
+  - _id
   - scheduleId
   - date
   - appointmentStatus
   - price
   - timeslot
-  - patient
+  - beneficiary
+  - doctor
+  - medicalCenter
+  - schedule
+  - beneficiaryId
+  - doctorId
+  - medicalCenterId
+  - scheduleId

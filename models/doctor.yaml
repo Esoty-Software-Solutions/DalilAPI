@@ -1,11 +1,9 @@
 title: doctor
-x-stoplight:
-  id: 1gbzardpygsvm
 x-tags:
   - doctor
 type: object
 properties:
-  doctorId:
+  _id:
     type: string
   firstName:
     type: string
@@ -23,7 +21,7 @@ properties:
     type: string
     format: date
 required:
-  - doctorId
+  - _id
   - firstName
   - secondName
   - lastName

@@ -3,6 +3,12 @@ x-tags:
   - medicalFile
 type: object
 properties:
+  _id:
+    type: string
+    readOnly: true
+  medicalFileId:
+    type: string
+    readOnly: true
   title:
     type: string
   surgeryDate:
@@ -25,4 +31,5 @@ properties:
     readOnly: true
     description: if there is no file "null" would be returned    
 required:
+  - _id
   - title

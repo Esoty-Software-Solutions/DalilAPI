@@ -3,7 +3,10 @@ x-tags:
   - medicalFile
 type: object
 properties:
-  _Id:
+  _id:
+    type: string
+    readOnly: true
+  medicalFileId:
     type: string
     readOnly: true
   title:
@@ -23,3 +26,4 @@ properties:
     description: if there is no file "null" would be returned
 required:
   - title
+  - _id

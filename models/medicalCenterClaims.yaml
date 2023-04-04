@@ -1,12 +1,10 @@
 title: medicalCenterClaims
-x-stoplight:
-  id: fpx41v840tn9a
 x-tags:
   - claims
   - medicalCenter
 type: object
 properties:
-  claimId:
+  _id:
     type: string
   patient:
     $ref: ./patient.yaml
@@ -44,7 +42,7 @@ properties:
   medicalReview:
     type: string
 required:
-  - claimId
+  - _id
   - patient
   - checkInConfermation
   - Staff

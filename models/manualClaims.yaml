@@ -3,7 +3,7 @@ x-stoplight:
   id: upe177ra9otie
 type: object
 properties:
-  claimId:
+  _id:
     type: string
   claimType:
     type: string
@@ -43,7 +43,7 @@ properties:
         type: string
         example: text.txt
 required:
-  - claimId
+  - _id
   - claimType
   - medicalCenterName
   - patientName

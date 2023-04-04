@@ -3,7 +3,7 @@ components:
     sms:
       type: object
       properties:
-        smsId:
+        _id:
           type: string
           readOnly: true
         messageStatus:
@@ -16,7 +16,7 @@ components:
     sms-new:
       type: object
       properties:
-        smsId:
+        _id:
           type: string
         messageStatus:
           type: string

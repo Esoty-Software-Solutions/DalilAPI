@@ -5,7 +5,7 @@ x-tags:
   - medicalCenter
 type: object
 properties:
-  serviceId:
+  _id:
     type: string
   serviceCode:
     type: string
@@ -23,7 +23,7 @@ properties:
     type: number
     format: float
 required:
-  - serviceId
+  - _id
   - serviceCode
   - serviceName
   - serviceType

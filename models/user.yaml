@@ -3,7 +3,7 @@ x-stoplight:
   id: m4si2pk0h07zi
 type: object
 properties:
-  userId:
+  _id:
     type: string
     readOnly: true
   username:
@@ -29,21 +29,18 @@ properties:
     readOnly: true
   subscriberId:
     type: string
-    readOnly: true
     nullable: true
-    description: if there is no subscriberId "null" would be returned
+    description: if there is no subscriberId, set value to null
   doctorId:
     type: string
-    readOnly: true
     nullable: true
-    description: if there is no doctorId "null" would be returned
-  instituionId:
+    description: if there is no doctorId, set value to null
+  institutionId:
     type: string
-    readOnly: true
     nullable: true
-    description: if there is no doctorId "null" would be returned
+    description: if there is no institutionId, set value to null
 required:
-  - userId
+  - _id
   - username
   - resetPassword
   - firstName

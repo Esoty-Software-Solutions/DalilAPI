@@ -1,11 +1,9 @@
 title: insurancePolicy
-x-stoplight:
-  id: o7gdily3hi3fz
 x-tags:
   - institutions
 type: object
 properties:
-  insurancePolicyId:
+  _id:
     type: string
   insuranceType:
     type: string
@@ -49,7 +47,7 @@ properties:
         - service
         - limit
 required:
-  - insurancePolicyId
+  - _id
   - insuranceType
   - insuranceIssuer
   - balanceResetDate

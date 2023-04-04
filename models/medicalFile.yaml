@@ -3,7 +3,7 @@ x-tags:
   - medicalFile
 type: object
 properties:
-  medicalFileId:
+  _id:
     type: string
     readOnly: true
   beneficiaryId:
@@ -21,8 +21,7 @@ properties:
     nullable: true
     description: Unit is in cm
 required:
-  - medicalFileId
-  - beneficiaryId
+  - _id
   - birthDate
   - gender
   - weight
