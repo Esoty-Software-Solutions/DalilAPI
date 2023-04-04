@@ -1,56 +1,108 @@
-title: schedule
-x-stoplight:
-  id: rcx5axsexvfm0
-x-tags:
-  - schedule
-type: object
-properties:
-  _id:
-    type: string
-  medicalCenterObject:
-    $ref: ./medicalCenter.yaml
-  doctorObject:
-    $ref: ./doctor.yaml
-  timeslot:
-    type: string
-    enum: [morning, afternoon, afternoon]
-  monday:
-    type: boolean
-  tuesday:
-    type: boolean
-  wednesday:
-    type: boolean
-  thursday:
-    type: boolean
-  friday:
-    type: boolean
-  saturday:
-    type: boolean
-  sunday:
-    type: boolean
-  price:
-    type: integer
-  startDate:
-    type: string
-    format: date
-  endDate:
-    type: string
-    format: date
-  isActive:
-    type: boolean
-required:
-  - _id
-  - medicalCenterObject
-  - doctorObject
-  - timeslot
-  - monday
-  - tuesday
-  - wednesday
-  - thursday
-  - friday
-  - saturday
-  - sunday
-  - price
-  - startDate
-  - endDate
-  - isActive
+components:
+  schemas: 
+    write:
+      type: object
+      properties:
+        _id:
+          type: string
+        medicalCenterId:
+          string: string
+          writeOnly: true
+        doctorId:
+          string: string
+          writeOnly: true
+        timeslot:
+          type: string
+          enum: [morning, afternoon, evening]
+        monday:
+          type: boolean
+        tuesday:
+          type: boolean
+        wednesday:
+          type: boolean
+        thursday:
+          type: boolean
+        friday:
+          type: boolean
+        saturday:
+          type: boolean
+        sunday:
+          type: boolean
+        price:
+          type: integer
+        startDate:
+          type: string
+          format: YYYY-MM-DD
+        endDate:
+          type: string
+          format: YYYY-MM-DD
+        isActive:
+          type: boolean
+          readyOnly: boolean
+      required:
+        - _id
+        - medicalCenterId
+        - doctorId
+        - timeslot
+        - monday
+        - tuesday
+        - wednesday
+        - thursday
+        - friday
+        - saturday
+        - sunday
+        - price
+        - startDate
+        - endDate
+    read:
+      type: object
+      properties:
+        _id:
+          type: string
+        medicalCenter:
+          $ref: ./medicalCenter.yaml
+        doctor:
+          $ref: ./doctor.yaml
+        timeslot:
+          type: string
+          enum: [morning, afternoon, afternoon]
+        monday:
+          type: boolean
+        tuesday:
+          type: boolean
+        wednesday:
+          type: boolean
+        thursday:
+          type: boolean
+        friday:
+          type: boolean
+        saturday:
+          type: boolean
+        sunday:
+          type: boolean
+        price:
+          type: integer
+        startDate:
+          type: string
+          format: date
+        endDate:
+          type: string
+          format: date
+        isActive:
+          type: boolean
+      required:
+        - _id
+        - medicalCenter
+        - doctor
+        - timeslot
+        - monday
+        - tuesday
+        - wednesday
+        - thursday
+        - friday
+        - saturday
+        - sunday
+        - price
+        - startDate
+        - endDate
+        - isActive

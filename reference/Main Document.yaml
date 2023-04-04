@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: '3.0.9'
 x-stoplight:
   id: v0r49t68fw391
 info:
@@ -8,7 +8,7 @@ info:
   license:
     name: TBD
 servers:
-  - url: 'http://localhost:3000/v1'
+  - url: 'http://dalildev.esoty.ca/:3000/v1'
 paths:
   /login:      
     parameters: []
@@ -2535,36 +2535,53 @@ paths:
       tags: [medicalCenters]
       operationId: get-medicalCenters
       description: ''
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  object:
-                    type: array
-                    items:
-                      $ref: ../models/medicalCenter.yaml
-                  objectCount:
-                    type: integer
-                    description: Indication if there are more objects to retreive
-                required:
-                  - object
-                  - objectCount
-                  - hasMore
-              examples: {}
       parameters:
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/starting_after_object'
         - $ref: '#/components/parameters/searchQuery'
         - $ref: '#/components/parameters/skip'
         - $ref: '#/components/parameters/city'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../models/standardResponse.yaml
+                  - type: object
+                    properties:
+                      data:
+                        type: object
+                        required:
+                          - objectCount
+                          - objectArray
+                        properties:
+                          objectCount:
+                            type: integer
+                          objectArray:
+                            type: array
+                            items:
+                              $ref: ../models/medicalCenter.yaml
+
     post:
       tags: [medicalCenters]
       summary: create a medical center
       operationId: post-medicalCenters
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              allOf:
+                - $ref: ../models/medicalCenter.yaml
+                - type: object
+                  properties:
+                    file:
+                      type: array
+                      items:
+                        type: string
+                        format: binary
+                      maxItems: 4  
       responses:
         '201':
           description: Created
@@ -2580,14 +2597,7 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
-      requestBody:
-        content:
-          application/json:
-              schema:
-                $ref: ../models/medicalCenter.yaml
-          multipart/form-data:
-            schema:
-              $ref: ../models/medicalCenter.yaml                  
+             
                 
                 
   '/medicalCenters/{medicalCenterId}':
@@ -2846,7 +2856,7 @@ paths:
                           type: array
                           items:                              
                             oneOf:
-                              - $ref: ../models/schedule.yaml
+                              - $ref: ../models/schedule.yaml#/components/schemas/read
                               - $ref: ../models/scheduleMedicalCenter.yaml
                               - $ref: ../models/scheduleDoctor.yaml
         '400':
@@ -2930,7 +2940,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../models/schedule.yaml
+                $ref: ../models/schedule.yaml#/components/schemas/read
         '400':
           description: Bad Request
         '401':
@@ -2943,20 +2953,26 @@ paths:
         content:
           application/json:
             schema:
-              $ref: ../models/schedule.yaml
+              $ref: ../models/schedule.yaml#/components/schemas/write
             examples: {}
       parameters: []
   '/schedules/{scheduleId}':
-    post:
+    patch:
       tags: [bookings]
       summary: Update schedule
+      operationId: patch-schedules-scheduleId
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/schedule.yaml#/components/schemas/write
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: ../models/schedule.yaml
+                $ref: ../models/schedule.yaml#/components/schemas/read
         '400':
           description: Bad Request
         '401':
@@ -2967,12 +2983,7 @@ paths:
           description: Not Found
         '500':
           description: Internal Server Error
-      operationId: patch-schedules-scheduleId
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: ../models/schedule.yaml
+
     get:
       summary: Get schedule by ID
       tags: [bookings]
@@ -2982,7 +2993,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../models/schedule.yaml
+                $ref: ../models/schedule.yaml#/components/schemas/read
         '400':
           description: Bad Request
         '401':

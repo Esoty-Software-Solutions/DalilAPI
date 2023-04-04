@@ -1,69 +1,72 @@
-title: appointment
-x-stoplight:
-  id: 6br7f6cdh03sa
-x-tags:
-  - appointment
-type: object
-properties:
-  _id:
-    type: string
-    readOnly: true
-  scheduleId:
-    type: string
-    writeOnly: true
-  beneficiaryId:
-    type: string
-    writeOnly: true
-  doctorId:
-    type: string
-    writeOnly: true
-  medicalCenterId:
-    type: string
-    writeOnly: true
-  
-  appointmentDate:
-    type: string
-    format: YYYY-MM-DD
-  appointmentStatus:
-    type: string
-    enum:
-      - booked
-      - pending
-      - cancelled
-      - completed
-      - rejected
-  timeslot:
-    type: string
+components:
+  schemas: 
+    write:
+      type: object
+      properties:
+        _id:
+          type: string
+          readOnly: true
+        scheduleId:
+          type: string
+          writeOnly: true
+        beneficiaryId:
+          type: string
+          writeOnly: true
 
+        appointmentDate:
+          type: string
+          format: YYYY-MM-DD
+        appointmentStatus:
+          type: string
+          enum:
+            - booked
+            - pending
+            - cancelled
+            - completed
+            - rejected
+        timeslot:
+          type: string
+      required:
+        - _id
+        - scheduleId
+        - appointmentDate
+        - appointmentStatus
+        - timeslot
+        - beneficiaryId
+        - scheduleId
 
-  beneficiary:
-    readOnly: true
-    $ref: ./beneficiary.yaml
-    description: readyOnly, do not send in the request body    
-  doctor:
-    readOnly: true
-    description: readyOnly, do not send in the request body
-    $ref: ./doctor.yaml    
-  medicalCenter:
-    $ref: ./medicalCenter.yaml
-    description: readyOnly, do not send in the request body
-    readOnly: true
-  schedule:
-    $ref: ./schedule.yaml
-    description: readyOnly, do not send in the request body
-    readOnly: true
-required:
-  - _id
-  - scheduleId
-  - date
-  - appointmentStatus
-  - price
-  - timeslot
-  - beneficiary
-  - doctor
-  - medicalCenter
-  - schedule
-  - beneficiaryId
-  - doctorId
-  - medicalCenterId
-  - scheduleId
+    read:
+      type: object
+      properties:
+        _id:
+          type: string
+          readOnly: true
+        appointmentDate:
+          type: string
+          format: YYYY-MM-DD
+        appointmentStatus:
+          type: string
+          enum:
+            - booked
+            - pending
+            - cancelled
+            - completed
+            - rejected
+        timeslot:
+          type: string
+
+        beneficiary:
+          readOnly: true
+          $ref: ./beneficiary.yaml
+          description: readyOnly, do not send in the request body
+        schedule:
+          $ref: ./schedule.yaml#/components/schemas/read
+          description: readyOnly, do not send in the request body
+          readOnly: true
+      required:
+        - _id
+        - appointmentDate
+        - appointmentStatus
+        - timeslot
+        - beneficiary
+        - schedule
