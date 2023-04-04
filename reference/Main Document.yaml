@@ -3938,14 +3938,19 @@ components:
       description: medical center ID
 
     appointmentStatus:
-      name: appointmentStatus
+      name: appointmentStatusList
       in: query
       required: false
       style: form
       explode: false
+      description: List of appointment statuses to filter by to filter by
       schema:
-        type: string
-      description: status of the appointment
+        type: array
+        items:
+          type: string
+      example: booked,pending,cancelled
+      
+      
 
       
     pending:

@@ -15,7 +15,7 @@ properties:
     type: string
     format: YYYY-MM-DD
     nullable: true
-  diagnosedBy:
+  doctorName:
     type: string
     nullable: true
   notes:
@@ -32,7 +32,6 @@ properties:
     readOnly: true
     description: if there is no file "null" would be returned
 required:
-  - documentId
   - title
   - _id
 
