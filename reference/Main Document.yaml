@@ -2210,19 +2210,14 @@ paths:
       tags: [bookings]
       operationId: get-appointments
       parameters:
-        - $ref: '#/components/parameters/appointmentStatus'
-        - $ref: '#/components/parameters/pending'
-        - $ref: '#/components/parameters/booked'
-        - $ref: '#/components/parameters/completed'
-        - $ref: '#/components/parameters/cancelled'
+        - $ref: '#/components/parameters/appointmentStatusList'
+        - $ref: '#/components/parameters/dateRange'
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/starting_after_object'
         - $ref: '#/components/parameters/searchQuery'
         - $ref: '#/components/parameters/skip'
-        - $ref: '#/components/parameters/fromDate'
-        - $ref: '#/components/parameters/toDate'
-        - $ref: '#/components/parameters/rejected'
         - $ref: '#/components/parameters/medicalCenterId'
+        - $ref: '#/components/parameters/doctorId'
       responses:
         '200':
           description: OK
@@ -2529,11 +2524,8 @@ paths:
                   - codeStatus
                   - message
       parameters:
-        - $ref: '#/components/parameters/booked'
-        - $ref: '#/components/parameters/pending'
-        - $ref: '#/components/parameters/completed'
-        - $ref: '#/components/parameters/cancelled'
-        - $ref: '#/components/parameters/rejected'
+        - $ref: '#/components/parameters/appointmentStatusList'
+        - $ref: '#/components/parameters/dateRange'
       x-internal: false
       description: ''
 
@@ -3928,50 +3920,38 @@ components:
         type: string
       description: medical center ID
 
-    appointmentStatus:
+    appointmentStatusList:
       name: appointmentStatusList
       in: query
       required: false
       style: form
       explode: false
-      description: List of appointment statuses to filter by to filter by
+      description: List of appointment statuses to filter by
       schema:
         type: array
         items:
           type: string
+          enum: [pending, booked, completed, cancelled, rejected]
       example: booked,pending,cancelled
-      
-      
 
-      
-    pending:
-      name: pending
+    dateRange:
+      name: dateRange
       in: query
       required: false
+      style: form
+      explode: false
+      description: Date range filter (start_date,end_date)
       schema:
-        type: boolean
-      description: Flag to retrieve pending appointments. Default value is true
-    booked:
-      name: booked
-      in: query
-      required: false
-      schema:
-        type: boolean
-      description: Flag to retrieve booked appointments. Default value is true
-    completed:
-      name: completed
-      in: query
-      required: false
-      schema:
-        type: boolean
-      description: Flag to retrieve completed appointments. Default value is true
-    cancelled:
-      name: cancelled
-      in: query
-      required: false
-      schema:
-        type: boolean
-      description: Flag to retrieve cancelled appointments. Default value is true
+        type: array
+        items:
+          type: string
+          format: YYYY-MM-DD
+        maxItems: 2
+      example: 2022-12-22,2023-03-01
+
+
+
+
     fromDate:
       name: fromDate
       in: query
@@ -4007,13 +3987,6 @@ components:
           - doctor
           - medicalCenter
       description: 'Flag to group the objects by either doctor or medical centers'
-    rejected:
-      name: rejected
-      in: query
-      required: false
-      schema:
-        type: boolean
-      description: Flag to retrieve rejected appointments. Default value is true
     specialty:
       name: specialty
       in: query
