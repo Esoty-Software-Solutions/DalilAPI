@@ -37,11 +37,11 @@ properties:
 
 
   beneficiary:
-    $ref: ./beneficiary.yaml
     readOnly: true
+    $ref: ./beneficiary.yaml    
   doctor:
-    $ref: ./doctor.yaml
     readOnly: true
+    $ref: ./doctor.yaml    
   medicalCenter:
     $ref: ./medicalCenter.yaml
     readOnly: true
