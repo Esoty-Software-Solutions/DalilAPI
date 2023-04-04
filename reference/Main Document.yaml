@@ -203,11 +203,11 @@ paths:
         description: ''
       description: ''
   
-  /users/{_id}/logout:
+  /users/{userId}/logout:
     parameters:
       - schema:
           type: string
-        name: _id
+        name: userId
         in: path
         required: true
     post:
@@ -236,11 +236,11 @@ paths:
       description: user logout
     
 
-  /users/{_id}:
+  /users/{userId}:
     parameters:
       - schema:
           type: string
-        name: _id
+        name: userId
         in: path
         required: true
     get:
@@ -304,13 +304,13 @@ paths:
                   - messageBody
       operationId: get-users-username
   
-  /users/{_id}/deviceTokens:
+  /users/{userId}/deviceTokens:
     parameters: []
     post:
       tags: [users]
       summary: update device token for user
       description: update device token for user
-      operationId: post-users-_id-deviceToken
+      operationId: post-users-userId-deviceToken
       requestBody:
         content:
           application/json:
@@ -342,8 +342,20 @@ paths:
                 schema:
                   $ref: ../models/standardResponse.yaml
   
-  /users/{_id}/changePassword:
+  /users/{userId}/changePassword:  
+    parameters:
+      - schema:
+          type: string
+        name: userId
+        in: path
+        required: true
     post:
+      operationId: post-users-userId-changePassword
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/changePassword.yaml
       summary: change user password
       tags: [users]
       responses:
@@ -403,19 +415,7 @@ paths:
                 required:
                   - statusCode
                   - messageBody
-      operationId: get-users-_id-changePassword
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: ../models/changePassword.yaml
-      parameters: []
-    parameters:
-      - schema:
-          type: string
-        name: _id
-        in: path
-        required: true
+
   
   /subscribers:
     get:
@@ -593,15 +593,15 @@ paths:
                   - codeStatus
                   - message
 
-  /subscribers/{_id}:
+  /subscribers/{subscriberId}:
     parameters:
       - schema:
           type: string
-        name: _id
+        name: subscriberId
         in: path
         required: true  
     get:
-      operationId: get-subscribers-_id
+      operationId: get-subscribers-subscriberId
       description: Get information about the subscriber
       parameters: []  
       summary: Get subscriber Information by ID
@@ -693,7 +693,7 @@ paths:
     patch:
       tags: [subscribers]
       summary: ''
-      operationId: patch-subscribers-_id
+      operationId: patch-subscribers-subscriberId
       requestBody:
         content:
           application/json:
@@ -770,17 +770,17 @@ paths:
                   - codeStatus
                   - message
 
-  /subscribers/{_id}/beneficiaries:
+  /subscribers/{subscriberId}/beneficiaries:
     parameters:
       - schema:
           type: string
-        name: _id
+        name: subscriberId
         in: path
         required: true
     get:
       summary: Get beneficiaries of a subscriber
       tags: [subscribers, beneficiaries]
-      operationId: get-subscribers-_id-beneficiaries
+      operationId: get-subscribers-subscriberId-beneficiaries
       parameters:
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/searchQuery'
@@ -869,7 +869,7 @@ paths:
       summary: Add a beneficiary for a subscriber      
       description: ''
       tags: [subscribers, beneficiaries]
-      operationId: post-subscribers-_id-beneficiaries
+      operationId: post-subscribers-subscriberId-beneficiaries
       requestBody:
         content:
           application/json:
@@ -946,22 +946,22 @@ paths:
                   - codeStatus
                   - message
 
-  /subscribers/{_id}/beneficiaries/_id:
+  /subscribers/{subscriberId}/beneficiaries/beneficiaryId:
     parameters:
       - schema:
           type: string
-        name: _id
+        name: subscriberId
         in: path
         required: true
       - schema:
           type: string
-        name: _id
+        name: beneficiaryId
         in: path
         required: true        
     get:
       summary: Get a beneficiary information
       tags: [subscribers, beneficiaries]
-      operationId: get-subscribers-_id-beneficiaries-_id
+      operationId: get-subscribers-subscriberId-beneficiaries-beneficiaryId
       parameters:
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/searchQuery'
@@ -1040,7 +1040,7 @@ paths:
       summary: update a beneficiary information 
       description: ''
       tags: [subscribers, beneficiaries]
-      operationId: post-subscribers-_id-beneficiaries-_id
+      operationId: post-subscribers-subscriberId-beneficiaries-beneficiaryId
       requestBody:
         content:
           application/json:
@@ -1117,22 +1117,22 @@ paths:
                   - codeStatus
                   - message
 
-  /subscribers/{_id}/beneficiaries/{_id}/medicalFiles:
+  /subscribers/{subscriberId}/beneficiaries/{beneficiaryId}/medicalFiles:
     parameters:
       - schema:
           type: string
-        name: _id
+        name: subscriberId
         in: path
         required: true
       - schema:
           type: string
-        name: _id
+        name: beneficiaryId
         in: path
         required: true   
     get:
       summary: Get medical file for beneficiary
       tags: [medicalFiles]
-      operationId: get-subscribers-_id-beneficiaries-_id-medicalFiles
+      operationId: get-subscribers-subscriberId-beneficiaries-beneficiaryId-medicalFiles
       responses:
         '200':
           description: OK
@@ -1160,7 +1160,7 @@ paths:
     patch:
       tags: [medicalFiles]
       summary: ''
-      operationId: patch-subscribers-_id-beneficiaries-_id-medicalFiles
+      operationId: patch-subscribers-subscriberId-beneficiaries-beneficiaryId-medicalFiles
       requestBody:
         content:
           application/json:
@@ -1238,22 +1238,22 @@ paths:
                   - message
 
    
-  /subscribers/{_id}/beneficiaries/{_id}/medicalFiles/clinicalVisits:
+  /subscribers/{subscriberId}/beneficiaries/{beneficiaryId}/medicalFiles/clinicalVisits:
     parameters:
       - schema:
           type: string
-        name: _id
+        name: subscriberId
         in: path
         required: true
       - schema:
           type: string
-        name: _id
+        name: beneficiaryId
         in: path
         required: true   
     get:
       summary: Get clinicalVisits of medical file
       tags: [medicalFiles]
-      operationId: get-subscribers-_id-beneficiaries-_id-medicalFiles-clinicalVisits
+      operationId: get-subscribers-subscriberId-beneficiaries-beneficiaryId-medicalFiles-clinicalVisits
       parameters:
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/searchQuery'
@@ -1293,7 +1293,7 @@ paths:
         '500':
           description: Internal Server Error
     post:
-      operationId: post--subscribers-_id-beneficiaries-_id-medicalFiles-clinicalVisits
+      operationId: post--subscribers-subscriberId-beneficiaries-beneficiaryId-medicalFiles-clinicalVisits
       summary: Create clinicalVisit document for medical file
       tags: [medicalFiles]
       requestBody:
@@ -1378,22 +1378,22 @@ paths:
                   - codeStatus
                   - message
  
-  /subscribers/{_id}/beneficiaries/{_id}/medicalFiles/allergies:
+  /subscribers/{subscriberId}/beneficiaries/{beneficiaryId}/medicalFiles/allergies:
     parameters:
       - schema:
           type: string
-        name: _id
+        name: subscriberId
         in: path
         required: true
       - schema:
           type: string
-        name: _id
+        name: beneficiaryId
         in: path
         required: true   
     get:
       summary: Get allergies of medical file
       tags: [medicalFiles]
-      operationId: get-subscribers-_id-beneficiaries-_id-medicalFiles-allergies
+      operationId: get-subscribers-subscriberId-beneficiaries-beneficiaryId-medicalFiles-allergies
       parameters:
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/searchQuery'
@@ -1433,7 +1433,7 @@ paths:
         '500':
           description: Internal Server Error
     post:
-      operationId: post--subscribers-_id-beneficiaries-_id-medicalFiles-allergies
+      operationId: post--subscribers-subscriberId-beneficiaries-beneficiaryId-medicalFiles-allergies
       summary: Create allergy document for medical file
       tags: [medicalFiles]
       requestBody:
@@ -1518,22 +1518,22 @@ paths:
                   - codeStatus
                   - message
 
-  /subscribers/{_id}/beneficiaries/{_id}/medicalFiles/surgeryHistories:
+  /subscribers/{subscriberId}/beneficiaries/{beneficiaryId}/medicalFiles/surgeryHistories:
     parameters:
       - schema:
           type: string
-        name: _id
+        name: subscriberId
         in: path
         required: true
       - schema:
           type: string
-        name: _id
+        name: beneficiaryId
         in: path
         required: true   
     get:
       summary: Get surgeryHistories of medical file
       tags: [medicalFiles]
-      operationId: get-subscribers-_id-beneficiaries-_id-medicalFiles-surgeryHistories
+      operationId: get-subscribers-subscriberId-beneficiaries-beneficiaryId-medicalFiles-surgeryHistories
       parameters:
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/searchQuery'
@@ -1573,7 +1573,7 @@ paths:
         '500':
           description: Internal Server Error
     post:
-      operationId: post--subscribers-_id-beneficiaries-_id-medicalFiles-surgeryHistories
+      operationId: post--subscribers-subscriberId-beneficiaries-beneficiaryId-medicalFiles-surgeryHistories
       summary: Create surgeryHistory document for medical file
       tags: [medicalFiles]
       requestBody:
@@ -1658,22 +1658,22 @@ paths:
                   - codeStatus
                   - message
 
-  /subscribers/{_id}/beneficiaries/{_id}/medicalFiles/chronicDiseases:
+  /subscribers/{subscriberId}/beneficiaries/{beneficiaryId}/medicalFiles/chronicDiseases:
     parameters:
       - schema:
           type: string
-        name: _id
+        name: subscriberId
         in: path
         required: true
       - schema:
           type: string
-        name: _id
+        name: beneficiaryId
         in: path
         required: true   
     get:
       summary: Get chronicDiseases of medical file
       tags: [medicalFiles]
-      operationId: get-subscribers-_id-beneficiaries-_id-medicalFiles-chronicDiseases
+      operationId: get-subscribers-subscriberId-beneficiaries-beneficiaryId-medicalFiles-chronicDiseases
       parameters:
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/searchQuery'
@@ -1713,7 +1713,7 @@ paths:
         '500':
           description: Internal Server Error
     post:
-      operationId: post--subscribers-_id-beneficiaries-_id-medicalFiles-chronicDiseases
+      operationId: post--subscribers-subscriberId-beneficiaries-beneficiaryId-medicalFiles-chronicDiseases
       summary: Create chronicDisease document for medical file
       tags: [medicalFiles]
       requestBody:
@@ -1798,22 +1798,22 @@ paths:
                   - codeStatus
                   - message
  
-  /subscribers/{_id}/beneficiaries/{_id}/medicalFiles/medicalTests:
+  /subscribers/{subscriberId}/beneficiaries/{beneficiaryId}/medicalFiles/medicalTests:
     parameters:
       - schema:
           type: string
-        name: _id
+        name: subscriberId
         in: path
         required: true
       - schema:
           type: string
-        name: _id
+        name: beneficiaryId
         in: path
         required: true   
     get:
       summary: Get medicalTests of medical file
       tags: [medicalFiles]
-      operationId: get-subscribers-_id-beneficiaries-_id-medicalFiles-medicalTests
+      operationId: get-subscribers-subscriberId-beneficiaries-beneficiaryId-medicalFiles-medicalTests
       parameters:
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/searchQuery'
@@ -1853,7 +1853,7 @@ paths:
         '500':
           description: Internal Server Error
     post:
-      operationId: post--subscribers-_id-beneficiaries-_id-medicalFiles-medicalTests
+      operationId: post--subscribers-subscriberId-beneficiaries-beneficiaryId-medicalFiles-medicalTests
       summary: Create medicalTest document for medical file
       tags: [medicalFiles]
       requestBody:
@@ -1942,11 +1942,11 @@ paths:
 
 
 
-  # /subscribers/{_id}/expenseReports:
+  # /subscribers/{subscriberId}/expenseReports:
   #   parameters:
   #     - schema:
   #         type: string
-  #       name: _id
+  #       name: subscriberId
   #       in: path
   #       required: true
   #   get:
@@ -1989,7 +1989,7 @@ paths:
   #         description: Not Found
   #       '500':
   #         description: Internal Server Error
-  #     operationId: get-subscribers-_id-expenseReports
+  #     operationId: get-subscribers-subscriberId-expenseReports
   #     parameters:
   #       - $ref: '#/components/parameters/limit'
   #       - $ref: '#/components/parameters/starting_after_object'
@@ -2013,22 +2013,12 @@ paths:
   #         description: Forbidden
   #       '500':
   #         description: Internal Server Error
-  #     operationId: post-subscribers-_id-expenseReport
+  #     operationId: post-subscribers-subscriberId-expenseReport
   #     requestBody:
   #       content:
   #         application/json:
   #           schema:
   #             $ref: ../models/expenseReport.yaml
-  #           examples:
-  #             Example 1:
-  #               value:
-  #                 healtcareCenterId: string
-  #                 healtcareCenterName: string
-  #                 serviceDate: '2019-08-24'
-  #                 charnge: 0
-  #                 currency: string
-  #                 _id: string
-  #                 patientName: string
 
   
   # /subscribers/claims:
@@ -2080,11 +2070,11 @@ paths:
   #       - $ref: '#/components/parameters/searchQuery'
   #       - $ref: '#/components/parameters/skip'
   #     description: ''
-  # /subscribers/{_id}/claims:
+  # /subscribers/{subscriberId}/claims:
   #   parameters:
   #     - schema:
   #         type: string
-  #       name: _id
+  #       name: subscriberId
   #       in: path
   #       required: true
   #   get:
@@ -2124,7 +2114,7 @@ paths:
   #         description: Not Found
   #       '500':
   #         description: Internal Server Error
-  #     operationId: get-subscribers-_id-claims
+  #     operationId: get-subscribers-subscriberId-claims
   #     parameters:
   #       - $ref: '#/components/parameters/limit'
   #       - $ref: '#/components/parameters/starting_after_object'
@@ -2149,7 +2139,7 @@ paths:
   #         description: Forbidden
   #       '500':
   #         description: Internal Server Error
-  #     operationId: post-subscribers-_id-claims
+  #     operationId: post-subscribers-subscriberId-claims
   #     requestBody:
   #       content:
   #         multipart/form-data:
@@ -2173,11 +2163,11 @@ paths:
   #             required:
   #               - description
   #       description: ''
-  # /subscribers/{_id}/benefitPolicies:
+  # /subscribers/{subscriberId}/benefitPolicies:
   #   parameters:
   #     - schema:
   #         type: string
-  #       name: _id
+  #       name: subscriberId
   #       in: path
   #       required: true
   #   get:
@@ -2212,7 +2202,7 @@ paths:
   #         description: Not Found
   #       '500':
   #         description: Internal Server Error
-  #     operationId: get-subscribers-_id-benefitPolicies
+  #     operationId: get-subscribers-subscriberId-benefitPolicies
 
   /appointments:
     get:
@@ -2344,11 +2334,11 @@ paths:
                   type: string
               required:
                 - appointmentStatus
-  /appointments/users/{_id}:
+  /appointments/users/{userId}:
     parameters:
       - schema:
           type: string
-        name: _id
+        name: userId
         in: path
         required: true
     post:
@@ -2439,7 +2429,7 @@ paths:
     get:
       tags: [bookings]
       summary: List all appointments for user
-      operationId: get-appointments-users-_id
+      operationId: get-appointments-users-userId
       responses:
         '200':
           description: OK
@@ -2608,17 +2598,17 @@ paths:
               $ref: ../models/medicalCenter.yaml                  
                 
                 
-  '/medicalCenters/{_id}':
+  '/medicalCenters/{medicalCenterId}':
     parameters:
       - schema:
           type: string
-        name: _id
+        name: medicalCenterId
         in: path
         required: true
     get:
       tags: [medicalCenters]
       summary: Get medical center
-      operationId: get-medicalCenters-_id
+      operationId: get-medicalCenters-medicalCenterId
       responses:
         '200':
           description: OK
@@ -2639,7 +2629,7 @@ paths:
     post:
       tags: [medicalCenters]
       summary: Get medical center object
-      operationId: post-medicalCenters-_id
+      operationId: post-medicalCenters-medicalCenterId
       responses:
         '200':
           description: OK
@@ -2673,7 +2663,7 @@ paths:
     delete:
       tags: [medicalCenters]
       summary: ''
-      operationId: delete-medicalCenters-_id
+      operationId: delete-medicalCenters-medicalCenterId
       responses:
         '201':
           description: Created
@@ -3100,7 +3090,7 @@ paths:
         - $ref: '#/components/parameters/searchQuery'
         - $ref: '#/components/parameters/skip'
         - $ref: '#/components/parameters/specialty'
-  /doctors/{_id}:
+  /doctors/{doctorId}:
     get:
       summary: Get doctor by ID
       tags: [doctors]
@@ -3121,18 +3111,18 @@ paths:
           description: Not Found
         '500':
           description: Internal Server Error
-      operationId: get-doctors-_id
+      operationId: get-doctors-doctorId
       parameters: []
     parameters:
       - schema:
           type: string
-        name: _id
+        name: doctorId
         in: path
         required: true
     patch:
       tags: [doctors]
       summary: ''
-      operationId: patch-doctors-_id
+      operationId: patch-doctors-doctorId
       responses:
         '200':
           description: OK
@@ -3158,7 +3148,7 @@ paths:
     delete:
       tags: [doctors]
       summary: ''
-      operationId: delete-doctors-_id
+      operationId: delete-doctors-doctorId
       responses:
         '200':
           description: OK
