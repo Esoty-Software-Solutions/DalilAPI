@@ -2218,6 +2218,21 @@ paths:
     get:
       summary: List all appointments
       tags: [bookings]
+      operationId: get-appointments
+      parameters:
+        - $ref: '#/components/parameters/appointmentStatus'
+        - $ref: '#/components/parameters/pending'
+        - $ref: '#/components/parameters/booked'
+        - $ref: '#/components/parameters/completed'
+        - $ref: '#/components/parameters/cancelled'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/starting_after_object'
+        - $ref: '#/components/parameters/searchQuery'
+        - $ref: '#/components/parameters/skip'
+        - $ref: '#/components/parameters/fromDate'
+        - $ref: '#/components/parameters/toDate'
+        - $ref: '#/components/parameters/rejected'
+        - $ref: '#/components/parameters/medicalCenterId'
       responses:
         '200':
           description: OK
@@ -2256,20 +2271,7 @@ paths:
           description: Not Found
         '500':
           description: Internal Server Error
-      operationId: get-appointments
-      parameters:
-        - $ref: '#/components/parameters/pending'
-        - $ref: '#/components/parameters/booked'
-        - $ref: '#/components/parameters/completed'
-        - $ref: '#/components/parameters/cancelled'
-        - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/starting_after_object'
-        - $ref: '#/components/parameters/searchQuery'
-        - $ref: '#/components/parameters/skip'
-        - $ref: '#/components/parameters/fromDate'
-        - $ref: '#/components/parameters/toDate'
-        - $ref: '#/components/parameters/rejected'
-        - $ref: '#/components/parameters/medicalCenterId'
+
   
   /appointments/{appointmentId}:
     parameters:
@@ -3934,6 +3936,18 @@ components:
       schema:
         type: string
       description: medical center ID
+
+    appointmentStatus:
+      name: appointmentStatus
+      in: query
+      required: false
+      style: form
+      explode: false
+      schema:
+        type: string
+      description: status of the appointment
+
+      
     pending:
       name: pending
       in: query
