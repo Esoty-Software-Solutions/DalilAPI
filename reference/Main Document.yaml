@@ -4723,7 +4723,7 @@ paths:
 
   /sms:
     get:
-      tags: [miscellaneous, sms]
+      tags: [sms]
       responses:
         '200':
           description: OK
@@ -4750,7 +4750,7 @@ paths:
         '500':
           description: Internal Server Error
     post:
-      tags: [miscellaneous, sms]
+      tags: [sms]
       requestBody:
         content:
           application/json:
@@ -4782,14 +4782,14 @@ paths:
         in: path
         required: true
     get:
-      tags: [miscellaneous, sms]
+      tags: [sms]
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: ../models/sms.yaml#/components/schemas/sms
+                $ref: ../models/sms.yaml#/components/schemas/read
         '400':
           description: Bad Request
         '401':
@@ -4800,20 +4800,20 @@ paths:
           description: Not Found
         '500':
           description: Internal Server Error
-    post:
-      tags: [miscellaneous, sms]
+    patch:
+      tags: [sms]
       requestBody:
         content:
           application/json:
             schema:
-              $ref: ../models/sms.yaml#/components/schemas/sms
+              $ref: ../models/sms.yaml#/components/schemas/update
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: ../models/sms.yaml#/components/schemas/sms
+                $ref: ../models/sms.yaml#/components/schemas/read
         '400':
           description: Bad Request
         '401':
