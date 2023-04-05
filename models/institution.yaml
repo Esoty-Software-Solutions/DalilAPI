@@ -7,21 +7,23 @@ type: object
 properties:
   _id:
     type: string
-  Name:
+    readOnly: true
+  name:
     type: string
   phoneNumber:
     type: string
-  cityHq:
+  city:
     type: string
   employeeCount:
     type: string
+    nullable: true
   subscriberCount:
     type: string
-  beneftiPolicy:
+    readOnly: true
+  benefitPolicy:
     $ref: ./insurancePolicy.yaml
 required:
   - _id
-  - Name
-  - employeeCount
+  - name
   - subscriberCount
-  - beneftiPolicy
+  - benefitPolicy

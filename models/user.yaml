@@ -39,6 +39,10 @@ properties:
     type: string
     nullable: true
     description: if there is no institutionId, set value to null
+  auxiliaryCenterId:
+    type: string
+    nullable: true
+    description: if there is no auxiliaryCenterId, set value to null
 required:
   - _id
   - username
@@ -47,3 +51,5 @@ required:
   - lastName
   - subscriberId
   - doctorId
+  - medicalCenterId
+  - auxiliaryCenterId

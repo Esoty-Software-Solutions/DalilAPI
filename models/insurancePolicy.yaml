@@ -3,8 +3,6 @@ x-tags:
   - institutions
 type: object
 properties:
-  _id:
-    type: string
   insuranceType:
     type: string
   insuranceIssuer:
@@ -47,7 +45,6 @@ properties:
         - service
         - limit
 required:
-  - _id
   - insuranceType
   - insuranceIssuer
   - balanceResetDate

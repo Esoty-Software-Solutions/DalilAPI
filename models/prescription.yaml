@@ -1,0 +1,37 @@
+title: prescription
+x-tags:
+  - prescription
+type: object
+properties:
+  _id:
+    type: string
+    readOnly: true
+  subscriberId:
+    type: string
+    writeOnly: true
+  title:
+    type: string
+  notes:
+    type: string
+    nullable: true
+  thumbnailLink:
+    type: string
+    readOnly: true
+    description: if there is no file "null" would be returned
+  fileLink:
+    type: string
+    readOnly: true
+    description: if there is no file "null" would be returned
+
+  Quotes:
+    type: array    
+    nullable: true
+    items:
+
+
+
+required:
+  - title
+  - _id
+  - thumbnailLink
+  - fileLink

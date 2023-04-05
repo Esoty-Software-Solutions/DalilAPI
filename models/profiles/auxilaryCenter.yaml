@@ -1,6 +1,6 @@
-title: medicalCenter
+title: axilaryCenter
 x-tags:
-  - medicalCenter
+  - axilaryCenter
 type: object
 properties:
   _id:
@@ -11,6 +11,9 @@ properties:
   city:
     type: string
     nullable: true
+  centerType:
+    type: string
+    enum: [pharmacy, laboratory, imagingCenter ]
   district:
     type: string
     nullable: true
@@ -54,6 +57,7 @@ properties:
 required:
   - _id
   - name
+  - centerType
   - city
   - phoneNumber
   - thumbnailLink

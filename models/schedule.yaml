@@ -5,6 +5,7 @@ components:
       properties:
         _id:
           type: string
+          readOnly: true
         medicalCenterId:
           string: string
           writeOnly: true
@@ -59,6 +60,7 @@ components:
       properties:
         _id:
           type: string
+          readOnly: true
         medicalCenter:
           $ref: ./medicalCenter.yaml
         doctor:

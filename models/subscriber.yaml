@@ -1,39 +1,111 @@
-title: subscriber
-x-tags:
-  - subscriber
-type: object
-properties:
-  _id:
-    type: string
-    readOnly: true
-  firstName:
-    type: string
-  secondName:
-    type: string
-  thirdName:
-    type: string
-  lastName:
-    type: string
-  birthdate:
-    type: string
-  phoneNumber:
-    type: string
-  gender:
-    type: string
-  beneficiaries:
-    type: array
-    items:
-      $ref: ./beneficiary.yaml
-  institutionId:
-    type: string
-  city:
-    type: string
-required:
-  - _id
-  - firstName
-  - secondName
-  - lastName
-  - phoneNumber
-  - gender
-  - beneficiaries
-  - account
+components:
+  schemas: 
+    write:
+      type: object
+      properties:
+        _id:
+          type: string
+          readOnly: true
+        firstName:
+          type: string
+        secondName:
+          type: string
+        thirdName:
+          type: string
+        lastName:
+          type: string
+        birthdate:
+          type: string
+        phoneNumber:
+          type: string
+        gender:
+          type: string
+        beneficiaries:
+          type: array
+          items:
+            $ref: ./beneficiary.yaml
+        institutionId:
+          type: string
+        city:
+          type: string
+      required:
+        - _id
+        - firstName
+        - secondName
+        - lastName
+        - phoneNumber
+        - gender
+        - beneficiaries
+        - account
+
+    read:
+      type: object
+      properties:
+        _id:
+          type: string
+          readOnly: true
+        firstName:
+          type: string
+        secondName:
+          type: string
+        thirdName:
+          type: string
+        lastName:
+          type: string
+        birthdate:
+          type: string
+        phoneNumber:
+          type: string
+        gender:
+          type: string
+        beneficiaries:
+          type: array
+          items:
+            $ref: ./beneficiary.yaml
+        institutionId:
+          type: string
+        city:
+          type: string
+      required:
+        - _id
+        - firstName
+        - secondName
+        - lastName
+        - phoneNumber
+        - gender
+        - beneficiaries
+        - account
+
+    update:
+      type: object
+      properties:
+        _id:
+          type: string
+          readOnly: true
+        firstName:
+          type: string
+        secondName:
+          type: string
+        thirdName:
+          type: string
+        lastName:
+          type: string
+        birthdate:
+          type: string
+        phoneNumber:
+          type: string
+        gender:
+          type: string
+        institutionId:
+          type: string
+        city:
+          type: string
+      required:
+        - _id
+        - firstName
+        - secondName
+        - lastName
+        - phoneNumber
+        - gender
+        - beneficiaries
+        - account
