@@ -4738,7 +4738,7 @@ paths:
                       objectArray:
                         type: array
                         items:
-                          $ref: ../models/sms.yaml#/components/schemas/sms
+                          $ref: ../models/sms.yaml#/components/schemas/read
         '400':
           description: Bad Request
         '401':
