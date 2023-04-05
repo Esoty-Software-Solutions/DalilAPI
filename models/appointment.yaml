@@ -70,3 +70,21 @@ components:
         - timeslot
         - beneficiary
         - schedule
+
+
+    update:
+      type: object
+      properties:
+        _id:
+          type: string
+        appointmentStatus:
+          type: string
+          enum:
+            - booked
+            - pending
+            - cancelled
+            - completed
+            - rejected
+      required:
+        - _id
+        - appointmentStatus

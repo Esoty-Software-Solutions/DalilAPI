@@ -442,7 +442,7 @@ paths:
                           objectArray:
                             type: array
                             items:
-                              $ref: ../models/subscriber.yaml                          
+                              $ref: ../models/subscriber.yaml#/components/schemas/read
                 required:
                   - data
         '401':
@@ -518,7 +518,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: ../models/subscriber.yaml
+              $ref: ../models/subscriber.yaml#/components/schemas/write
         description: ''    
       summary: Create a new subscriber
       tags: [subscribers]
@@ -533,7 +533,7 @@ paths:
                   - type: object
                     properties:
                       data:
-                        $ref: ../models/subscriber.yaml
+                        $ref: ../models/subscriber.yaml#/components/schemas/read
                     required:
                       - data
         '400':
@@ -617,7 +617,7 @@ paths:
                   - type: object
                     properties:
                       data:
-                        $ref: ../models/subscriber.yaml
+                        $ref: ../models/subscriber.yaml#/components/schemas/read
                     required:
                       - data
         '400':
@@ -698,7 +698,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: ../models/subscriber.yaml
+              $ref: ../models/subscriber.yaml#/components/schemas/update
       responses:
         '200':
           description: OK
@@ -710,7 +710,7 @@ paths:
                   - type: object
                     properties:
                       data:
-                        $ref: ../models/subscriber.yaml
+                        $ref: ../models/subscriber.yaml#/components/schemas/read
                     required:
                       - data
         '401':
@@ -1797,7 +1797,7 @@ paths:
                 required:
                   - codeStatus
                   - message
- 
+
   /subscribers/{subscriberId}/beneficiaries/{beneficiaryId}/medicalFiles/medicalTests:
     parameters:
       - schema:
@@ -2241,7 +2241,7 @@ paths:
                       objectArray:
                         type: array
                         items:
-                          $ref: ../models/appointment.yaml
+                          $ref: ../models/appointment.yaml#/components/schemas/read
                 required:
                   - statusCode
                   - message
@@ -2265,8 +2265,8 @@ paths:
         name: appointmentId
         in: path
         required: true
-    post:
-      summary: update appointment
+    get:
+      summary: get an appointment
       tags: [bookings]
       responses:
         '200':
@@ -2281,14 +2281,20 @@ paths:
                   message:
                     type: string
                   data:
-                    $ref: ../models/appointment.yaml
+                    $ref: ../models/appointment.yaml#/components/schemas/read
                 required:
                   - statusCode
                   - message
                   - data
     patch:
-      summary: update appointment
+      summary: update an appointment status
       tags: [bookings]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/appointment.yaml#/components/schemas/update
+        description: ''
       responses:
         '200':
           description: OK
@@ -2302,7 +2308,7 @@ paths:
                   message:
                     type: string
                   data:
-                    $ref: ../models/appointment.yaml
+                    $ref: ../models/appointment.yaml#/components/schemas/read
                 required:
                   - statusCode
                   - message
@@ -2319,17 +2325,8 @@ paths:
           description: Internal Server Error
       operationId: patch-appointments-appointmentId
       description: ''
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                appointmentStatus:
-                  type: string
-              required:
-                - appointmentStatus
-  /appointments/users/{userId}:
+
+  /subscribers/{subscriberId}/appointments:
     parameters:
       - schema:
           type: string
@@ -2337,9 +2334,15 @@ paths:
         in: path
         required: true
     post:
-      tags: [bookings]
+      tags: [bookings] 
       summary: request an appointment
-      operationId: post-appointments
+      operationId: post-subscribers-subscriberId-appointments
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/appointment.yaml#/components/schemas/write
+        description: ''
       responses:
         '201':
           description: Created
@@ -2353,7 +2356,7 @@ paths:
                   message:
                     type: string
                   data:
-                    $ref: ../models/appointment.yaml
+                    $ref: ../models/appointment.yaml#/components/schemas/write
                 required:
                   - codeStatus
                   - message
@@ -2414,45 +2417,36 @@ paths:
                 required:
                   - codeStatus
                   - message
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: ../models/appointment.yaml
-        description: ''
 
     get:
       tags: [bookings]
       summary: List all appointments for user
-      operationId: get-appointments-users-userId
+      operationId: get-subscribers-subscriberId-appointments
+      parameters:
+        - $ref: '#/components/parameters/appointmentStatusList'
+        - $ref: '#/components/parameters/dateRange'      
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  codeStatus:
-                    type: string
-                  message:
-                    type: string
-                  data:
-                    type: object
-                    required:
-                      - objectCount
-                      - objectArray
+                allOf:
+                  - $ref: ../models/standardResponse.yaml
+                  - type: object
                     properties:
-                      objectCount:
-                        type: integer
-                      objectArray:
-                        type: array
-                        items:
-                          $ref: ../models/appointment.yaml
-                required:
-                  - codeStatus
-                  - message
-                  - data
+                      data:
+                        type: object
+                        required:
+                          - objectCount
+                          - objectArray
+                        properties:
+                          objectCount:
+                            type: integer
+                          objectArray:
+                            type: array
+                            items:
+                              $ref: ../models/appointment.yaml#/components/schemas/read
         '400':
           description: Bad Request
           content:
@@ -2523,11 +2517,6 @@ paths:
                 required:
                   - codeStatus
                   - message
-      parameters:
-        - $ref: '#/components/parameters/appointmentStatusList'
-        - $ref: '#/components/parameters/dateRange'
-      x-internal: false
-      description: ''
 
   /medicalCenters:
     get:
