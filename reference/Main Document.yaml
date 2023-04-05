@@ -4755,14 +4755,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: ../models/sms.yaml#/components/schemas/sms
+              $ref: ../models/sms.yaml#/components/schemas/write
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: ../models/sms.yaml#/components/schemas/sms
+                $ref: ../models/sms.yaml#/components/schemas/read
         '400':
           description: Bad Request
         '401':
