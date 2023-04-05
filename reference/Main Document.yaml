@@ -72,6 +72,12 @@ paths:
     get:      
       summary: List all users
       tags: [users]
+      operationId: get-users
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/starting_after_object'
+        - $ref: '#/components/parameters/searchQuery'
+        - $ref: '#/components/parameters/skip'
       responses:
         '200':
           description: OK
@@ -138,12 +144,7 @@ paths:
                 required:
                   - statusCode
                   - message
-      operationId: get-users
-      parameters:
-        - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/starting_after_object'
-        - $ref: '#/components/parameters/searchQuery'
-        - $ref: '#/components/parameters/skip'
+
     post:
       summary: Create a new user
       tags: [users]
@@ -2218,6 +2219,7 @@ paths:
         - $ref: '#/components/parameters/skip'
         - $ref: '#/components/parameters/medicalCenterId'
         - $ref: '#/components/parameters/doctorId'
+        - $ref: '#/components/parameters/city'
       responses:
         '200':
           description: OK
@@ -2789,37 +2791,19 @@ paths:
       tags: [bookings]
       operationId: get-schedules
       parameters:
-        - schema:
-            type: string
-          in: query
-          name: city
-          required: true
-        - $ref: '#/components/parameters/specialty'
-        - schema:
-            type: string
-            enum: ["morning", "afternoon", "evening"]
-          in: query
-          name: timeSlot
-        - schema:
-            type: string
-            format: YYYY-MM-DD
-          in: query
-          name: fromDate
-          required: true
-        - schema:
-            type: string
-            format: YYYY-MM-DD
-          in: query
-          name: toDate
-          required: true          
+        - $ref: '#/components/parameters/specialty'          
         - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/skip'
         - $ref: '#/components/parameters/starting_after_object'
         - $ref: '#/components/parameters/searchQuery'
-        - $ref: '#/components/parameters/skip'
+        - $ref: '#/components/parameters/timeSlot'
+        - $ref: '#/components/parameters/dateRange'
+        - $ref: '#/components/parameters/city'
         - $ref: '#/components/parameters/doctorId'
         - $ref: '#/components/parameters/medicalCenterId'
         - $ref: '#/components/parameters/sortBy'
         - $ref: '#/components/parameters/groupBy'
+        
       description: ''
       responses:
         '200':
@@ -2843,6 +2827,7 @@ paths:
                           type: integer
                         objectArray:
                           type: array
+                          description: Different response based on the sortBy and groupBy query parameters
                           items:                              
                             oneOf:
                               - $ref: ../models/schedule.yaml#/components/schemas/read
@@ -2923,6 +2908,11 @@ paths:
       tags: [bookings]
       summary: Create a new schedule
       operationId: post-schedules
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/schedule.yaml#/components/schemas/write
       responses:
         '201':
           description: Created
@@ -2938,14 +2928,17 @@ paths:
           description: Forbidden
         '500':
           description: Internal Server Error
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: ../models/schedule.yaml#/components/schemas/write
-            examples: {}
-      parameters: []
+
+
+
   '/schedules/{scheduleId}':
+
+    parameters:
+      - schema:
+          type: string
+        name: scheduleId
+        in: path
+        required: true
     patch:
       tags: [bookings]
       summary: Update schedule
@@ -2976,6 +2969,7 @@ paths:
     get:
       summary: Get schedule by ID
       tags: [bookings]
+      operationId: get-schedules-scheduleId
       responses:
         '200':
           description: OK
@@ -2993,8 +2987,7 @@ paths:
           description: Not Found
         '500':
           description: Internal Server Error
-      operationId: get-schedules-scheduleId
-      parameters: []
+
     delete:
       summary: Delete schedule
       tags: [bookings]
@@ -3012,12 +3005,7 @@ paths:
           description: Not Found
         '500':
           description: Internal Server Error
-    parameters:
-      - schema:
-          type: string
-        name: scheduleId
-        in: path
-        required: true
+
 
   /doctors:
     post:
@@ -3159,40 +3147,33 @@ paths:
     get:
       summary: List cities
       tags: [miscellaneous]
+      operationId: get-cities
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/searchQuery'
+        - $ref: '#/components/parameters/skip'
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  codeStatus:
-                    type: string
-                  message:
-                    type: string
-                  data:
-                    type: object
-                    required:
-                      - objectCount
-                      - objectArray
+                allOf:
+                  - $ref: ../models/standardResponse.yaml
+                  - type: object
                     properties:
-                      objectCount:
-                        type: integer
-                      objectArray:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            cityName:
-                              type: string
-                          required:
-                            - cityName
-                required:
-                  - codeStatus
-                  - message
-                  - data
-              examples: {}
+                      data:
+                        type: object
+                        required:
+                          - objectCount
+                          - objectArray
+                        properties:
+                          objectCount:
+                            type: integer
+                          objectArray:
+                            type: array
+                            items:
+                              $ref: ../models/enumList.yaml
         '400':
           description: Bad Request
           content:
@@ -3263,34 +3244,30 @@ paths:
                 required:
                   - codeStatus
                   - message
-      operationId: get-cities
+
     post:
       tags: [miscellaneous]
       summary: Add a city
       operationId: post-cities
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/enumList.yaml      
       responses:
         '201':
           description: Created
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  codeStatus:
-                    type: string
-                  message:
-                    type: string
-                  data:
-                    type: object
-                    required:
-                      - cityName
+                allOf:
+                  - $ref: ../models/standardResponse.yaml
+                  - type: object
                     properties:
-                      cityName:
-                        type: string
-                required:
-                  - codeStatus
-                  - message
-                  - data
+                      data:
+                        $ref: ../models/enumList.yaml
+                    required:
+                      - data 
         '400':
           description: Bad Request
           content:
@@ -3347,306 +3324,1467 @@ paths:
                 required:
                   - codeStatus
                   - message
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                cityName:
-                  type: string
-              required:
-                - cityName
-  /medicalSpecialties:
+
+
+  /misc/cities:
     get:
+      summary: List cities
       tags: [miscellaneous]
-      summary: List medical specialties
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  codeStatus:
-                    type: string
-                  message:
-                    type: string
-                  data:
-                    type: object
-                    required:
-                      - objectCount
-                      - objectArray
-                    properties:
-                      objectCount:
-                        type: integer
-                      objectArray:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            medicalSpecialtyName:
-                              type: string
-                          required:
-                            - medicalSpecialtyName
-                required:
-                  - codeStatus
-                  - message
-                  - data
-        '400':
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  codeStatus:
-                    type: string
-                  message:
-                    type: string
-                required:
-                  - codeStatus
-                  - message
-        '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  codeStatus:
-                    type: string
-                  message:
-                    type: string
-                required:
-                  - codeStatus
-                  - message
-        '403':
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  codeStatus:
-                    type: string
-                  message:
-                    type: string
-                required:
-                  - codeStatus
-                  - message
-        '404':
-          description: Not Found
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  codeStatus:
-                    type: string
-                  message:
-                    type: string
-                required:
-                  - codeStatus
-                  - message
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  codeStatus:
-                    type: string
-                  message:
-                    type: string
-                required:
-                  - codeStatus
-                  - message
-      operationId: get-medicalSpecialties
-    post:
-      summary: Add a medical specialty
-      tags: [miscellaneous]
-      responses:
-        '201':
-          description: Created
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  codeStatus:
-                    type: string
-                  message:
-                    type: string
-                  data:
-                    type: object
-                    required:
-                      - medicalSpecialtyName
-                    properties:
-                      medicalSpecialtyName:
-                        type: string
-                required:
-                  - codeStatus
-                  - message
-                  - data
-        '400':
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  codeStatus:
-                    type: string
-                  message:
-                    type: string
-                required:
-                  - codeStatus
-                  - message
-        '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  codeStatus:
-                    type: string
-                  message:
-                    type: string
-                required:
-                  - codeStatus
-                  - message
-        '403':
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  codeStatus:
-                    type: string
-                  message:
-                    type: string
-                required:
-                  - codeStatus
-                  - message
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  codeStatus:
-                    type: string
-                  message:
-                    type: string
-                required:
-                  - codeStatus
-                  - message
-      operationId: post-medicalSpecialties
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                specialtyName:
-                  type: string
-              required:
-                - specialtyName
-    parameters: []
-  /medicalServices:
-    get:
-      summary: Get medical Services
-      tags: [miscellaneous]
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  objectCount:
-                    type: integer
-                  data:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        objectCount:
-                          type: integer
-                        objectArray:
-                          type: array
-                          items:
-                            type: object
-                            properties:
-                              medicaServiceName:
-                                type: string
-                            required:
-                              - medicaServiceName
-                      required:
-                        - objectCount
-                        - objectArray
-                required:
-                  - objectCount
-                  - hasMore
-                  - data
-        '400':
-          description: Bad Request
-        '401':
-          description: Unauthorized
-        '403':
-          description: Forbidden
-        '404':
-          description: Not Found
-        '500':
-          description: Internal Server Error
-      operationId: get-medicalServices
+      operationId: get-cities
       parameters:
         - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/starting_after_object'
         - $ref: '#/components/parameters/searchQuery'
         - $ref: '#/components/parameters/skip'
-      description: ''
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../models/standardResponse.yaml
+                  - type: object
+                    properties:
+                      data:
+                        type: object
+                        required:
+                          - objectCount
+                          - objectArray
+                        properties:
+                          objectCount:
+                            type: integer
+                          objectArray:
+                            type: array
+                            items:
+                              $ref: ../models/enumList.yaml
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+
     post:
-      summary: Add medical service
       tags: [miscellaneous]
+      summary: Add a city
+      operationId: post-cities
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/enumList.yaml      
       responses:
         '201':
           description: Created
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  serviceName:
-                    type: string
-                required:
-                  - serviceName
+                allOf:
+                  - $ref: ../models/standardResponse.yaml
+                  - type: object
+                    properties:
+                      data:
+                        $ref: ../models/enumList.yaml
+                    required:
+                      - data 
         '400':
           description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
         '401':
           description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
         '403':
           description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
         '500':
           description: Internal Server Error
-      operationId: post-medicalServices
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+
+  /misc/medicalSpecialties:
+    get:
+      summary: List cities
+      tags: [miscellaneous]
+      operationId: get-cities
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/searchQuery'
+        - $ref: '#/components/parameters/skip'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../models/standardResponse.yaml
+                  - type: object
+                    properties:
+                      data:
+                        type: object
+                        required:
+                          - objectCount
+                          - objectArray
+                        properties:
+                          objectCount:
+                            type: integer
+                          objectArray:
+                            type: array
+                            items:
+                              $ref: ../models/enumList.yaml
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+
+    post:
+      tags: [miscellaneous]
+      summary: Add a city
+      operationId: post-cities
       requestBody:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                serviceName:
-                  type: string
-              required:
-                - serviceName
+              $ref: ../models/enumList.yaml      
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../models/standardResponse.yaml
+                  - type: object
+                    properties:
+                      data:
+                        $ref: ../models/enumList.yaml
+                    required:
+                      - data 
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+
+
+  /misc/medicalServices:
+    get:
+      summary: List cities
+      tags: [miscellaneous]
+      operationId: get-cities
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/searchQuery'
+        - $ref: '#/components/parameters/skip'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../models/standardResponse.yaml
+                  - type: object
+                    properties:
+                      data:
+                        type: object
+                        required:
+                          - objectCount
+                          - objectArray
+                        properties:
+                          objectCount:
+                            type: integer
+                          objectArray:
+                            type: array
+                            items:
+                              $ref: ../models/enumList.yaml
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+
+    post:
+      tags: [miscellaneous]
+      summary: Add a city
+      operationId: post-cities
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/enumList.yaml      
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../models/standardResponse.yaml
+                  - type: object
+                    properties:
+                      data:
+                        $ref: ../models/enumList.yaml
+                    required:
+                      - data 
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+
+
+  /misc/genderEnum:
+    get:
+      summary: List cities
+      tags: [miscellaneous]
+      operationId: get-cities
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/searchQuery'
+        - $ref: '#/components/parameters/skip'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../models/standardResponse.yaml
+                  - type: object
+                    properties:
+                      data:
+                        type: object
+                        required:
+                          - objectCount
+                          - objectArray
+                        properties:
+                          objectCount:
+                            type: integer
+                          objectArray:
+                            type: array
+                            items:
+                              $ref: ../models/enumList.yaml
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+
+    post:
+      tags: [miscellaneous]
+      summary: Add a city
+      operationId: post-cities
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/enumList.yaml      
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../models/standardResponse.yaml
+                  - type: object
+                    properties:
+                      data:
+                        $ref: ../models/enumList.yaml
+                    required:
+                      - data 
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+
+
+  /misc/appointmentStatusEnum:
+    get:
+      summary: List cities
+      tags: [miscellaneous]
+      operationId: get-cities
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/searchQuery'
+        - $ref: '#/components/parameters/skip'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../models/standardResponse.yaml
+                  - type: object
+                    properties:
+                      data:
+                        type: object
+                        required:
+                          - objectCount
+                          - objectArray
+                        properties:
+                          objectCount:
+                            type: integer
+                          objectArray:
+                            type: array
+                            items:
+                              $ref: ../models/enumList.yaml
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+
+    post:
+      tags: [miscellaneous]
+      summary: Add a city
+      operationId: post-cities
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/enumList.yaml      
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../models/standardResponse.yaml
+                  - type: object
+                    properties:
+                      data:
+                        $ref: ../models/enumList.yaml
+                    required:
+                      - data 
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+
+  /misc/timeSlotEnum:
+    get:
+      summary: List cities
+      tags: [miscellaneous]
+      operationId: get-cities
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/searchQuery'
+        - $ref: '#/components/parameters/skip'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../models/standardResponse.yaml
+                  - type: object
+                    properties:
+                      data:
+                        type: object
+                        required:
+                          - objectCount
+                          - objectArray
+                        properties:
+                          objectCount:
+                            type: integer
+                          objectArray:
+                            type: array
+                            items:
+                              $ref: ../models/enumList.yaml
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+
+    post:
+      tags: [miscellaneous]
+      summary: Add a city
+      operationId: post-cities
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/enumList.yaml      
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../models/standardResponse.yaml
+                  - type: object
+                    properties:
+                      data:
+                        $ref: ../models/enumList.yaml
+                    required:
+                      - data 
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+
+  /misc/relationshipToBeneficiaryEnum:
+    get:
+      summary: List cities
+      tags: [miscellaneous]
+      operationId: get-cities
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/searchQuery'
+        - $ref: '#/components/parameters/skip'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../models/standardResponse.yaml
+                  - type: object
+                    properties:
+                      data:
+                        type: object
+                        required:
+                          - objectCount
+                          - objectArray
+                        properties:
+                          objectCount:
+                            type: integer
+                          objectArray:
+                            type: array
+                            items:
+                              $ref: ../models/enumList.yaml
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+
+    post:
+      tags: [miscellaneous]
+      summary: Add a city
+      operationId: post-cities
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/enumList.yaml      
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../models/standardResponse.yaml
+                  - type: object
+                    properties:
+                      data:
+                        $ref: ../models/enumList.yaml
+                    required:
+                      - data 
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+
+  /misc/accountStatusEnum:
+    get:
+      summary: List cities
+      tags: [miscellaneous]
+      operationId: get-cities
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/searchQuery'
+        - $ref: '#/components/parameters/skip'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../models/standardResponse.yaml
+                  - type: object
+                    properties:
+                      data:
+                        type: object
+                        required:
+                          - objectCount
+                          - objectArray
+                        properties:
+                          objectCount:
+                            type: integer
+                          objectArray:
+                            type: array
+                            items:
+                              $ref: ../models/enumList.yaml
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+
+    post:
+      tags: [miscellaneous]
+      summary: Add a city
+      operationId: post-cities
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/enumList.yaml      
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../models/standardResponse.yaml
+                  - type: object
+                    properties:
+                      data:
+                        $ref: ../models/enumList.yaml
+                    required:
+                      - data 
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  codeStatus:
+                    type: string
+                  message:
+                    type: string
+                required:
+                  - codeStatus
+                  - message
+
 
   /institutions:
     get:
@@ -3920,12 +5058,26 @@ components:
         type: string
       description: medical center ID
 
+    timeSlot:
+      name: timeSlot
+      in: query
+      required: false
+      style: form
+      explode: true
+      description: List of timeSlots to filter by
+      schema:
+        type: array
+        items:
+          type: string
+          enum: [morning, afternoon, evening]
+      example: morning,evening
+
     appointmentStatusList:
       name: appointmentStatusList
       in: query
       required: false
       style: form
-      explode: false
+      explode: true
       description: List of appointment statuses to filter by
       schema:
         type: array
@@ -3939,7 +5091,7 @@ components:
       in: query
       required: false
       style: form
-      explode: false
+      explode: true
       description: Date range filter (start_date,end_date)
       schema:
         type: array
