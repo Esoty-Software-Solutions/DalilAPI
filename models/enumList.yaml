@@ -3,14 +3,28 @@ x-tags:
   - miscellaneous
 type: object
 properties:
-  Enum:
-    type: array
-    items:
-      type: object
-      properties:
-        itemId:
-          type: string
-          description: Id to use in API
-        displayName:
-          type: string
-          description: name to display in the UI
+  _id:
+    type: string
+    readOnly: true
+  backendName:
+    type: string
+    description: name to use in API
+  ArabicName:
+    type: string
+    description: Arabic name to display in the UI
+    writeOnly: true
+  EnglishName:
+    type: string
+    description: English name to display in the UI
+    writeOnly: true      
+  displayName:
+    type: string
+    description: name to display in the UI
+    readOnly: true
+required:
+  - _id
+  - backendName
+  - ArabicName
+  - EnglishName
+  - displayName
+

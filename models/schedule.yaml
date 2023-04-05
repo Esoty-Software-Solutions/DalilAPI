@@ -12,7 +12,7 @@ components:
         doctorId:
           string: string
           writeOnly: true
-        timeslot:
+        timeSlot:
           type: string
           enum: [morning, afternoon, evening]
         monday:
@@ -44,7 +44,7 @@ components:
         - _id
         - medicalCenterId
         - doctorId
-        - timeslot
+        - timeSlot
         - monday
         - tuesday
         - wednesday
@@ -65,7 +65,7 @@ components:
           $ref: ./medicalCenter.yaml
         doctor:
           $ref: ./doctor.yaml
-        timeslot:
+        timeSlot:
           type: string
           enum: [morning, afternoon, afternoon]
         monday:
@@ -96,7 +96,7 @@ components:
         - _id
         - medicalCenter
         - doctor
-        - timeslot
+        - timeSlot
         - monday
         - tuesday
         - wednesday

@@ -1,11 +1,12 @@
 title: schedule grouped by medicalCenter
 type: object
 properties:
-  medicalCenterObject:
+  medicalCenter:
     $ref: ./medicalCenter.yaml
   scheduleCount:
     type: integer
+    description: number of schedules under this medicalCenter
   scheduleList:
     type: array
     items:
-      $ref: ./schedule.yaml
+      $ref: ../models/schedule.yaml#/components/schemas/read

@@ -24,14 +24,14 @@ components:
             - cancelled
             - completed
             - rejected
-        timeslot:
+        timeSlot:
           type: string
       required:
         - _id
         - scheduleId
         - appointmentDate
         - appointmentStatus
-        - timeslot
+        - timeSlot
         - beneficiaryId
         - scheduleId
 
@@ -52,7 +52,7 @@ components:
             - cancelled
             - completed
             - rejected
-        timeslot:
+        timeSlot:
           type: string
 
         beneficiary:
@@ -67,7 +67,7 @@ components:
         - _id
         - appointmentDate
         - appointmentStatus
-        - timeslot
+        - timeSlot
         - beneficiary
         - schedule
 

@@ -14,7 +14,7 @@ properties:
   appointmentDate:
     type: string
     format: date
-  timeslot:
+  timeSlot:
     type: string
   patient:
     $ref: ./patient.yaml
@@ -23,5 +23,5 @@ required:
   - doctorId
   - medicalCenterId
   - appointmentDate
-  - timeslot
+  - timeSlot
   - patient
