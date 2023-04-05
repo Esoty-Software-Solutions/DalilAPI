@@ -3143,189 +3143,6 @@ paths:
         '500':
           description: Internal Server Error
 
-  /cities:
-    get:
-      summary: List cities
-      tags: [miscellaneous]
-      operationId: get-cities
-      parameters:
-        - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/searchQuery'
-        - $ref: '#/components/parameters/skip'
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: ../models/standardResponse.yaml
-                  - type: object
-                    properties:
-                      data:
-                        type: object
-                        required:
-                          - objectCount
-                          - objectArray
-                        properties:
-                          objectCount:
-                            type: integer
-                          objectArray:
-                            type: array
-                            items:
-                              $ref: ../models/enumList.yaml
-        '400':
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  codeStatus:
-                    type: string
-                  message:
-                    type: string
-                required:
-                  - codeStatus
-                  - message
-        '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  codeStatus:
-                    type: string
-                  message:
-                    type: string
-                required:
-                  - codeStatus
-                  - message
-        '403':
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  codeStatus:
-                    type: string
-                  message:
-                    type: string
-                required:
-                  - codeStatus
-                  - message
-        '404':
-          description: Not Found
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  codeStatus:
-                    type: string
-                  message:
-                    type: string
-                required:
-                  - codeStatus
-                  - message
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  codeStatus:
-                    type: string
-                  message:
-                    type: string
-                required:
-                  - codeStatus
-                  - message
-
-    post:
-      tags: [miscellaneous]
-      summary: Add a city
-      operationId: post-cities
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: ../models/enumList.yaml      
-      responses:
-        '201':
-          description: Created
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: ../models/standardResponse.yaml
-                  - type: object
-                    properties:
-                      data:
-                        $ref: ../models/enumList.yaml
-                    required:
-                      - data 
-        '400':
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  codeStatus:
-                    type: string
-                  message:
-                    type: string
-                required:
-                  - codeStatus
-                  - message
-        '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  codeStatus:
-                    type: string
-                  message:
-                    type: string
-                required:
-                  - codeStatus
-                  - message
-        '403':
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  codeStatus:
-                    type: string
-                  message:
-                    type: string
-                required:
-                  - codeStatus
-                  - message
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  codeStatus:
-                    type: string
-                  message:
-                    type: string
-                required:
-                  - codeStatus
-                  - message
-
-
   /misc/cities:
     get:
       summary: List cities
@@ -3510,9 +3327,9 @@ paths:
 
   /misc/medicalSpecialties:
     get:
-      summary: List cities
+      summary: List medicalSpecialties
       tags: [miscellaneous]
-      operationId: get-cities
+      operationId: get-medicalSpecialties
       parameters:
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/searchQuery'
@@ -3612,8 +3429,8 @@ paths:
 
     post:
       tags: [miscellaneous]
-      summary: Add a city
-      operationId: post-cities
+      summary: Add a medicalSpecialty
+      operationId: post-medicalSpecialties
       requestBody:
         content:
           application/json:
@@ -3693,9 +3510,9 @@ paths:
 
   /misc/medicalServices:
     get:
-      summary: List cities
+      summary: List medicalServices
       tags: [miscellaneous]
-      operationId: get-cities
+      operationId: get-medicalServices
       parameters:
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/searchQuery'
@@ -3795,8 +3612,8 @@ paths:
 
     post:
       tags: [miscellaneous]
-      summary: Add a city
-      operationId: post-cities
+      summary: Add a medicalService
+      operationId: post-medicalServices
       requestBody:
         content:
           application/json:
@@ -3876,9 +3693,9 @@ paths:
 
   /misc/genderEnum:
     get:
-      summary: List cities
+      summary: List genderEnums
       tags: [miscellaneous]
-      operationId: get-cities
+      operationId: get-genderEnum
       parameters:
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/searchQuery'
@@ -3978,8 +3795,8 @@ paths:
 
     post:
       tags: [miscellaneous]
-      summary: Add a city
-      operationId: post-cities
+      summary: Add a genderEnum
+      operationId: post-genderEnums
       requestBody:
         content:
           application/json:
@@ -4059,9 +3876,9 @@ paths:
 
   /misc/appointmentStatusEnum:
     get:
-      summary: List cities
+      summary: List appointmentStatusEnums
       tags: [miscellaneous]
-      operationId: get-cities
+      operationId: get-appointmentStatusEnums
       parameters:
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/searchQuery'
@@ -4161,8 +3978,8 @@ paths:
 
     post:
       tags: [miscellaneous]
-      summary: Add a city
-      operationId: post-cities
+      summary: Add a appointmentStatusEnum
+      operationId: post-appointmentStatusEnums
       requestBody:
         content:
           application/json:
@@ -4241,9 +4058,9 @@ paths:
 
   /misc/timeSlotEnum:
     get:
-      summary: List cities
+      summary: List timeSlotEnums
       tags: [miscellaneous]
-      operationId: get-cities
+      operationId: get-timeSlotEnums
       parameters:
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/searchQuery'
@@ -4343,8 +4160,8 @@ paths:
 
     post:
       tags: [miscellaneous]
-      summary: Add a city
-      operationId: post-cities
+      summary: Add a timeSlotEnum
+      operationId: post-timeSlotEnums
       requestBody:
         content:
           application/json:
@@ -4423,9 +4240,9 @@ paths:
 
   /misc/relationshipToBeneficiaryEnum:
     get:
-      summary: List cities
+      summary: List relationshipToBeneficiaryEnums
       tags: [miscellaneous]
-      operationId: get-cities
+      operationId: get-relationshipToBeneficiaryEnums
       parameters:
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/searchQuery'
@@ -4525,8 +4342,8 @@ paths:
 
     post:
       tags: [miscellaneous]
-      summary: Add a city
-      operationId: post-cities
+      summary: Add a relationshipToBeneficiaryEnum
+      operationId: post-relationshipToBeneficiaryEnums
       requestBody:
         content:
           application/json:
@@ -4605,9 +4422,9 @@ paths:
 
   /misc/accountStatusEnum:
     get:
-      summary: List cities
+      summary: List accountStatusEnum
       tags: [miscellaneous]
-      operationId: get-cities
+      operationId: get-accountStatusEnums
       parameters:
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/searchQuery'
@@ -4707,8 +4524,8 @@ paths:
 
     post:
       tags: [miscellaneous]
-      summary: Add a city
-      operationId: post-cities
+      summary: Add a accountStatusEnum
+      operationId: post-accountStatusEnums
       requestBody:
         content:
           application/json:
