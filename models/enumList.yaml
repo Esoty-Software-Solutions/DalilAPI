@@ -11,11 +11,11 @@ properties:
     type: string
     description: name to use in API when a word is needed
     nullable: true
-  ArabicName:
+  arabicName:
     type: string
     description: Arabic name to display in the UI
     writeOnly: true
-  EnglishName:
+  englishName:
     type: string
     description: English name to display in the UI
     writeOnly: true      
@@ -26,7 +26,7 @@ properties:
 required:
   - _id
   - backendName
-  - ArabicName
-  - EnglishName
+  - arabicName
+  - englishName
   - displayName
 
