@@ -2216,7 +2216,6 @@ paths:
                     required:
                       - data
 
-
   /institutions:
     get:
       summary: Get all institution
