@@ -307,7 +307,12 @@ paths:
       operationId: get-users-username
   
   /users/{userId}/deviceTokens:
-    parameters: []
+    parameters:
+      - schema:
+          type: string
+        name: userId
+        in: path
+        required: true
     post:
       tags: [users]
       summary: update device token for user
