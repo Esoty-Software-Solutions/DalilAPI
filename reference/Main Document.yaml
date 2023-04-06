@@ -1448,7 +1448,7 @@ paths:
 
   /misc/cities/{cityId}:
     get:
-      summary: List cities
+      summary: get a city
       tags: [miscellaneous]
       operationId: get-cities-cityId
       parameters:
@@ -1471,7 +1471,7 @@ paths:
                       - data 
     patch:
       tags: [miscellaneous]
-      summary: Add a city
+      summary: update a city
       operationId: patch-cities-cityId
       requestBody:
         content:
@@ -1554,7 +1554,7 @@ paths:
 
   /misc/medicalSpecialties/{medicalSpecialtyId}:
     get:
-      summary: List medicalSpecialties
+      summary: get a medicalSpecialty
       tags: [miscellaneous]
       operationId: get-medicalSpecialties-medicalSpecialtyId
       parameters:
@@ -1577,7 +1577,7 @@ paths:
                       - data 
     patch:
       tags: [miscellaneous]
-      summary: Add a city
+      summary: update a city
       operationId: patch-medicalSpecialties-medicalSpecialtyId
       requestBody:
         content:
@@ -1657,7 +1657,7 @@ paths:
 
   /misc/medicalServices/{medicalServiceId}:
     get:
-      summary: List medicalServices
+      summary: Get a medicalService
       tags: [miscellaneous]
       operationId: get-medicalServices-medicalServiceId
       parameters:
@@ -1680,7 +1680,7 @@ paths:
                       - data 
     patch:
       tags: [miscellaneous]
-      summary: Add a city
+      summary: update a medicalService
       operationId: patch-medicalServices-medicalServiceId
       requestBody:
         content:
@@ -1760,7 +1760,7 @@ paths:
 
   /misc/genderEnum/{genderEnumId}:
     get:
-      summary: List genderEnum
+      summary: get a genderEnum
       tags: [miscellaneous]
       operationId: get-genderEnum-genderEnumId
       parameters:
@@ -1783,7 +1783,7 @@ paths:
                       - data 
     patch:
       tags: [miscellaneous]
-      summary: Add a city
+      summary: Update a genderEnum
       operationId: patch-genderEnum-genderEnumId
       requestBody:
         content:
@@ -1863,7 +1863,7 @@ paths:
 
   /misc/appointmentStatusEnum/{appointmentStatusEnumId}:
     get:
-      summary: List appointmentStatusEnum
+      summary: get a appointmentStatusEnum
       tags: [miscellaneous]
       operationId: get-appointmentStatusEnum-appointmentStatusEnumId
       parameters:
@@ -1886,7 +1886,7 @@ paths:
                       - data 
     patch:
       tags: [miscellaneous]
-      summary: Add a city
+      summary: Update a appointmentStatusEnum
       operationId: patch-appointmentStatusEnum-appointmentStatusEnumId
       requestBody:
         content:
@@ -1966,7 +1966,7 @@ paths:
 
   /misc/timeSlotEnum/{timeSlotEnumId}:
     get:
-      summary: List timeSlotEnum
+      summary: Get a timeSlotEnum
       tags: [miscellaneous]
       operationId: get-timeSlotEnum-timeSlotEnumId
       parameters:
@@ -1989,7 +1989,7 @@ paths:
                       - data 
     patch:
       tags: [miscellaneous]
-      summary: Add a city
+      summary: Update a timeSlotEnum
       operationId: patch-timeSlotEnum-timeSlotEnumId
       requestBody:
         content:
@@ -2068,7 +2068,7 @@ paths:
 
   /misc/relationshipToBeneficiaryEnum/{relationshipToBeneficiaryEnumId}:
     get:
-      summary: List relationshipToBeneficiaryEnum
+      summary: Get a relationshipToBeneficiaryEnum
       tags: [miscellaneous]
       operationId: get-relationshipToBeneficiaryEnum-relationshipToBeneficiaryEnumId
       parameters:
@@ -2091,7 +2091,7 @@ paths:
                       - data 
     patch:
       tags: [miscellaneous]
-      summary: Add a city
+      summary: Update a relationshipToBeneficiaryEnum
       operationId: patch-relationshipToBeneficiaryEnum-relationshipToBeneficiaryEnumId
       requestBody:
         content:
@@ -2171,7 +2171,7 @@ paths:
 
   /misc/accountStatusEnum/{accountStatusEnumId}:
     get:
-      summary: List accountStatusEnum
+      summary: Get a accountStatusEnum
       tags: [miscellaneous]
       operationId: get-accountStatusEnum-accountStatusEnumId
       parameters:
@@ -2194,7 +2194,7 @@ paths:
                       - data 
     patch:
       tags: [miscellaneous]
-      summary: Add a city
+      summary: Update a accountStatusEnum
       operationId: patch-accountStatusEnum-accountStatusEnumId
       requestBody:
         content:
