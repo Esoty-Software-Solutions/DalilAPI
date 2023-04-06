@@ -30,16 +30,21 @@ components:
         sunday:
           type: boolean
         price:
-          type: integer
+          type: number
         startDate:
           type: string
-          format: YYYY-MM-DD
+          format: date
+          pattern: /([0-9]{4})-(?:[0-9]{2})-([0-9]{2})/
+          example: "2019-05-17"
         endDate:
           type: string
-          format: YYYY-MM-DD
+          format: date
+          pattern: /([0-9]{4})-(?:[0-9]{2})-([0-9]{2})/
+          example: "2019-05-17"
         isActive:
           type: boolean
           readyOnly: boolean
+      description: When creating a new schedule, at least one day of the week should be true.
       required:
         - _id
         - medicalCenterId
@@ -87,9 +92,13 @@ components:
         startDate:
           type: string
           format: date
+          pattern: /([0-9]{4})-(?:[0-9]{2})-([0-9]{2})/
+          example: "2019-05-17"
         endDate:
           type: string
           format: date
+          pattern: /([0-9]{4})-(?:[0-9]{2})-([0-9]{2})/
+          example: "2019-05-17"
         isActive:
           type: boolean
       required:

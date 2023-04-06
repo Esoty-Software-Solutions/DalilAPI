@@ -9,13 +9,19 @@ properties:
         type: string
       dateJoined:
         type: string
-        format: YYYY-MM-DD
+        format: date
+        pattern: /([0-9]{4})-(?:[0-9]{2})-([0-9]{2})/
+        example: "2019-05-17"
       contractEndDate:
         type: string
-        format: YYYY-MM-DD
+        format: date
+        pattern: /([0-9]{4})-(?:[0-9]{2})-([0-9]{2})/
+        example: "2019-05-17"
       contractResetDate:
         type: string
         format: MM-DD
+        pattern: /(?:[0-9]{2})-([0-9]{2})/
+        example: "05-17"
 
   YearStatistics:
     type: object
@@ -127,7 +133,9 @@ properties:
           type: number
         transactionDate:
           type: string
-          format: YYYY-MM-DD
+          format: date
+          pattern: /([0-9]{4})-(?:[0-9]{2})-([0-9]{2})/
+          example: "2019-05-17"
         transactionCurrency:
           type: string
           enum: [EUR, USD, LYD]
@@ -145,7 +153,9 @@ properties:
           type: string
         dateJoined:
           type: string
-          format: YYYY-MM-DD
+          format: date
+          pattern: /([0-9]{4})-(?:[0-9]{2})-([0-9]{2})/
+          example: "2019-05-17"
         expenseAmount:
           type: number
         expenseCurrency:
