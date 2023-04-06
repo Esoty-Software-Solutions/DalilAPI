@@ -90,12 +90,15 @@ paths:
                               $ref: ../models/user.yaml
                 required:
                   - data
-
-
     post:
       summary: Create a new user
       tags: [users]
       operationId: post-users
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/user.yaml
       responses:
         '201':
           description: Created
@@ -109,15 +112,7 @@ paths:
                       data:
                         $ref: ../models/user.yaml
                     required:
-                      - data                  
-
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: ../models/user.yaml
-        description: ''
-      description: ''
+                      - data
   
   /users/{userId}/logout:
     parameters:
@@ -1123,11 +1118,18 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../models/medicalCenter.yaml
+                allOf:
+                  - $ref: ../models/standardResponse.yaml
+                  - type: object
+                    properties:
+                      data:
+                        $ref: ../models/medicalCenter.yaml
+                    required:
+                      - data
              
                 
                 
-  '/medicalCenters/{medicalCenterId}':
+  /medicalCenters/{medicalCenterId}:
     parameters:
       - schema:
           type: string
@@ -1144,38 +1146,56 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../models/medicalCenter.yaml
+                allOf:
+                  - $ref: ../models/standardResponse.yaml
+                  - type: object
+                    properties:
+                      data:
+                        $ref: ../models/medicalCenter.yaml
+                    required:
+                      - data
     patch:
       tags: [medicalCenters]
       summary: Get medical center object
       operationId: patch-medicalCenters-medicalCenterId
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: ../models/medicalCenter.yaml
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: ../models/medicalCenter.yaml
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: ../models/medicalCenter.yaml
-          application/xml:
-            schema:
-              type: object
-              properties: {}
-          multipart/form-data:
-            schema:
-              $ref: ../models/medicalCenter.yaml
-        description: ''
+                allOf:
+                  - $ref: ../models/standardResponse.yaml
+                  - type: object
+                    properties:
+                      data:
+                        $ref: ../models/medicalCenter.yaml
+                    required:
+                      - data
+
     delete:
       tags: [medicalCenters]
       summary: ''
       operationId: delete-medicalCenters-medicalCenterId
       responses:
-        '201':
-          description: Created
+        '204':
+          description: Deleted
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../models/standardResponse.yaml
+                  - type: object
+                    properties:
+                      data:
+                        $ref: ../models/medicalCenter.yaml
+                    required:
+                      - data
 
   /schedules:
     get:
@@ -1266,7 +1286,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../models/schedule.yaml#/components/schemas/read
+                allOf:
+                  - $ref: ../models/standardResponse.yaml
+                  - type: object
+                    properties:
+                      data:
+                        $ref: ../models/schedule.yaml#/components/schemas/read
+                    required:
+                      - data
 
     get:
       summary: Get schedule by ID
@@ -1278,7 +1305,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../models/schedule.yaml#/components/schemas/read
+                allOf:
+                  - $ref: ../models/standardResponse.yaml
+                  - type: object
+                    properties:
+                      data:
+                        $ref: ../models/schedule.yaml#/components/schemas/read
+                    required:
+                      - data
 
     delete:
       summary: Delete schedule
@@ -1308,7 +1342,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../models/doctor.yaml
+                allOf:
+                  - $ref: ../models/standardResponse.yaml
+                  - type: object
+                    properties:
+                      data:
+                        $ref: ../models/doctor.yaml
+                    required:
+                      - data
     get:
       summary: List doctors
       tags: [doctors]
@@ -1359,7 +1400,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../models/doctor.yaml
+                allOf:
+                  - $ref: ../models/standardResponse.yaml
+                  - type: object
+                    properties:
+                      data:
+                        $ref: ../models/doctor.yaml
+                    required:
+                      - data
 
     patch:
       tags: [doctors]
@@ -1376,7 +1424,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../models/doctor.yaml
+                allOf:
+                  - $ref: ../models/standardResponse.yaml
+                  - type: object
+                    properties:
+                      data:
+                        $ref: ../models/doctor.yaml
+                    required:
+                      - data
 
     delete:
       tags: [doctors]
