@@ -2333,7 +2333,7 @@ paths:
     parameters:
       - schema:
           type: string
-        name: userId
+        name: subscriberId
         in: path
         required: true
     post:
