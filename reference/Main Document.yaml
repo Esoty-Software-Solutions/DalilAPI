@@ -159,8 +159,31 @@ paths:
                         $ref: ../models/user.yaml
                     required:
                       - data
-      operationId: get-users-username
-  
+      operationId: get-users-userId
+    patch:
+      summary: update user information
+      tags: [users]
+      operationId: patch-users-userId
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/user.yaml      
+      responses:
+        '201':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../models/standardResponse.yaml
+                  - type: object
+                    properties:
+                      data:
+                        $ref: ../models/user.yaml
+                    required:
+                      - data
+    
   /users/{userId}/deviceTokens:
     parameters:
       - schema:
@@ -201,13 +224,13 @@ paths:
         required: true
     post:
       operationId: post-users-userId-changePassword
+      summary: change user password
+      tags: [users]
       requestBody:
         content:
           application/json:
             schema:
-              $ref: ../models/changePassword.yaml
-      summary: change user password
-      tags: [users]
+              $ref: ../models/changePassword.yaml      
       responses:
         '200':
           description: OK
