@@ -39,6 +39,18 @@ properties:
     type: string
     nullable: true
     description: if there is no institutionId, set value to null
+  pharmacyId:
+    type: string
+    nullable: true
+    description: if there is no pharmacyId, set value to null
+  laboratoryId:
+    type: string
+    nullable: true
+    description: if there is no laboratoryId, set value to null
+  ImagingCenterId:
+    type: string
+    nullable: true
+    description: if there is no ImagingCenterId, set value to null
   auxiliaryCenterId:
     type: string
     nullable: true
@@ -52,4 +64,4 @@ required:
   - subscriberId
   - doctorId
   - medicalCenterId
-  - auxiliaryCenterId
+  - pharmacyId
