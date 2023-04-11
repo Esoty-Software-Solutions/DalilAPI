@@ -35,38 +35,34 @@ properties:
   subscriberId:
     type: string
     nullable: true
-    description: if there is no subscriberId, set value to null
+    description: if there is no subscriberId
   doctorId:
     type: string
     nullable: true
-    description: if there is no doctorId, set value to null
+    description: if there is no doctorId 
   institutionId:
     type: string
     nullable: true
-    description: if there is no institutionId, set value to null
+    description: if there is no institutionId
   pharmacyId:
     type: string
     nullable: true
-    description: if there is no pharmacyId, set value to null
+    description: if there is no pharmacyId
   laboratoryId:
     type: string
     nullable: true
-    description: if there is no laboratoryId, set value to null
+    description: if there is no laboratoryId
   ImagingCenterId:
     type: string
     nullable: true
-    description: if there is no ImagingCenterId, set value to null
+    description: if there is no ImagingCenterId
   auxiliaryCenterId:
     type: string
     nullable: true
-    description: if there is no auxiliaryCenterId, set value to null
+    description: if there is no auxiliaryCenterId
 required:
   - _id
   - username
   - resetPassword
   - firstName
   - lastName
-  - subscriberId
-  - doctorId
-  - medicalCenterId
-  - pharmacyId
