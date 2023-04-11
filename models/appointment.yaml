@@ -12,23 +12,16 @@ components:
         beneficiaryId:
           type: string
           writeOnly: true
-
         appointmentDate:
           type: string
-          
-          
           pattern: /([0-9]{4})-(?:[0-9]{2})-([0-9]{2})/
           example: "2019-05-17"
         appointmentStatus:
           type: string
-          enum:
-            - booked
-            - pending
-            - cancelled
-            - completed
-            - rejected
+          format: uuid
         timeSlot:
           type: string
+          format: uuid
       required:
         - _id
         - scheduleId
@@ -51,15 +44,10 @@ components:
           example: "2019-05-17"
         appointmentStatus:
           type: string
-          enum:
-            - booked
-            - pending
-            - cancelled
-            - completed
-            - rejected
+          format: uuid
         timeSlot:
           type: string
-
+          format: uuid
         beneficiary:
           readOnly: true
           $ref: ./beneficiary.yaml
@@ -84,12 +72,7 @@ components:
           type: string
         appointmentStatus:
           type: string
-          enum:
-            - booked
-            - pending
-            - cancelled
-            - completed
-            - rejected
+          format: uuid
       required:
         - _id
         - appointmentStatus

@@ -1655,7 +1655,7 @@ paths:
                       - data 
     patch:
       tags: [miscellaneous]
-      summary: update a city
+      summary: update a medical specialty
       operationId: patch-medicalSpecialties-medicalSpecialtyId
       requestBody:
         content:
@@ -2089,11 +2089,11 @@ paths:
                     required:
                       - data
 
-  /misc/relationshipToBeneficiaryEnum:
+  /misc/relationshipToSubscriberEnum:
     get:
-      summary: List relationshipToBeneficiaryEnums
+      summary: List relationshipToSubscriberEnums
       tags: [miscellaneous]
-      operationId: get-relationshipToBeneficiaryEnums
+      operationId: get-relationshipToSubscriberEnums
       parameters:
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/searchQuery'
@@ -2122,8 +2122,8 @@ paths:
                               $ref: ../models/enumList.yaml
     post:
       tags: [miscellaneous]
-      summary: Add a relationshipToBeneficiaryEnum
-      operationId: post-relationshipToBeneficiaryEnums
+      summary: Add a relationshipToSubscriberEnum
+      operationId: post-relationshipToSubscriberEnums
       requestBody:
         content:
           application/json:
@@ -2144,11 +2144,11 @@ paths:
                     required:
                       - data 
 
-  /misc/relationshipToBeneficiaryEnum/{relationshipToBeneficiaryEnumId}:
+  /misc/relationshipToSubscriberEnum/{relationshipToSubscriberEnumId}:
     get:
-      summary: Get a relationshipToBeneficiaryEnum
+      summary: Get a relationshipToSubscriberEnum
       tags: [miscellaneous]
-      operationId: get-relationshipToBeneficiaryEnum-relationshipToBeneficiaryEnumId
+      operationId: get-relationshipToSubscriberEnum-relationshipToSubscriberEnumId
       parameters:
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/searchQuery'
@@ -2169,8 +2169,8 @@ paths:
                       - data 
     patch:
       tags: [miscellaneous]
-      summary: Update a relationshipToBeneficiaryEnum
-      operationId: patch-relationshipToBeneficiaryEnum-relationshipToBeneficiaryEnumId
+      summary: Update a relationshipToSubscriberEnum
+      operationId: patch-relationshipToSubscriberEnum-relationshipToSubscriberEnumId
       requestBody:
         content:
           application/json:
