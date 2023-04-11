@@ -8,6 +8,11 @@ properties:
     readOnly: true
   username:
     type: string
+  password:
+    type: string
+    format: password
+    writeOnly: true
+    description: Optional. Used only when creating a new user
   firstName:
     type: string
   secondName:
