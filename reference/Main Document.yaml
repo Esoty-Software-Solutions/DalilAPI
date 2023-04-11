@@ -48,26 +48,40 @@ paths:
               required:
                 - title
                 - body
-
-                    
-      description: user login      
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                allOf:
-                  - $ref: ../models/standardResponse.yaml
-                  - type: object
+                type: object
+                properties:
+                  deviceToken:
+                    type: string
+                  deviceType:
+                    type: string
+                    enum: [android, ios, browser]
+                  payload:
+                    type: object
                     properties:
-                      token:
+                      title:
                         type: string
+                        description: title of the notification
+                      body:
+                        type: string
+                        description: body of the notification
+                      clickAction:
+                        type: string
+                        description: action to be taken when the notification is clicked
+                      iconURL:
+                        type: string
+                        description: icon to be displayed with the notification                    
                       data:
-                        $ref: ../models/user.yaml
-                    required:
-                      - token
-                      - data
+                        type: object
+                        description: JSON data to be sent with the notification
+                required:
+                  - title
+                  - body
 
 
   /login:      
