@@ -9,8 +9,12 @@ properties:
   name:
     type: string
   city:
+    type: object
+    readOnly: true
+  cityId:
     type: string
-    nullable: true
+    writeOnly: true
+  employeeCount:    
   district:
     type: string
     nullable: true
@@ -55,6 +59,7 @@ required:
   - _id
   - name
   - city
+  - cityId
   - phoneNumber
   - thumbnailLink
   - fileLink

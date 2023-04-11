@@ -13,8 +13,12 @@ components:
           string: string
           writeOnly: true
         timeSlot:
+          type: object
+          readOnly: true
+        timeSlotId:
           type: string
-          enum: [morning, afternoon, evening]
+          format: uuid
+          writeOnly: true 
         monday:
           type: boolean
         tuesday:
@@ -50,6 +54,7 @@ components:
         - medicalCenterId
         - doctorId
         - timeSlot
+        - timeSlotId
         - monday
         - tuesday
         - wednesday
@@ -71,8 +76,12 @@ components:
         doctor:
           $ref: ./doctor.yaml
         timeSlot:
+          type: object
+          readOnly: true
+        timeSlotId:
           type: string
-          enum: [morning, afternoon, afternoon]
+          format: uuid
+          writeOnly: true 
         monday:
           type: boolean
         tuesday:
@@ -106,6 +115,7 @@ components:
         - medicalCenter
         - doctor
         - timeSlot
+        - timeSlotId
         - monday
         - tuesday
         - wednesday

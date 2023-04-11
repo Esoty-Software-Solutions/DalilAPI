@@ -113,7 +113,13 @@ properties:
         medicalCenterName:
           type: string
         city:
+          type: object
+          readOnly: true
+          nullable: true
+        cityId:
           type: string
+          writeOnly: true
+          nullable: true
         claimAmount:
           type: number
         servicesCount:

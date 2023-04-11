@@ -13,9 +13,17 @@ properties:
   phoneNumber:
     type: string
   city:
+    type: object
+    readOnly: true
+  cityId:
     type: string
+    writeOnly: true
   employeeCount:
     type: string
+    nullable: true
+  email:
+    type: string
+    format: email
     nullable: true
   subscriberCount:
     type: string
@@ -27,3 +35,6 @@ required:
   - name
   - subscriberCount
   - benefitPolicy
+  - city
+  - cityId
+  - phoneNumber

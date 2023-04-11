@@ -20,11 +20,19 @@ properties:
     pattern: /([0-9]{4})-(?:[0-9]{2})-([0-9]{2})/
     example: "2019-05-17"
   relationshipToSubscriber:
+    type: object
+    readOnly: true
+  relationshipToSubscriberId:
     type: string
-    enum: [self, father, mother, wife, husband, daughter, son]
+    format: uuid
+    writeOnly: true     
   gender:
+    type: object
+    readOnly: true
+  genderId:
     type: string
-    enum: [male, female]
+    format: uuid
+    writeOnly: true    
   medicalFileId:
     type: string
     nullable: true
@@ -37,5 +45,7 @@ required:
   - lastName
   - birthdate
   - relationshipToSubscriber
+  - relationshipToSubscriberId
   - medicalFileId
   - gender
+  - genderId

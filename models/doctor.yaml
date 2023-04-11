@@ -13,7 +13,12 @@ properties:
   lastName:
     type: string
   specialty:
+    type: object
+    readOnly: true
+  specialtyId:
     type: string
+    format: uuid
+    writeOnly: true    
   level:
     type: string
   gender:
@@ -29,5 +34,6 @@ required:
   - secondName
   - lastName
   - specialty
+  - specialtyId
   - level
   - gender

@@ -917,7 +917,7 @@ paths:
       tags: [bookings]
       operationId: get-appointments
       parameters:
-        - $ref: '#/components/parameters/appointmentStatusList'
+        - $ref: '#/components/parameters/appointmentStatusId'
         - $ref: '#/components/parameters/dateRange'
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/starting_after_object'
@@ -1055,7 +1055,7 @@ paths:
       summary: List all appointments for user
       operationId: get-subscribers-subscriberId-appointments
       parameters:
-        - $ref: '#/components/parameters/appointmentStatusList'
+        - $ref: '#/components/parameters/appointmentStatusId'
         - $ref: '#/components/parameters/dateRange'      
       responses:
         '200':
@@ -2509,8 +2509,8 @@ components:
           type: string
       example: [afdsa34,jklj3432,j32432l]
 
-    appointmentStatusList:
-      name: appointmentStatusList
+    appointmentStatusId:
+      name: appointmentStatusId
       in: query
       required: false
       style: form

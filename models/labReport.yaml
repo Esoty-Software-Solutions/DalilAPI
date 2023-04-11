@@ -14,7 +14,11 @@ properties:
   district:
     type: string
   city:
+    type: object
+    readOnly: true
+  cityId:
     type: string
+    writeOnly: true
   testInformation:
     type: array
     items:
@@ -70,4 +74,5 @@ required:
   - centerName
   - reportDate
   - city
+  - cityId
   - testInformation

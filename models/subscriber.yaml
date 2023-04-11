@@ -27,7 +27,13 @@ components:
         institutionId:
           type: string
         city:
+          type: object
+          readOnly: true
+          nullable: true
+        cityId:
           type: string
+          writeOnly: true
+          nullable: true
       required:
         - _id
         - firstName
@@ -65,7 +71,13 @@ components:
         institutionId:
           type: string
         city:
+          type: object
+          readOnly: true
+          nullable: true
+        cityId:
           type: string
+          writeOnly: true
+          nullable: true
       required:
         - _id
         - firstName
@@ -99,7 +111,13 @@ components:
         institutionId:
           type: string
         city:
+          type: object
+          readOnly: true
+          nullable: true
+        cityId:
           type: string
+          writeOnly: true
+          nullable: true
       required:
         - _id
         - firstName

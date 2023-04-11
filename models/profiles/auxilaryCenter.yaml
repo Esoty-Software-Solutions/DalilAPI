@@ -9,7 +9,12 @@ properties:
   name:
     type: string
   city:
+    type: object
+    readOnly: true
+    nullable: true
+  cityId:
     type: string
+    writeOnly: true
     nullable: true
   centerType:
     type: string
@@ -59,6 +64,7 @@ required:
   - name
   - centerType
   - city
+  - cityId
   - phoneNumber
   - thumbnailLink
   - fileLink
