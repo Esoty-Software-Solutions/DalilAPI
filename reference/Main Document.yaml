@@ -10,6 +10,66 @@ info:
 servers:
   - url: 'http://dalildev.esoty.ca/v1'
 paths:
+  /TestPushNotification:      
+    parameters: []
+    post:
+      tags: [devices]      
+      summary: Test Push notification
+      operationId: post-TestPushNotification
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                deviceToken:
+                  type: string
+                deviceType:
+                  type: string
+                  enum: [android, ios, browser]
+                payload:
+                  type: object
+                  properties:
+                    title:
+                      type: string
+                      description: title of the notification
+                    body:
+                      type: string
+                      description: body of the notification
+                    clickAction:
+                      type: string
+                      description: action to be taken when the notification is clicked
+                    iconURL:
+                      type: string
+                      description: icon to be displayed with the notification                    
+                    data:
+                      type: object
+                      description: JSON data to be sent with the notification
+              required:
+                - title
+                - body
+
+                    
+      description: user login      
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../models/standardResponse.yaml
+                  - type: object
+                    properties:
+                      token:
+                        type: string
+                      data:
+                        $ref: ../models/user.yaml
+                    required:
+                      - token
+                      - data
+
+
   /login:      
     parameters: []
     post:
