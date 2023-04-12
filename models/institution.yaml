@@ -19,7 +19,7 @@ properties:
     type: string
     writeOnly: true
   employeeCount:
-    type: string
+    type: integer
     nullable: true
   email:
     type: string

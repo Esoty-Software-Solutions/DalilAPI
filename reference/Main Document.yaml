@@ -2711,6 +2711,12 @@ paths:
                       data:
                         $ref: ../models/prescription.yaml
   /prescriptions/{prescriptionId}/prescriptionQuotes:
+    parameters:
+    - schema:
+        type: string
+      name: prescriptionId
+      in: path
+      required: true
     get:
       summary: Get all prescriptions quotes for a prescription
       tags: [prescriptions]

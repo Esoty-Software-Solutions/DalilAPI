@@ -14,10 +14,6 @@ properties:
   cityId:
     type: string
     writeOnly: true
-  employeeCount:    
-  district:
-    type: string
-    nullable: true
   description:
     type: string
     nullable: true
