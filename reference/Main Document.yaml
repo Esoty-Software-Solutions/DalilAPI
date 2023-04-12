@@ -1599,6 +1599,12 @@ paths:
                       - data
 
   /misc/cities/{cityId}:
+    parameters:
+    - schema:
+        type: string
+      name: cityId
+      in: path
+      required: true 
     get:
       summary: get a city
       tags: [miscellaneous]
@@ -1705,6 +1711,12 @@ paths:
                       - data 
 
   /misc/medicalSpecialties/{medicalSpecialtyId}:
+    parameters:
+    - schema:
+        type: string
+      name: medicalSpecialtyId
+      in: path
+      required: true 
     get:
       summary: get a medicalSpecialty
       tags: [miscellaneous]
@@ -1808,6 +1820,12 @@ paths:
                       - data
 
   /misc/medicalServices/{medicalServiceId}:
+    parameters:
+    - schema:
+        type: string
+      name: medicalServiceId
+      in: path
+      required: true 
     get:
       summary: Get a medicalService
       tags: [miscellaneous]
@@ -1911,6 +1929,12 @@ paths:
                       - data
 
   /misc/genderEnum/{genderEnumId}:
+    parameters:
+    - schema:
+        type: string
+      name: genderEnumId
+      in: path
+      required: true    
     get:
       summary: get a genderEnum
       tags: [miscellaneous]
@@ -2014,6 +2038,12 @@ paths:
                       - data
 
   /misc/appointmentStatusEnum/{appointmentStatusEnumId}:
+    parameters:
+    - schema:
+        type: string
+      name: appointmentStatusEnumId
+      in: path
+      required: true 
     get:
       summary: get a appointmentStatusEnum
       tags: [miscellaneous]
@@ -2117,6 +2147,12 @@ paths:
                       - data 
 
   /misc/timeSlotEnum/{timeSlotEnumId}:
+    parameters:
+    - schema:
+        type: string
+      name: timeSlotEnumId
+      in: path
+      required: true
     get:
       summary: Get a timeSlotEnum
       tags: [miscellaneous]
@@ -2219,6 +2255,12 @@ paths:
                       - data 
 
   /misc/relationshipToSubscriberEnum/{relationshipToSubscriberEnumId}:
+    parameters:
+    - schema:
+        type: string
+      name: relationshipToSubscriberEnumId
+      in: path
+      required: true
     get:
       summary: Get a relationshipToSubscriberEnum
       tags: [miscellaneous]
@@ -2322,6 +2364,12 @@ paths:
                       - data 
 
   /misc/accountStatusEnum/{accountStatusEnumId}:
+    parameters:
+    - schema:
+        type: string
+      name: accountStatusEnumId
+      in: path
+      required: true    
     get:
       summary: Get a accountStatusEnum
       tags: [miscellaneous]
