@@ -66,3 +66,4 @@ required:
   - resetPassword
   - firstName
   - lastName
+  - phoneNumber
