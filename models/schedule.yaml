@@ -47,7 +47,7 @@ components:
           example: "2019-05-17"
         isActive:
           type: boolean
-          readOnly: boolean
+          readOnly: true
       description: When creating a new schedule, at least one day of the week should be true.
       required:
         - _id
