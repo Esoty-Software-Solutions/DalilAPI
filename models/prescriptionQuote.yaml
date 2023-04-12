@@ -1,0 +1,36 @@
+title: prescription Quote
+x-tags:
+  - prescriptionQuote
+type: object
+properties:
+  _id:
+    type: string
+    readOnly: true
+  pharmacyId:
+    type: string
+    format: uuid
+  prescriptionId:
+    type: string
+    format: uuid
+  notes:
+    type: string
+    nullable: true
+  totalPrice:
+    type: number
+  table:
+    type: array
+    items:
+      type: object
+      properties:
+        name:
+          type: string
+        price:
+          type: number
+    minItems: 1
+
+required:
+  - title
+  - _id
+  - thumbnailLink
+  - fileLink
+  - pharmacyId

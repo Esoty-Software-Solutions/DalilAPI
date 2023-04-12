@@ -1,0 +1,65 @@
+title: pharmacy
+x-tags:
+  - pharmacy
+type: object
+properties:
+  _id:
+    type: string
+    readOnly: true    
+  name:
+    type: string
+  city:
+    type: object
+    readOnly: true
+  cityId:
+    type: string
+    writeOnly: true
+  employeeCount:    
+  district:
+    type: string
+    nullable: true
+  description:
+    type: string
+    nullable: true
+  address:
+    type: string
+    nullable: true
+  phoneNumber:
+    type: array
+    items:
+      type: string
+    minItems: 1
+  email:
+    type: string
+    format: email
+    nullable: true
+  facebookLink:
+    type: string
+    nullable: true
+  googleMapLink:
+    type: string
+    nullable: true
+  website:
+    type: string
+    nullable: true
+  thumbnailLink:
+    type: string
+    nullable: true
+    readOnly: true
+    description: if there is no file "null" would be returned
+  fileLink:
+    type: array
+    items:
+      type: string
+    minItems: 1      
+    nullable: true
+    readOnly: true
+    description: if there is no file "null" would be returned
+required:
+  - _id
+  - name
+  - city
+  - cityId
+  - phoneNumber
+  - thumbnailLink
+  - fileLink

@@ -2370,51 +2370,68 @@ paths:
 
   /institutions:
     get:
-      summary: Get all institution
+      summary: Get all institutions
       tags: [institutions]
-      responses:
-        '200':
-          description: OK
-
       operationId: get-institutions
       parameters:
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/starting_after_object'
         - $ref: '#/components/parameters/searchQuery'
         - $ref: '#/components/parameters/skip'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                object:
-                  type: array
-                  items:
-                    $ref: ../models/institution.yaml
-                objectCounts:
-                  type: integer
-              required:
-                - object
-                - objectCounts
-                - hasMore
-    post:
-      summary: Create an institution
-      tags: [institutions]
       responses:
-        '201':
-          description: Created
+        '200':
+          description: OK
           content:
             application/json:
               schema:
-                $ref: ../models/institution.yaml
-
+                allOf:
+                  - $ref: ../models/standardResponse.yaml
+                  - type: object
+                    properties:
+                      data:
+                        type: object
+                        required:
+                          - objectCount
+                          - objectArray
+                        properties:
+                          objectCount:
+                            type: integer
+                          objectArray:
+                            type: array
+                            items:
+                              $ref: ../models/institution.yaml
+    post:
+      summary: Create an institution
+      tags: [institutions]
       operationId: post-institutions
       requestBody:
         content:
-          application/json:
+          multipart/form-data:
             schema:
-              $ref: ../models/institution.yaml
+              allOf:
+                - $ref: ../models/institution.yaml
+                - type: object
+                  properties:
+                    file:
+                      type: array
+                      items:
+                        type: string
+                        format: binary
+                      maxItems: 4
+      responses:
+        '201':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../models/standardResponse.yaml
+                  - type: object
+                    properties:
+                      data:
+                        $ref: ../models/institution.yaml
+
+
   /institutions/{institutionId}:
     parameters:
       - schema:
@@ -2422,23 +2439,6 @@ paths:
         name: institutionId
         in: path
         required: true
-    patch:
-      summary: Update institution
-      tags: [institutions]
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: ../models/institution.yaml
-
-      operationId: patch-institutions-institutionId
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: ../models/institution.yaml
     get:
       tags: [institutions]
       summary: ''
@@ -2449,8 +2449,322 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../models/institution.yaml
+                allOf:
+                  - $ref: ../models/standardResponse.yaml
+                  - type: object
+                    properties:
+                      data:
+                        $ref: ../models/institution.yaml
+    patch:
+      summary: Update a institution
+      tags: [institutions]
+      operationId: patch-institutions-institutionId
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              allOf:
+                - $ref: ../models/institution.yaml
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../models/standardResponse.yaml
+                  - type: object
+                    properties:
+                      data:
+                        $ref: ../models/institution.yaml
 
+  /pharmacies:
+    get:
+      summary: Get all pharmacies
+      tags: [pharmacies]
+      operationId: get-pharmacies      
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/searchQuery'
+        - $ref: '#/components/parameters/skip'
+        - $ref: '#/components/parameters/cityId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../models/standardResponse.yaml
+                  - type: object
+                    properties:
+                      data:
+                        type: object
+                        required:
+                          - objectCount
+                          - objectArray
+                        properties:
+                          objectCount:
+                            type: integer
+                          objectArray:
+                            type: array
+                            items:
+                              $ref: ../models/pharmacy.yaml
+    post:
+      tags: [pharmacies]
+      summary: create a pharmacy
+      operationId: post-pharmacies
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              allOf:
+                - $ref: ../models/pharmacy.yaml
+                - type: object
+                  properties:
+                    file:
+                      type: array
+                      items:
+                        type: string
+                        format: binary
+                      maxItems: 4 
+      responses:
+        '201':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../models/standardResponse.yaml
+                  - type: object
+                    properties:
+                      data:
+                        $ref: ../models/pharmacy.yaml
+  /pharmacies/{pharmacyId}:
+    parameters:
+    - schema:
+        type: string
+      name: pharmacyId
+      in: path
+      required: true
+    get:
+      summary: Get a pharmacy
+      tags: [pharmacies]
+      operationId: get-pharmacies-pharmacyId
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../models/standardResponse.yaml
+                  - type: object
+                    properties:
+                      data:
+                        $ref: ../models/pharmacy.yaml
+    patch:
+      summary: Update a pharmacy
+      tags: [pharmacies]
+      operationId: patch-pharmacies-pharmacyId
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              allOf:
+                - $ref: ../models/pharmacy.yaml
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../models/standardResponse.yaml
+                  - type: object
+                    properties:
+                      data:
+                        $ref: ../models/pharmacy.yaml
+    delete:
+      summary: Delete a pharmacy
+      tags: [pharmacies]
+      operationId: delete-pharmacies-pharmacyId
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../models/standardResponse.yaml
+                  - type: object
+                    properties:
+                      data:
+                        $ref: ../models/pharmacy.yaml
+
+  /prescriptions:
+    get:
+      summary: Get all prescriptions
+      tags: [prescriptions]
+      operationId: get-prescriptions
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/starting_after_object'
+        - $ref: '#/components/parameters/searchQuery'
+        - $ref: '#/components/parameters/skip'
+        - $ref: '#/components/parameters/pharmacyId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../models/standardResponse.yaml
+                  - type: object
+                    properties:
+                      data:
+                        type: object
+                        required:
+                          - objectCount
+                          - objectArray
+                        properties:
+                          objectCount:
+                            type: integer
+                          objectArray:
+                            type: array
+                            items:
+                              $ref: ../models/prescription.yaml
+    post:
+      summary: Create a prescription
+      tags: [prescriptions]
+      operationId: post-prescriptions
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              allOf:
+                - $ref: ../models/prescription.yaml
+                - type: object
+                  properties:
+                    file:
+                      type: array
+                      items:
+                        type: string
+                        format: binary
+                      maxItems: 1
+      responses:
+        '201':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../models/standardResponse.yaml
+                  - type: object
+                    properties:
+                      data:
+                        $ref: ../models/prescription.yaml
+  /prescriptions/{prescriptionId}:
+    parameters:
+      - schema:
+          type: string
+        name: prescriptionId
+        in: path
+        required: true
+    get:
+      tags: [prescriptions]
+      summary: ''
+      operationId: get-prescriptions-prescriptionId
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../models/standardResponse.yaml
+                  - type: object
+                    properties:
+                      data:
+                        $ref: ../models/prescription.yaml
+    patch:
+      summary: Update a prescription
+      tags: [prescriptions]
+      operationId: patch-prescriptions-prescriptionId
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              allOf:
+                - $ref: ../models/prescription.yaml
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../models/standardResponse.yaml
+                  - type: object
+                    properties:
+                      data:
+                        $ref: ../models/prescription.yaml
+  /prescriptions/{prescriptionId}/prescriptionQuotes:
+    get:
+      summary: Get all prescriptions quotes for a prescription
+      tags: [prescriptions]
+      operationId: get-prescriptions-prescriptionQuotes
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/starting_after_object'
+        - $ref: '#/components/parameters/searchQuery'
+        - $ref: '#/components/parameters/skip'
+        - $ref: '#/components/parameters/pharmacyId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../models/standardResponse.yaml
+                  - type: object
+                    properties:
+                      data:
+                        type: object
+                        required:
+                          - objectCount
+                          - objectArray
+                        properties:
+                          objectCount:
+                            type: integer
+                          objectArray:
+                            type: array
+                            items:
+                              $ref: ../models/prescriptionQuote.yaml
+    post:
+      summary: Create a prescription quote for a prescription
+      tags: [prescriptions]
+      operationId: post-prescriptions-prescriptionQuotes
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: ../models/prescriptionQuote.yaml                
+      responses:
+        '201':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../models/standardResponse.yaml
+                  - type: object
+                    properties:
+                      data:
+                        $ref: ../models/prescriptionQuote.yaml
 
   /sms:
     get:
@@ -2485,8 +2799,6 @@ paths:
             application/json:
               schema:
                 $ref: ../models/sms.yaml#/components/schemas/read
-
-
   /sms/{smsId}:
     parameters:
       - schema:
@@ -2518,8 +2830,6 @@ paths:
             application/json:
               schema:
                 $ref: ../models/sms.yaml#/components/schemas/read
-
-
 
 
 components:
@@ -2569,6 +2879,14 @@ components:
       schema:
         type: string
       description: medical center ID
+    pharmacyId:
+      name: pharmacyId
+      in: query
+      required: false
+      schema:
+        type: string
+      description: pharmacy ID    
+    
 
     timeSlotId:
       name: timeSlotId

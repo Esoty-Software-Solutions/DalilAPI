@@ -8,7 +8,7 @@ properties:
     readOnly: true
   subscriberId:
     type: string
-    writeOnly: true
+    format: uuid
   title:
     type: string
   notes:
@@ -22,16 +22,18 @@ properties:
     type: string
     readOnly: true
     description: if there is no file "null" would be returned
-
   Quotes:
     type: array    
     nullable: true
     items:
-
-
+      $ref: ./prescriptionQuote.yaml
+  isActive:
+    type: boolean
+    description: if the prescription post is active or not
 
 required:
   - title
   - _id
   - thumbnailLink
   - fileLink
+  - subscriberId
