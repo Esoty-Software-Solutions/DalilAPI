@@ -7,10 +7,10 @@ components:
           type: string
           readOnly: true
         medicalCenterId:
-          string: string
+          type: string
           writeOnly: true
         doctorId:
-          string: string
+          type: string
           writeOnly: true
         timeSlot:
           type: object
@@ -47,7 +47,7 @@ components:
           example: "2019-05-17"
         isActive:
           type: boolean
-          readyOnly: boolean
+          readOnly: boolean
       description: When creating a new schedule, at least one day of the week should be true.
       required:
         - _id

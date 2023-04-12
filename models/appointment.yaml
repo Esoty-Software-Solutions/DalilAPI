@@ -39,7 +39,6 @@ components:
         - timeSlot
         - timeSlotId
         - beneficiaryId
-        - scheduleId
 
     read:
       type: object
