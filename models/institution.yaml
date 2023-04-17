@@ -34,7 +34,6 @@ required:
   - _id
   - name
   - subscriberCount
-  - benefitPolicy
   - city
   - cityId
   - phoneNumber
