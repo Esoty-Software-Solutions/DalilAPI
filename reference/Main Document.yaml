@@ -585,6 +585,30 @@ paths:
                         $ref: ../models/medicalFile.yaml
                     required:
                       - data
+    post:
+      tags: [medicalFiles]
+      summary: ""
+      operationId: post-subscribers-subscriberId-beneficiaries-beneficiaryId-medicalFiles
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/medicalFile.yaml
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../models/standardResponse.yaml
+                  - type: object
+                    properties:
+                      data:
+                        $ref: ../models/medicalFile.yaml
+                    required:
+                      - data
+
     patch:
       tags: [medicalFiles]
       summary: ""
