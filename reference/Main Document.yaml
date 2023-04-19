@@ -9,6 +9,7 @@ info:
     name: TBD
 servers:
   - url: "http://dalildev.esoty.ca/v1"
+  - url: "https://testdalil.onrender.com/v1"
 paths:
   /TestPushNotification:
     parameters: []
