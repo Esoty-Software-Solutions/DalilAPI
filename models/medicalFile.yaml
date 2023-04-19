@@ -10,14 +10,14 @@ properties:
     type: string
     readOnly: true
   weight:
-    type: string
+    type: number
     nullable: true
     description: Unit is in kg
   bloodType:
-    type: string
+    type: number
     nullable: true
   height:
-    type: string
+    type: number
     nullable: true
     description: Unit is in cm
 required:
