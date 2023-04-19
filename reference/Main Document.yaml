@@ -8,7 +8,7 @@ info:
   license:
     name: TBD
 servers:
-  - url: "http://dalildev.esoty.ca"
+  - url: "http://dalildev.esoty.ca/v1"
 paths:
   /TestPushNotification:
     parameters: []
@@ -129,7 +129,7 @@ paths:
       description: user login
       parameters: []
 
-  /v1/users:
+  /users:
     get:
       summary: List all users
       tags: [users]
