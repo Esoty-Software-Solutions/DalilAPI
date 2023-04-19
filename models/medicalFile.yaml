@@ -22,6 +22,3 @@ properties:
     description: Unit is in cm
 required:
   - _id
-  - birthDate
-  - gender
-  - weight
