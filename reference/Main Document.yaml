@@ -1458,14 +1458,14 @@ paths:
               schema:
                 type: object
                 properties:
-                  object:
+                  objectArray:
                     type: array
                     items:
                       $ref: ../models/doctor.yaml
                   objectCount:
                     type: integer
                 required:
-                  - object
+                  - objectArray
                   - objectCount
                   - hasMore
 
