@@ -1,4 +1,4 @@
-openapi: "3.0.9"
+openapi: "3.0.3"
 x-stoplight:
   id: v0r49t68fw391
 info:
@@ -8,8 +8,8 @@ info:
   license:
     name: TBD
 servers:
-  - url: "http://dalildev.esoty.ca/v1"
   - url: "https://testdalil.onrender.com/v1"
+  - url: "http://dalildev.esoty.ca/v1"    
   - url: "http://localhost:3000/v1"
 paths:
   /TestPushNotification:
@@ -1183,7 +1183,7 @@ paths:
                           objectArray:
                             type: array
                             items:
-                              $ref: ../models/medicalCenter.yaml
+                              $ref: ../models/medicalCenter.yaml#/components/schemas/read
     post:
       tags: [medicalCenters]
       summary: create a medical center
@@ -1193,7 +1193,7 @@ paths:
           multipart/form-data:
             schema:
               allOf:
-                - $ref: ../models/medicalCenter.yaml
+                - $ref: ../models/medicalCenter.yaml#/components/schemas/write
                 - type: object
                   properties:
                     file:
@@ -1213,7 +1213,7 @@ paths:
                   - type: object
                     properties:
                       data:
-                        $ref: ../models/medicalCenter.yaml
+                        $ref: ../models/medicalCenter.yaml#/components/schemas/read
                     required:
                       - data
 
@@ -1239,7 +1239,7 @@ paths:
                   - type: object
                     properties:
                       data:
-                        $ref: ../models/medicalCenter.yaml
+                        $ref: ../models/medicalCenter.yaml#/components/schemas/read
                     required:
                       - data
     patch:
@@ -1250,7 +1250,7 @@ paths:
         content:
           multipart/form-data:
             schema:
-              $ref: ../models/medicalCenter.yaml
+              $ref: ../models/medicalCenter.yaml#/components/schemas/write
       responses:
         "200":
           description: OK
@@ -1262,7 +1262,7 @@ paths:
                   - type: object
                     properties:
                       data:
-                        $ref: ../models/medicalCenter.yaml
+                        $ref: ../models/medicalCenter.yaml#/components/schemas/read
                     required:
                       - data
 
@@ -1281,7 +1281,7 @@ paths:
                   - type: object
                     properties:
                       data:
-                        $ref: ../models/medicalCenter.yaml
+                        $ref: ../models/medicalCenter.yaml#/components/schemas/read
                     required:
                       - data
 
@@ -1421,7 +1421,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: ../models/doctor.yaml
+              $ref: ../models/doctor.yaml#/components/schemas/write
       responses:
         "201":
           description: Created
@@ -1433,7 +1433,7 @@ paths:
                   - type: object
                     properties:
                       data:
-                        $ref: ../models/doctor.yaml
+                        $ref: ../models/doctor.yaml#/components/schemas/read
                     required:
                       - data
     get:
@@ -1461,7 +1461,7 @@ paths:
                   objectArray:
                     type: array
                     items:
-                      $ref: ../models/doctor.yaml
+                      $ref: ../models/doctor.yaml#/components/schemas/read
                   objectCount:
                     type: integer
                 required:
@@ -1491,7 +1491,7 @@ paths:
                   - type: object
                     properties:
                       data:
-                        $ref: ../models/doctor.yaml
+                        $ref: ../models/doctor.yaml#/components/schemas/read
                     required:
                       - data
 
@@ -1503,7 +1503,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: ../models/doctor.yaml
+              $ref: ../models/doctor.yaml#/components/schemas/write
       responses:
         "200":
           description: OK
@@ -1515,7 +1515,7 @@ paths:
                   - type: object
                     properties:
                       data:
-                        $ref: ../models/doctor.yaml
+                        $ref: ../models/doctor.yaml#/components/schemas/read
                     required:
                       - data
 

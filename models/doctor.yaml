@@ -1,39 +1,71 @@
-title: doctor
-x-tags:
-  - doctor
-type: object
-properties:
-  _id:
-    type: string
-    readOnly: true
-  firstName:
-    type: string
-  secondName:
-    type: string
-  lastName:
-    type: string
-  specialty:
-    type: object
-    readOnly: true
-  specialtyId:
-    type: string
-    format: uuid
-    writeOnly: true    
-  level:
-    type: string
-  gender:
-    type: string
-  birthdate:
-    type: string
-    format: date
-    pattern: /([0-9]{4})-(?:[0-9]{2})-([0-9]{2})/
-    example: "2019-05-17"
-required:
-  - _id
-  - firstName
-  - secondName
-  - lastName
-  - specialty
-  - specialtyId
-  - level
-  - gender
+components:
+  schemas: 
+    write:
+      type: object
+      properties:
+        firstName:
+          type: string
+        secondName:
+          type: string
+        thirdName:
+          type: string          
+        lastName:
+          type: string
+        specialtyId:
+          type: string
+          format: uuid
+          writeOnly: true    
+        levelId:
+          format: uuid
+          writeOnly: true  
+        genderId:
+          type: string
+          format: uuid
+          writeOnly: true           
+        birthdate:
+          type: string
+          format: date
+          pattern: /([0-9]{4})-(?:[0-9]{2})-([0-9]{2})/
+          example: "2019-05-17"
+      required:
+        - _id
+        - firstName
+        - secondName
+        - lastName
+        - genderId
+        - specialtyId
+    read:
+      type: object
+      properties:
+        _id:
+          type: string
+          readOnly: true
+        firstName:
+          type: string
+        secondName:
+          type: string
+        thirdName:
+          type: string           
+        lastName:
+          type: string
+        specialty:
+          $ref: ./enumList.yaml
+          readOnly: true
+        level:
+          $ref: ./enumList.yaml
+          readOnly: true  
+        gender:
+          $ref: ./enumList.yaml
+          readOnly: true
+        birthdate:
+          type: string
+          format: date
+          pattern: /([0-9]{4})-(?:[0-9]{2})-([0-9]{2})/
+          example: "2019-05-17"
+      required:
+        - _id
+        - firstName
+        - secondName
+        - lastName
+        - specialty
+        - gender

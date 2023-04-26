@@ -18,20 +18,21 @@ components:
           type: string
         phoneNumber:
           type: string
-        gender:
+        genderId:
           type: string
+          format: uuid
+          writeOnly: true
         beneficiaries:
           type: array
           items:
             $ref: ./beneficiary.yaml
         institutionId:
           type: string
-        city:
-          type: object
-          readOnly: true
-          nullable: true
+          format: uuid
+          writeOnly: true
         cityId:
           type: string
+          format: uuid
           writeOnly: true
           nullable: true
       required:
@@ -40,9 +41,9 @@ components:
         - secondName
         - lastName
         - phoneNumber
-        - gender
+        - genderId
+        - institutionId
         - beneficiaries
-        - account
 
     read:
       type: object
@@ -63,20 +64,18 @@ components:
         phoneNumber:
           type: string
         gender:
-          type: string
+          $ref: ./enumList.yaml
+          readOnly: true  
         beneficiaries:
           type: array
           items:
             $ref: ./beneficiary.yaml
-        institutionId:
-          type: string
+        institution:
+          $ref: ./institution.yaml
+          readOnly: true  
         city:
-          type: object
-          readOnly: true
-          nullable: true
-        cityId:
-          type: string
-          writeOnly: true
+          $ref: ./enumList.yaml
+          readOnly: true  
           nullable: true
       required:
         - _id
