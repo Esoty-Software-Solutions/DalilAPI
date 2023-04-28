@@ -1,0 +1,48 @@
+components:
+  schemas:
+    csv-success:
+            type: object
+            properties:
+                statusCode:
+                    type: string
+                    example: 200
+                message:
+                    type: string
+                    example: 2 Files uploaded 
+            required:
+                - statusCode
+                - message
+                
+            data:
+              type: object
+              properties:
+                  start_time:
+                    type: string
+                  end_time:
+                    type: string
+                  operation_type:
+                    type: string
+                  payload_count:
+                    type: string
+                  status:
+                    type: string
+                  failed_records_count:
+                    type: number
+                    readOnly: true
+                  successful_records_count:
+                    type: number
+                    example: 2
+                    
+    csv-fail:
+          type: array
+          items:
+          properties: 
+            statusCode:
+               type: number
+               example: 500
+            message:
+              type: string
+              example: System Execution Error
+            data: 
+              type: object
+              example: null    

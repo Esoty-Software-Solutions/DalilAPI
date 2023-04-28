@@ -377,7 +377,39 @@ paths:
                         $ref: ../models/subscriber.yaml#/components/schemas/read
                     required:
                       - data
-
+  /subscribers/upload-csv:
+    post:
+      summary: upload csv file
+      tags:
+        - subscribers
+      description: ''
+      operationId: uploadFile
+      parameters:
+        - name: File Name
+          in: query
+          description: name of the file
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+             type: string
+             format: binary
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                  $ref: ../responses/csv-upload.yaml#/components/schemas/csv-success
+        '500':
+            description: Faliure Response
+            content: 
+              application/json:
+                schema: 
+                  $ref: ../responses/csv-upload.yml#/components/schemas/csv-fail                 
   /subscribers/{subscriberId}:
     parameters:
       - schema:
