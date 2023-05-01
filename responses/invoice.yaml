@@ -22,6 +22,7 @@ components:
         - serviced
         - charge
         - date
+        
     readInvoice:
       type: object
       properties:
@@ -47,22 +48,7 @@ components:
         - serviced
         - charge
         - date
-    readAllInvoice:
-      type: object
-      properties:
-        statusCode:
-          type: string
-        message:
-          type: string
-        data:
-          type: object
-          properties:
-            objectCount:
-              type: number
-            objectArray:
-              type: array
-              items:
-                  $ref: '#/components/schemas/readInvoice'
+
     failResponse:
       type: object
       properties: 
@@ -74,8 +60,16 @@ components:
           example: System Execution Error
         data: 
           type: object
-          example: null      
-                   
+          example: null 
+    deleteResponse: 
+         type: object
+         properties:
+            statusCode:
+              type: string
+              example: 201
+            message:
+              type: string
+              example: Invoice Deleted
   parameters:
       limit:
         name: limit

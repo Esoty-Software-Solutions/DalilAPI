@@ -1,0 +1,56 @@
+components: 
+  schemas:
+    read: 
+      type: object
+      properties:
+        _id:
+          type: string
+          readOnly: true
+        subscriberId:
+          type: string
+        beneficiaryId:
+          type: string
+        appointmentId:
+          type: string
+        starCount :
+          type: integer
+          minimum: 1
+          maximum: 5
+        notes :
+          type: string
+    write: 
+      type: object
+      properties:
+        subscriberId:
+          type: string
+        beneficiaryId:
+          type: string
+        appointmentId:
+          type: string
+        starCount :
+          type: integer
+          minimum: 1
+          maximum: 5
+        notes :
+          type: string
+    failResponse:
+      type: object
+      properties: 
+        statusCode:
+          type: number
+          example: 500
+        message:
+          type: string
+          example: System Execution Error
+        data: 
+          type: object
+          example: null 
+    deleteResponse: 
+         type: object
+         properties:
+            statusCode:
+              type: string
+              example: 201
+            message:
+              type: string
+              example: Review Deleted 

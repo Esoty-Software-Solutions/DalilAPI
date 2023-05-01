@@ -1010,7 +1010,7 @@ paths:
                         $ref: ../models/medicalTest.yaml
                     required:
                       - data
-
+   
   /appointments:
     get:
       summary: List all appointments
@@ -1178,7 +1178,192 @@ paths:
                             type: array
                             items:
                               $ref: ../models/appointment.yaml#/components/schemas/read
+  /invoice/{medicalCenterId}:
+    parameters:
+      - schema:
+          type: string
+        name: medicalCenterId
+        in: path
+        required: true
+    get:
+      tags:
+        - Invoices
+      summary: Get list of all Invoices of medical center
+      description: Get a Invoice Information
+      operationId: get-all-invoices
+      parameters:
+        - $ref: ../responses/invoice.yml#/components/parameters/limit
+        - $ref: ../responses/invoice.yml#/components/parameters/starting_after_object
+        - $ref: ../responses/invoice.yml#/components/parameters/searchQuery
+        - $ref: ../responses/invoice.yml#/components/parameters/skip
+          
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                    statusCode:
+                       type: string
+                    message:
+                        type: string
+                    data:
+                        type: object
+                        properties:
+                          objectCount:
+                            type: number
+                          objectArray:
+                            type: array
+                            items:
+                              $ref: ../responses/invoice.yml#/components/schemas/readInvoice
+                
+        '500':
+            description: Faliure Response
+            content: 
+              application/json:
+                schema: 
+                  $ref: ../responses/invoice.yml#/components/schemas/failResponse
+    post:
+      tags:
+        - Invoices
+      summary: Add new invoice
+      description: Upload invoices of the users
+      operationId: post-invoices
+      parameters:
+        - in: path
+          name: medicalCenterId
+          schema:
+            type: string
+          required: true
+          description: ID of the invoice
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../responses/invoice.yml#/components/schemas/writeInvoice
+              
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                  type: object
+                  properties:
+                    statusCode:
+                      type: string
+                      example: 201
+                    message:
+                      type: string
+                      example: Invoice Added
+                    data:
+                      $ref: ../responses/invoice.yml#/components/schemas/writeInvoice
+                    
+        '500':
+            description: Faliure Response
+            content: 
+              application/json:
+                schema: 
+                  $ref: ../responses/invoice.yml#/components/schemas/failResponse
+                        
+     
+                        
+  /invoice/{invoiceId}/{medicalCenterId}:
+    parameters:
+      - schema:
+          type: string
+        name: invoiceId
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: medicalCenterId
+        in: path
+        required: true
+    get:
+      tags:
+        - Invoices
+      summary: Get a Invoice Information by ID
+      description: Get a Invoice Information
+      operationId: get-invoices
+      parameters:
+        - $ref: ../responses/invoice.yml#/components/parameters/limit
+        - $ref: ../responses/invoice.yml#/components/parameters/starting_after_object
+        - $ref: ../responses/invoice.yml#/components/parameters/searchQuery
+        - $ref: ../responses/invoice.yml#/components/parameters/skip
+          
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: 
+                $ref: ../responses/invoice.yml#/components/schemas/readInvoice
+                
+        '500':
+            description: Faliure Response
+            content: 
+              application/json:
+                schema: 
+                  $ref: ../responses/invoice.yml#/components/schemas/failResponse   
+    patch:
+      summary: Update a invoice information
+      description: It updates the data of the invoice
+      tags:
+        - Invoices
+      operationId: post-invoice-invoiceId-medicalCenter-medicalCenterId 
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../responses/invoice.yml#/components/schemas/writeInvoice
+      
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                  type: object
+                  properties:
+                    statusCode:
+                      type: string
+                      example: 201
+                    message:
+                      type: string
+                      example: Invoice Updated
+                    data:
+                      $ref: ../responses/invoice.yml#/components/schemas/writeInvoice
+                
+        '500':
+            description: Faliure Response
+            content: 
+              application/json:
+                schema: 
+                  $ref: ../responses/invoice.yml#/components/schemas/failResponse        
+    delete:
+      summary: Delete a invoice
+      description: It delete the data of the invoice
+      tags:
+        - Invoices
+      operationId: delete-invoice-invoiceId
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../responses/invoice.yml#/components/schemas/deleteResponse
 
+                
+        '500':
+            description: Faliure Response
+            content: 
+              application/json:
+                schema: 
+                  $ref: ../responses/invoice.yml#/components/schemas/writeInvoice    
   /medicalCenters:
     get:
       summary: List medical
@@ -1562,6 +1747,191 @@ paths:
             application/json:
               schema:
                 $ref: ../models/standardResponse.yaml
+  
+  /review/{doctorId}:
+    parameters:
+      - schema:
+          type: string
+        name: doctorId
+        in: path
+        required: true
+    get:
+      tags:
+        - DoctorReviews 
+      summary: Get list of all reviews of a doctor
+      description: Get reviews of a doctor
+      operationId: get-all-reviews
+      parameters:
+        - $ref: ../responses/invoice.yml#/components/parameters/limit
+        - $ref: ../responses/invoice.yml#/components/parameters/starting_after_object
+        - $ref: ../responses/invoice.yml#/components/parameters/searchQuery
+        - $ref: ../responses/invoice.yml#/components/parameters/skip
+          
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                    statusCode:
+                       type: string
+                    message:
+                        type: string
+                    data:
+                        type: object
+                        properties:
+                          objectCount:
+                            type: number
+                          objectArray:
+                            type: array
+                            items:
+                              $ref: ../responses/review.yml#/components/schemas/read
+                
+        '500':
+            description: Faliure Response
+            content: 
+              application/json:
+                schema: 
+                  $ref: ../responses/review.yml#/components/schemas/failResponse
+                  
+    post:
+      tags:
+        - DoctorReviews
+      summary: Add doctors review
+      description: Add doctors review
+      operationId: post-doctorReview
+      parameters:
+        - in: path
+          name: doctorId
+          schema:
+            type: string
+          required: true
+          description: ID of the doctor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../responses/review.yml#/components/schemas/write
+              
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                  type: object
+                  properties:
+                    statusCode:
+                      type: string
+                      example: 201
+                    message:
+                      type: string
+                      example: Review Added
+                    data:
+                      $ref: ../responses/review.yml#/components/schemas/read
+                    
+        '500':
+            description: Faliure Response
+            content: 
+              application/json:
+                schema: 
+                  $ref: ../responses/review.yml#/components/schemas/failResponse
+  /review/{doctorId}/{reviewId}:   
+    parameters:
+        - in: path
+          name: doctorId
+          schema:
+            type: string
+          required: true
+          description: ID of the doctor
+        - in: path
+          name: reviewId
+          schema:
+            type: string
+          required: true
+          description: ID of the review
+    get:
+      tags:
+        - DoctorReviews 
+      summary: Get a single review
+      description: Get single review of a doctor
+      operationId: get-one-review
+      parameters:
+        - $ref: ../responses/invoice.yml#/components/parameters/limit
+        - $ref: ../responses/invoice.yml#/components/parameters/starting_after_object
+        - $ref: ../responses/invoice.yml#/components/parameters/searchQuery
+        - $ref: ../responses/invoice.yml#/components/parameters/skip
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../responses/review.yml#/components/schemas/read
+        '500':
+            description: Faliure Response
+            content: 
+              application/json:
+                schema: 
+                  $ref: ../responses/review.yml#/components/schemas/failResponse        
+    patch:
+      summary: Updates single review of the doctor
+      description: It updates the data of the reviews
+      tags:
+        - DoctorReviews
+      operationId: post-DoctorReviews-doctorId
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../responses/review.yml#/components/schemas/read
+      
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                  type: object
+                  properties:
+                    statusCode:
+                      type: string
+                      example: 201
+                    message:
+                      type: string
+                      example: Review Updated
+                    data:
+                      $ref: ../responses/review.yml#/components/schemas/read
+                
+        '500':
+            description: Faliure Response
+            content: 
+              application/json:
+                schema: 
+                  $ref: ../responses/review.yml#/components/schemas/failResponse       
+    delete:
+      summary: Deletes a doctors review
+      description: It deletes doctors review
+      tags:
+        - DoctorReviews
+      operationId: delete-review-doctorId
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../responses/review.yml#/components/schemas/deleteResponse
+
+                
+        '500':
+            description: Faliure Response
+            content: 
+              application/json:
+                schema: 
+                  $ref: ../responses/review.yml#/components/schemas/failResponse              
 
   /misc/cities:
     get:
